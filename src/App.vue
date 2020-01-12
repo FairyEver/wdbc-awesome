@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <img ref="img" src="https://www.baidu.com/img/bd_logo1.png?where=super" alt="" srcset="">
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
@@ -7,6 +8,18 @@
     <router-view/>
   </div>
 </template>
+
+<script>
+import { ipcRenderer } from 'electron'
+export default {
+  mounted () {
+    this.$refs.img.ondragstart = (event) => {
+      event.preventDefault()
+      ipcRenderer.send('ondragstart', '/path/to/item')
+    }
+  }
+}
+</script>
 
 <style lang="scss">
 #app {

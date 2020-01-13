@@ -1,18 +1,18 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <img ref="img" alt="Vue logo" src="../assets/logo.png">
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import { ipcRenderer } from 'electron'
 export default {
   name: 'home',
-  components: {
-    HelloWorld
+  mounted () {
+    this.$refs.img.ondragstart = (event) => {
+      event.preventDefault()
+      ipcRenderer.send('ondragstart', '/path/to/item')
+    }
   }
 }
 </script>

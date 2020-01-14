@@ -1,4 +1,4 @@
-<style lang="scss" scoped>
+<style lang="scss">
 .page-album {}
 </style>
 

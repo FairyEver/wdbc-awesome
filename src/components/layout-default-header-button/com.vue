@@ -1,11 +1,7 @@
 <template>
   <a-popover placement="bottomRight" :trigger="trigger">
-    <template v-if="this.$slots.content" slot="content">
-      <slot name="content"/>
-    </template>
-    <template v-if="this.$slots.title" slot="title">
-      <slot name="title"/>
-    </template>
+    <slot v-if="this.$slots.content" slot="content" name="content"/>
+    <slot v-if="this.$slots.title" slot="title" name="title"/>
     <div class="layout-header-button" flex="main:center cross:center">
       <a-icon :type="icon" :spin="spin"/>
     </div>

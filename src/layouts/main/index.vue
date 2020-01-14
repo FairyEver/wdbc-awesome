@@ -12,6 +12,7 @@ html, body {
       z-index: 999;
       box-shadow: 0 2px 10px 0 rgba(0,0,0,0.10);
       background-color: #011528;
+      padding-right: $LAYOUT_MAIN_PADDING / 2;
       .layout-header-button {
         height: $LAYOUT_HEADER_HEIGHT;
         width: $LAYOUT_HEADER_HEIGHT;
@@ -43,12 +44,14 @@ html, body {
         </a-menu-item>
       </a-menu>
       <div flex="main:justify">
-        <div class="layout-header-button" flex="main:center cross:center">
-          <a-icon type="sync" spin/>
-        </div>
-        <div class="layout-header-button" flex="main:center cross:center">
-          <a-icon type="bell"/>
-        </div>
+        <layout-default-header-button icon="sync" spin>
+          <div slot="title">title</div>
+          <div slot="content">content</div>
+        </layout-default-header-button>
+        <layout-default-header-button icon="bell">
+          <div slot="title">title</div>
+          <div slot="content">content</div>
+        </layout-default-header-button>
       </div>
     </div>
     <div class="layout-main">

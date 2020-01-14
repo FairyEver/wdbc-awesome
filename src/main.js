@@ -7,7 +7,7 @@ import 'ant-design-vue/dist/antd.css'
 import router from './router'
 import store from './store'
 
-import api from '@/plugin/api'
+import api from '@/plugins/api'
 
 import '@/components'
 import 'flex.css'

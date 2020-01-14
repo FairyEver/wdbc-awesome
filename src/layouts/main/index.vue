@@ -44,12 +44,20 @@ html, body {
         </a-menu-item>
       </a-menu>
       <div flex="main:justify">
-        <layout-default-header-button icon="sync" spin>
-          <div slot="title">title</div>
+        <layout-default-header-button icon="database">
+          <div slot="title">总览</div>
           <div slot="content">content</div>
         </layout-default-header-button>
+        <layout-default-header-button icon="sync">
+          <div slot="title">刷新数据</div>
+          <div slot="content">
+            <p>此操作将重新请求服务器数据</p>
+            <p>将刷新本地资源列表</p>
+            <a-button type="danger" icon="sync" block>刷新数据</a-button>
+          </div>
+        </layout-default-header-button>
         <layout-default-header-button icon="bell">
-          <div slot="title">title</div>
+          <div slot="title">消息</div>
           <div slot="content">content</div>
         </layout-default-header-button>
       </div>

@@ -1,5 +1,5 @@
 <template>
-  <a-popover placement="bottomRight">
+  <a-popover placement="bottomRight" :trigger="trigger">
     <template v-if="this.$slots.content" slot="content">
       <slot name="content"/>
     </template>
@@ -24,6 +24,11 @@ export default {
     spin: {
       type: Boolean,
       default: false,
+      required: false
+    },
+    trigger: {
+      type: String,
+      default: 'click', // focus | hover | click
       required: false
     }
   }

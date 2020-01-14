@@ -12,11 +12,13 @@
 import { ipcRenderer } from 'electron'
 export default {
   name: 'page-album',
-  mounted () {
+  async mounted () {
     this.$refs.img.ondragstart = (event) => {
       event.preventDefault()
       ipcRenderer.send('ondragstart', '/path/to/item')
     }
+    const result = await this.$api.LIBRARY_LOAD()
+    console.log(result)
   }
 }
 </script>

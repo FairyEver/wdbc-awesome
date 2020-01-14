@@ -12,7 +12,7 @@ html, body {
       z-index: 999;
       box-shadow: 0 2px 10px 0 rgba(0,0,0,0.10);
       background-color: #011528;
-      padding-right: $LAYOUT_MAIN_PADDING / 2;
+      padding: 0 $LAYOUT_MAIN_PADDING;
       .layout-header-button {
         height: $LAYOUT_HEADER_HEIGHT;
         width: $LAYOUT_HEADER_HEIGHT;

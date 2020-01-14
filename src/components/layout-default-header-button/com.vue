@@ -3,7 +3,9 @@
     <slot v-if="this.$slots.content" slot="content" name="content"/>
     <slot v-if="this.$slots.title" slot="title" name="title"/>
     <div class="layout-header-button" flex="main:center cross:center">
-      <a-icon :type="icon" :spin="spin"/>
+      <a-badge :count="count" :offset="[3, -3]">
+        <a-icon :type="icon" :spin="spin"/>
+      </a-badge>
     </div>
   </a-popover>
 </template>
@@ -25,6 +27,11 @@ export default {
     trigger: {
       type: String,
       default: 'click', // focus | hover | click
+      required: false
+    },
+    count: {
+      type: Number,
+      default: 0,
       required: false
     }
   }

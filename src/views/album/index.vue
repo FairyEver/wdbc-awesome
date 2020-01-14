@@ -1,13 +1,17 @@
+<style lang="scss" scoped>
+.page-album {}
+</style>
+
 <template>
-  <div class="home">
-    <img ref="img" alt="Vue logo" src="../assets/logo.png">
+  <div class="page-album">
+    <img ref="img" alt="Vue logo" src="@/assets/logo.png">
   </div>
 </template>
 
 <script>
 import { ipcRenderer } from 'electron'
 export default {
-  name: 'home',
+  name: 'page-album',
   mounted () {
     this.$refs.img.ondragstart = (event) => {
       event.preventDefault()

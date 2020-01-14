@@ -5,7 +5,10 @@ import {
   createProtocol,
   installVueDevtools
 } from 'vue-cli-plugin-electron-builder/lib'
+
 const isDevelopment = process.env.NODE_ENV !== 'production'
+
+const resolve = dir => require('path').join(__static, dir)
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -91,8 +94,16 @@ if (isDevelopment) {
 }
 
 ipcMain.on('ondragstart', (event, filePath) => {
+
+  const { DownloaderHelper } = require('node-downloader-helper');
+  const dl = new DownloaderHelper('https://qiniucdn.fairyever.com/20191215221254.png', app.getPath('userData'));
+
+  dl.on('end', () => console.log('Download Completed'))
+  dl.on('progress', (stats) => console.log(stats))
+  dl.start();
+
   event.sender.startDrag({
-    file: '/Users/liyang/Documents/code/wdbc-awesome/src/assets/logo.png',
-    icon: '/Users/liyang/Documents/code/wdbc-awesome/src/assets/logo.png'
+    file: require('path').join(app.getPath('userData'), 'card.png'),
+    icon: resolve('icon/start-drag.png')
   })
 })

@@ -5,7 +5,6 @@
   "scripts": {
     "build": "vue-cli-service electron:build",
     "dev": "vue-cli-service electron:serve",
-    "generate": "node tools/generate.js",
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps"
   },
@@ -32,6 +31,7 @@
     "electron": "^6.0.0",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
+    "qiniu": "^7.3.0",
     "sass": "^1.23.7",
     "sass-loader": "^8.0.0",
     "vue-cli-plugin-electron-builder": "^1.4.4",

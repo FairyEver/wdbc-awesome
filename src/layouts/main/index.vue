@@ -20,6 +20,7 @@ html, body {
         user-select: none;
         cursor: pointer;
         &:hover {
+          background-color: $COLOR_PRIMARY;
           color: $COLOR_HEADER_TEXT_ACTIVE;
         }
       }
@@ -63,9 +64,7 @@ html, body {
       </div>
     </div>
     <div class="layout-main">
-      <a-card title="Small size card">
-        <router-view/>
-      </a-card>
+      <router-view/>
     </div>
   </div>
 </template>

@@ -44,8 +44,8 @@ export default {
     //   event.preventDefault()
     //   ipcRenderer.send('ondragstart', '/path/to/item')
     // }
-    // const result = await this.$api.LIBRARY_LOAD()
-    // console.log(result)
+    const result = await this.$api.LIBRARY_LOAD()
+    console.log(result)
     console.log(this.$store.getters['library/getterDemo'])
   },
   methods: {

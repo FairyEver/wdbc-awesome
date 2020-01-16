@@ -4,7 +4,7 @@ export default ({ request }) => ({
    */
   LIBRARY_LOAD () {
     return request({
-      url: '/db.json',
+      url: '/build/materials.json',
       method: 'get'
     })
   }

@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+const upload = require('./upload')
 
 async function scan ({
   folderPath,
@@ -15,14 +16,21 @@ async function scan ({
 	for (const filename of files) {
 		// path
 		const filePathFull = path.join(folderPath, filename)
+		const filePath = filePathFull.replace(rootFolderPath, '')
 		// 是否为文件或者文件夹
 		const stat = await fs.statSync(filePathFull)
 		const isFile = stat.isFile()
 		const isDir = stat.isDirectory()
 		// 解析路径
-		const parsed = path.parse(filePathFull.replace(rootFolderPath, ''))
+		const parsed = path.parse(filePath)
 		// 忽略点开头
 		if (parsed.name[0] === '.') continue
+		if (isFile) {
+			await upload({
+				filePath,
+				filePathFull
+			})
+		}
 		result.push({
 			size: stat.size,
 			isFile,

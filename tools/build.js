@@ -4,9 +4,8 @@
     console.log('没有设置 AK SK')
     return
   }
-  const [ AK, SK ] = argv
-  console.log(`AK ${AK}`)
-  console.log(`SK ${SK}`)
+  global.AK = argv[0]
+  global.SK = argv[1]
   
   const path = require('path')
   const resolve = dir => path.join(__dirname, dir)

@@ -1,6 +1,6 @@
 [
   {
-    "size": 160,
+    "size": 128,
     "isFile": false,
     "isDir": true,
     "ext": "",
@@ -21,39 +21,6 @@
         "ext": "png",
         "name": "demo.1",
         "elements": []
-      },
-      {
-        "size": 160,
-        "isFile": false,
-        "isDir": true,
-        "ext": "",
-        "name": "主题 2",
-        "elements": [
-          {
-            "size": 58004,
-            "isFile": true,
-            "isDir": false,
-            "ext": "png",
-            "name": "1",
-            "elements": []
-          },
-          {
-            "size": 82335,
-            "isFile": true,
-            "isDir": false,
-            "ext": "png",
-            "name": "2",
-            "elements": []
-          },
-          {
-            "size": 181934,
-            "isFile": true,
-            "isDir": false,
-            "ext": "png",
-            "name": "3",
-            "elements": []
-          }
-        ]
       }
     ]
   },

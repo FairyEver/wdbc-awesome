@@ -26,10 +26,11 @@ async function scan ({
 		// 忽略点开头
 		if (parsed.name[0] === '.') continue
 		if (isFile) {
-			await upload({
+			const uploadResult = await upload({
 				filePath,
 				filePathFull
 			})
+			console.log(uploadResult)
 		}
 		result.push({
 			size: stat.size,

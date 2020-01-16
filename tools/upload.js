@@ -1,8 +1,9 @@
 // https://portal.qiniu.com/kodo/bucket/resource?bucketName=fairyever
+// https://developer.qiniu.com/kodo/manual/1235/vars#magicvar
 
 const qiniu = require('qiniu')
 
-const base = 'wdbc-awesome'
+const fileName = name => 'wdbc-awesome' + name
 
 const accessKey = global.AK
 const secretKey = global.SK
@@ -14,18 +15,24 @@ async function upload ({
 }) {
   return new Promise((resolve, reject) => {
     const putPolicy = new qiniu.rs.PutPolicy({
-      scope: 'fairyever' + ':' + base + filePath
+      scope: 'fairyever' + ':' + fileName(filePath),
+      returnBody: '{"key":"$(key)","fsize":$(fsize)}'
     })
-    const uploadToken = putPolicy.uploadToken(mac)
     const config = new qiniu.conf.Config()
     config.zone = qiniu.zone.Zone_z0
     const formUploader = new qiniu.form_up.FormUploader(config)
     const putExtra = new qiniu.form_up.PutExtra()
-    formUploader.putFile(uploadToken, base + filePath, filePathFull, putExtra, function(respErr, respBody, respInfo) {
-      if (respErr) return reject(respErr)
-      if (respInfo.statusCode == 200) resolve(respBody)
-      else reject(new Error(respBody))
-    })
+    formUploader.putFile(
+      putPolicy.uploadToken(mac),
+      fileName(filePath),
+      filePathFull,
+      putExtra,
+      function(respErr, respBody, respInfo) {
+        if (respErr) return reject(respErr)
+        if (respInfo.statusCode == 200) resolve(respBody)
+        else reject(new Error(respBody))
+      }
+    )
   })
 }
 

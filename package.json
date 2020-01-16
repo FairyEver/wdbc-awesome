@@ -14,6 +14,7 @@
     "axios": "^0.19.1",
     "core-js": "^3.4.4",
     "flex.css": "^1.1.7",
+    "lodash": "^4.17.15",
     "node-downloader-helper": "^1.0.11",
     "v-lazy-image": "^1.3.2",
     "vue": "^2.6.10",

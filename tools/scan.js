@@ -25,6 +25,7 @@ async function scan ({
 		const parsed = path.parse(filePath)
 		// 忽略点开头
 		if (parsed.name[0] === '.') continue
+		// 元素对象
 		element.size = stat.size
 		element.isFile = isFile
 		element.isDir = isDir
@@ -38,12 +39,13 @@ async function scan ({
 			})
 		}
 		if (isFile) {
-			const { height, width } = await upload({
+			const uploaded = await upload({
 				filePath,
 				filePathFull
 			})
-			element.height = height
-			element.width = width
+			element.height = uploaded.height
+			element.width = uploaded.width
+			element.uuid = uploaded.uuid
 		}
 		result.push(element)
 	}

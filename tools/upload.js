@@ -17,7 +17,7 @@ async function upload ({
     console.log(`[ upload ] ${filePathFull}`)
     const putPolicy = new qiniu.rs.PutPolicy({
       scope: 'fairyever' + ':' + fileName(filePath),
-      returnBody: '{"height":$(imageInfo.height), "width":$(imageInfo.width)}'
+      returnBody: '{"height":$(imageInfo.height), "width":$(imageInfo.width), "uuid":$(uuid)}'
     })
     const config = new qiniu.conf.Config()
     config.zone = qiniu.zone.Zone_z0

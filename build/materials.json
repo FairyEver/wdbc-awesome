@@ -1,6 +1,6 @@
 [
   {
-    "size": 160,
+    "size": 128,
     "isFile": false,
     "isDir": true,
     "ext": "",
@@ -12,7 +12,8 @@
         "isDir": false,
         "ext": "png",
         "name": "2",
-        "elements": []
+        "height": 578,
+        "width": 910
       },
       {
         "size": 195471,
@@ -20,73 +21,8 @@
         "isDir": false,
         "ext": "png",
         "name": "demo.1",
-        "elements": []
-      },
-      {
-        "size": 192,
-        "isFile": false,
-        "isDir": true,
-        "ext": "",
-        "name": "主题 2",
-        "elements": [
-          {
-            "size": 58004,
-            "isFile": true,
-            "isDir": false,
-            "ext": "png",
-            "name": "1",
-            "elements": []
-          },
-          {
-            "size": 82335,
-            "isFile": true,
-            "isDir": false,
-            "ext": "png",
-            "name": "2",
-            "elements": []
-          },
-          {
-            "size": 181934,
-            "isFile": true,
-            "isDir": false,
-            "ext": "png",
-            "name": "3",
-            "elements": []
-          },
-          {
-            "size": 160,
-            "isFile": false,
-            "isDir": true,
-            "ext": "",
-            "name": "主题 2",
-            "elements": [
-              {
-                "size": 58004,
-                "isFile": true,
-                "isDir": false,
-                "ext": "png",
-                "name": "1",
-                "elements": []
-              },
-              {
-                "size": 82335,
-                "isFile": true,
-                "isDir": false,
-                "ext": "png",
-                "name": "2",
-                "elements": []
-              },
-              {
-                "size": 181934,
-                "isFile": true,
-                "isDir": false,
-                "ext": "png",
-                "name": "3",
-                "elements": []
-              }
-            ]
-          }
-        ]
+        "height": 336,
+        "width": 500
       }
     ]
   },
@@ -103,7 +39,8 @@
         "isDir": false,
         "ext": "png",
         "name": "1",
-        "elements": []
+        "height": 680,
+        "width": 542
       },
       {
         "size": 82335,
@@ -111,7 +48,8 @@
         "isDir": false,
         "ext": "png",
         "name": "2",
-        "elements": []
+        "height": 436,
+        "width": 602
       },
       {
         "size": 181934,
@@ -119,7 +57,8 @@
         "isDir": false,
         "ext": "png",
         "name": "3",
-        "elements": []
+        "height": 322,
+        "width": 774
       }
     ]
   }

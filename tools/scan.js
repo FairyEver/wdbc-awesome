@@ -10,10 +10,10 @@ async function scan ({
 	let result = []
 	// 检查是否为文件夹，这个判断只在递归的第一次触发
   if (needCheckIsFolder && !await fs.statSync(folderPath).isDirectory()) return result
-  
 	// 获得文件夹的内容
 	const files = await fs.readdirSync(folderPath)
 	for (const filename of files) {
+		let element = {}
 		// path
 		const filePathFull = path.join(folderPath, filename)
 		const filePath = filePathFull.replace(rootFolderPath, '')
@@ -25,25 +25,27 @@ async function scan ({
 		const parsed = path.parse(filePath)
 		// 忽略点开头
 		if (parsed.name[0] === '.') continue
-		if (isFile) {
-			const uploadResult = await upload({
-				filePath,
-				filePathFull
-			})
-			console.log(uploadResult)
-		}
-		result.push({
-			size: stat.size,
-			isFile,
-			isDir,
-			ext: parsed.ext.replace(/^\./, ''),
-			name: parsed.name,
-			elements: isDir ? await scan({
+		element.size = stat.size
+		element.isFile = isFile
+		element.isDir = isDir
+		element.ext = parsed.ext.replace(/^\./, '')
+		element.name = parsed.name
+		if (isDir) {
+			element.elements = await scan({
 				folderPath: filePathFull,
 				rootFolderPath,
         needCheckIsFolder: false
-			}) : []
-		})
+			})
+		}
+		if (isFile) {
+			const { height, width } = await upload({
+				filePath,
+				filePathFull
+			})
+			element.height = height
+			element.width = width
+		}
+		result.push(element)
 	}
   return result
 }

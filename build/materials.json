@@ -1,5 +1,5 @@
 {
-  "elements": [
+  "library": [
     {
       "size": 160,
       "name": "主题 1",
@@ -49,6 +49,5 @@
       ],
       "cover": "1579332924228.png"
     }
-  ],
-  "customProps": {}
+  ]
 }

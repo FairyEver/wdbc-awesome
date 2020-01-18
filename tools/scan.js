@@ -38,7 +38,6 @@ async function scan ({
 				path: filePathFull
 			})
 			if (uploaded) {
-				console.log(uploaded)
 				element.url = uploaded.url
 				element.height = uploaded.height
 				element.width = uploaded.width

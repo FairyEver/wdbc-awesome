@@ -6,19 +6,11 @@
   }
   global.AK = argv[0]
   global.SK = argv[1]
-  
   const path = require('path')
   const resolve = dir => path.join(__dirname, dir)
-  
-  const scan = require('./scan')
-  
-  const libraryFolder = resolve('../library')
-  
-  const libraryFolderScanResult = await scan({
-    folderPath: libraryFolder
-  })
-
+  const { scan, maker } = require('./scan')
+  const folder = resolve('../library')
+  const result = maker(await scan({ folderPath: folder }))
   const write = require('./write')
-
-  await write(resolve('../build/materials.json'), JSON.stringify(libraryFolderScanResult, null, 2))
+  await write(resolve('../build/materials.json'), JSON.stringify(result, null, 2))
 })()

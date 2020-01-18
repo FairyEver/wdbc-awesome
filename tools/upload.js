@@ -4,29 +4,27 @@
 const qiniu = require('qiniu')
 const md5 = require('md5-file/promise')
 const { uploadedFind, uploadedAdd } = require('./db.js')
-
-const accessKey = global.AK
-const secretKey = global.SK
-const mac = new qiniu.auth.digest.Mac(accessKey, secretKey)
+const mac = new qiniu.auth.digest.Mac(global.AK, global.SK)
 
 async function upload ({
-  name,
+  url,
   path
 }) {
   return new Promise(async (resolve, reject) => {
     function log (status) {
-      console.log(`[ ${status} ] ${name}`)
+      console.log(`[ ${status} ] ${url}`)
     }
     const file = {
-      hash: await md5(path),
-      path
+      url,
+      path,
+      hash: await md5(path)
     }
     const uploaded = uploadedFind(file)
     if (uploaded) {
       log('已经上传过')
       return resolve(uploaded)
     }
-    const fileName = 'wdbc-awesome/' + name
+    const fileName = 'wdbc-awesome/' + url
     const putPolicy = new qiniu.rs.PutPolicy({
       scope: 'fairyever' + ':' + fileName,
       returnBody: '{"height":$(imageInfo.height), "width":$(imageInfo.width)}'
@@ -47,11 +45,12 @@ async function upload ({
         }
         if (respInfo.statusCode == 200) {
           log('上传完成')
-          uploadedAdd({
+          const result = {
             ...file,
             ...respBody
-          })
-          resolve(respBody)
+          }
+          uploadedAdd(result)
+          resolve(result)
         }
         else {
           log('上传失败')

@@ -1,63 +1,54 @@
-[
-  {
-    "size": 160,
-    "name": "主题 1",
-    "elements": [
-      {
-        "size": 195471,
-        "name": "cover",
-        "url": "1579327624701.png",
-        "height": 336,
-        "width": 500
-      },
-      {
-        "size": 90325,
-        "name": "名称",
-        "url": "1579327625605.png",
-        "height": 578,
-        "width": 910
-      },
-      {
-        "size": 195471,
-        "name": "哈哈哈哈哈",
-        "url": "1579327625607.png",
-        "height": 336,
-        "width": 500
-      }
-    ]
-  },
-  {
-    "size": 192,
-    "name": "主题 2",
-    "elements": [
-      {
-        "size": 195471,
-        "name": "cover",
-        "url": "1579327625610.png",
-        "height": 336,
-        "width": 500
-      },
-      {
-        "size": 82335,
-        "name": "一月又一月",
-        "url": "1579327626071.png",
-        "height": 436,
-        "width": 602
-      },
-      {
-        "size": 58004,
-        "name": "哎哎哎哎哎",
-        "url": "1579327626074.png",
-        "height": 680,
-        "width": 542
-      },
-      {
-        "size": 181934,
-        "name": "自己及",
-        "url": "1579327626075.png",
-        "height": 322,
-        "width": 774
-      }
-    ]
-  }
-]
+{
+  "elements": [
+    {
+      "size": 160,
+      "name": "主题 1",
+      "elements": [
+        {
+          "size": 90325,
+          "name": "名称",
+          "url": "1579332923203.png",
+          "height": 578,
+          "width": 910
+        },
+        {
+          "size": 195471,
+          "name": "哈哈哈哈哈",
+          "url": "1579332923635.png",
+          "height": 336,
+          "width": 500
+        }
+      ],
+      "cover": "1579332922628.png"
+    },
+    {
+      "size": 192,
+      "name": "主题 2",
+      "elements": [
+        {
+          "size": 82335,
+          "name": "一月又一月",
+          "url": "1579332924823.png",
+          "height": 436,
+          "width": 602
+        },
+        {
+          "size": 58004,
+          "name": "哎哎哎哎哎",
+          "url": "1579332925284.png",
+          "height": 680,
+          "width": 542
+        },
+        {
+          "size": 181934,
+          "name": "自己及",
+          "url": "1579332925715.png",
+          "height": 322,
+          "width": 774
+        }
+      ],
+      "cover": "1579332924228.png"
+    }
+  ],
+  "customProps": {}
+}

@@ -9,9 +9,9 @@ db.defaults({
 })
   .write()
 
-module.exports.uploadedFind = file => {
+module.exports.uploadedFind = ({ path, hash }) => {
   return db.get('uploaded')
-    .find(file)
+    .find({ path, hash })
     .value()
 }
 

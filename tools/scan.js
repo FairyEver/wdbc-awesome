@@ -34,11 +34,12 @@ async function scan ({
 		if (isFile) {
 			const url = new Date().valueOf() + parsed.ext
 			const uploaded = await upload({
-				name: url,
+				url,
 				path: filePathFull
 			})
 			if (uploaded) {
-				element.url = url
+				console.log(uploaded)
+				element.url = uploaded.url
 				element.height = uploaded.height
 				element.width = uploaded.width
 			}
@@ -48,4 +49,35 @@ async function scan ({
   return result
 }
 
-module.exports = scan
+module.exports.scan = scan
+
+/**
+ * @description 将原始的扫描结果处理为特殊的格式
+ * @param {Array} source 原始的扫描结果
+ */
+function maker (source) {
+	// 过滤之后的元素
+	let elements = []
+	// 被筛选出来的特殊属性
+	let customProps = {}
+	source.forEach(el => {
+		if (el.elements) {
+			const result = maker(el.elements)
+			for (const key in result.customProps) {
+				el[key] = result.customProps[key]
+			}
+			el.elements = result.elements
+			elements.push(el)
+		} else if (/^_/.test(el.name)) {
+			customProps[el.name.replace(/^_/, '')] = el.url
+		} else {
+			elements.push(el)
+		}
+	})
+	return {
+		elements,
+		customProps
+	}
+}
+
+module.exports.maker = maker

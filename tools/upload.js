@@ -24,7 +24,7 @@ async function upload ({
     const uploaded = uploadedFileFind(file)
     if (uploaded) {
       log('已经上传过')
-      return resolve()
+      return resolve(uploaded)
     }
     const fileName = 'wdbc-awesome/' + name
     const putPolicy = new qiniu.rs.PutPolicy({
@@ -47,7 +47,10 @@ async function upload ({
         }
         if (respInfo.statusCode == 200) {
           log('上传完成')
-          uploadedFileAdd(file)
+          uploadedFileAdd({
+            ...file,
+            ...respBody
+          })
           resolve(respBody)
         }
         else {

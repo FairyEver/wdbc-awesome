@@ -9,26 +9,14 @@ db.defaults({
 })
   .write()
 
-module.exports.uploadedFileFind = ({
-  path = '',
-  hash = ''
-}) => {
+module.exports.uploadedFileFind = (file) => {
   return db.get('uploadedFiles')
-    .find({
-      path,
-      hash
-    })
+    .find(file)
     .value()
 }
 
-module.exports.uploadedFileAdd = ({
-  path = '',
-  hash = ''
-}) => {
+module.exports.uploadedFileAdd = (file) => {
   db.get('uploadedFiles')
-    .push({
-      path,
-      hash
-    })
+    .push(file)
     .write()
 }

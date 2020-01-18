@@ -1,69 +1,55 @@
 [
   {
     "size": 128,
-    "isFile": false,
-    "isDir": true,
     "ext": "",
     "name": "主题 1",
     "elements": [
       {
         "size": 90325,
-        "isFile": true,
-        "isDir": false,
         "ext": "png",
         "name": "aaaaaaaaaa",
         "height": 578,
         "width": 910,
-        "uuid": "86869dbb-12f7-4387-aea5-c927109c97d5"
+        "hash": "b2be2fc120fb6faa3040c18abffc1832"
       },
       {
         "size": 195471,
-        "isFile": true,
-        "isDir": false,
         "ext": "png",
         "name": "demo.1",
         "height": 336,
         "width": 500,
-        "uuid": "b3ced20b-9629-48e5-bdf5-6e9e1386e286"
+        "hash": "f421b0bef0c9fb6ce74ab8c8c4db2936"
       }
     ]
   },
   {
     "size": 160,
-    "isFile": false,
-    "isDir": true,
     "ext": "",
     "name": "主题 2",
     "elements": [
       {
         "size": 82335,
-        "isFile": true,
-        "isDir": false,
         "ext": "png",
         "name": "22222222222",
         "height": 436,
         "width": 602,
-        "uuid": "56b0d012-ec6d-47ba-a03d-af47ca355610"
+        "hash": "82ff386d9af5a68355366c151b8af0dc"
       },
       {
         "size": 58004,
-        "isFile": true,
-        "isDir": false,
         "ext": "png",
         "name": "bbbbbbbb",
         "height": 680,
         "width": 542,
-        "uuid": "f0399227-2e04-4517-af04-875913f6b632"
+        "hash": "6714d0f334297100e4824063ee931340"
       },
       {
         "size": 181934,
-        "isFile": true,
-        "isDir": false,
         "ext": "png",
         "name": "cccccc",
         "height": 322,
         "width": 774,
-        "uuid": "0be03dfa-279d-45bb-a2b7-ab00f0cb71cf"
+        "hash": "b0a6b00d854f020de0af225d4c733ccc"
       }
     ]
   }

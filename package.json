@@ -32,6 +32,8 @@
     "electron": "^6.0.0",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
+    "lowdb": "^1.0.0",
+    "md5-file": "^4.0.0",
     "qiniu": "^7.3.0",
     "sass": "^1.23.7",
     "sass-loader": "^8.0.0",

@@ -1,6 +1,9 @@
 const fs = require('fs')
 const path = require('path')
+const shortid = require('shortid')
 const upload = require('./upload')
+
+shortid.characters('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ$@')
 
 async function scan ({
   folderPath,
@@ -22,6 +25,7 @@ async function scan ({
 		// 忽略点开头
 		if (parsed.name[0] === '.') continue
 		// 元素对象
+		element.id = shortid.generate()
 		element.size = stat.size
 		element.name = parsed.name
 		if (isDir) {

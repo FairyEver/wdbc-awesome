@@ -4,7 +4,6 @@
 
 <template>
   <div class="page-album">
-    <!-- <img ref="img" alt="Vue logo" src="@/assets/logo.png"> -->
     <a-row :gutter="10">
       <a-col
         v-for="n in 8"
@@ -44,9 +43,7 @@ export default {
     //   event.preventDefault()
     //   ipcRenderer.send('ondragstart', '/path/to/item')
     // }
-    const result = await this.$api.LIBRARY_LOAD()
-    console.log(result)
-    console.log(this.$store.getters['library/getterDemo'])
+    this.$store.dispatch('materials/fetch')
   },
   methods: {
   }

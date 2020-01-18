@@ -1,6 +1,31 @@
 @import './color.scss';
 @import './var.scss';
 
+.unselect {
+  user-select: none;
+  cursor: pointer;
+}
+
+.square {
+  width: 100%;
+  padding-top: 100%;
+  height: 0;
+}
+
+.bg-cover {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.radius2 {
+  border-radius: 2px;
+}
+
+.radius4 {
+  border-radius: 4px;
+}
+
 // 边距相关
 $sizes: (0, 5px, 10px, 15px, 20px);
 $sizes-name: (0, 5, 10, 15, 20);

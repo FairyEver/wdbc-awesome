@@ -10,18 +10,14 @@ async function scan ({
 	let result = []
 	// 检查是否为文件夹，这个判断只在递归的第一次触发
   if (needCheckIsFolder && !await fs.statSync(folderPath).isDirectory()) return result
-	// 获得文件夹的内容
 	const files = await fs.readdirSync(folderPath)
 	for (const filename of files) {
 		let element = {}
-		// path
 		const filePathFull = path.join(folderPath, filename)
 		const filePath = filePathFull.replace(rootFolderPath, '')
-		// 是否为文件或者文件夹
 		const stat = await fs.statSync(filePathFull)
 		const isFile = stat.isFile()
 		const isDir = stat.isDirectory()
-		// 解析路径
 		const parsed = path.parse(filePath)
 		// 忽略点开头
 		if (parsed.name[0] === '.') continue

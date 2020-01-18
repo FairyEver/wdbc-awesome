@@ -3,7 +3,7 @@
 
 const qiniu = require('qiniu')
 const md5 = require('md5-file/promise')
-const { uploadedFileFind, uploadedFileAdd } = require('./db.js')
+const { uploadedFind, uploadedAdd } = require('./db.js')
 
 const accessKey = global.AK
 const secretKey = global.SK
@@ -21,7 +21,7 @@ async function upload ({
       hash: await md5(path),
       path
     }
-    const uploaded = uploadedFileFind(file)
+    const uploaded = uploadedFind(file)
     if (uploaded) {
       log('已经上传过')
       return resolve(uploaded)
@@ -47,7 +47,7 @@ async function upload ({
         }
         if (respInfo.statusCode == 200) {
           log('上传完成')
-          uploadedFileAdd({
+          uploadedAdd({
             ...file,
             ...respBody
           })

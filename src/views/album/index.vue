@@ -14,7 +14,7 @@
         :lg="4"
         :xl="3"
         class="is-mb-10">
-        <img class="square" :style="{ backgroundImage: `url(${$url(el.cover)})` }"/>
+        <library-element :value="el"/>
       </a-col>
     </a-row>
   </div>

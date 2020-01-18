@@ -4,7 +4,7 @@
 const qiniu = require('qiniu')
 const md5 = require('md5-file/promise')
 const { uploadedFind, uploadedAdd } = require('./db.js')
-const mac = new qiniu.auth.digest.Mac(global.AK, global.SK)
+const mac = new qiniu.auth.digest.Mac(global.materials.AK, global.materials.SK)
 
 async function upload ({
   url,

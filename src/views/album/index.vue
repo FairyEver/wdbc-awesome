@@ -5,22 +5,16 @@
 <template>
   <div class="page-album">
     <a-row :gutter="10">
-      <a-col v-for="el of $store.getters['materials/library']" :key="el.id" :xs="24" :sm="12" :md="8" :lg="6" :xl="6" class="is-mb-10">
-        <a-card hoverable>
-          <img
-            alt="example"
-            src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-            slot="cover"
-          />
-          <template class="ant-card-actions" slot="actions">
-            <a-icon type="setting" />
-            <a-icon type="edit" />
-            <a-icon type="ellipsis" />
-          </template>
-          <a-card-meta :title="el.name" description="This is the description">
-            <a-avatar slot="avatar" src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"/>
-          </a-card-meta>
-        </a-card>
+      <a-col
+        v-for="el of $store.getters['materials/library']"
+        :key="el.id"
+        :xs="12"
+        :sm="8"
+        :md="6"
+        :lg="4"
+        :xl="3"
+        class="is-mb-10">
+        <img class="square" :style="{ backgroundImage: `url(${$url(el.cover)})` }"/>
       </a-col>
     </a-row>
   </div>

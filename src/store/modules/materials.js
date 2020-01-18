@@ -12,7 +12,23 @@ export default ({ api }) => ({
      * @example this.$store.getters['materials/library']
      */
     library (state, getters, rootState, rootGetters) {
-      return state.value.library
+      return state.value.library || []
+    },
+    /**
+     * @description 资源数据域名
+     * @example store.getters['materials/libraryBase']
+     * @example this.$store.getters['materials/libraryBase']
+     */
+    libraryBase (state, getters, rootState, rootGetters) {
+      return state.value.base || ''
+    },
+    /**
+     * @description 资源数据目录地址
+     * @example store.getters['materials/libraryPrefix']
+     * @example this.$store.getters['materials/libraryPrefix']
+     */
+    libraryPrefix (state, getters, rootState, rootGetters) {
+      return state.value.prefix || ''
     }
   },
   mutations: {

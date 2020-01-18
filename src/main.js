@@ -8,6 +8,7 @@ import router from './router'
 import store from './store'
 
 import api from '@/plugins/api'
+import library from '@/plugins/library'
 
 import '@/components'
 import 'flex.css'
@@ -16,6 +17,7 @@ Vue.config.productionTip = false
 
 Vue.use(Antd)
 Vue.use(api)
+Vue.use(library)
 
 new Vue({
   router,

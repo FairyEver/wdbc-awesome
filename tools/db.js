@@ -5,29 +5,29 @@ const adapter = new FileSync('./tools/database.json')
 const db = low(adapter)
 
 db.defaults({
-  files: []
+  uploadedFiles: []
 })
   .write()
 
-module.exports.fileFind = ({
-  filePath = '',
+module.exports.uploadedFileFind = ({
+  path = '',
   hash = ''
 }) => {
-  return db.get('files')
+  return db.get('uploadedFiles')
     .find({
-      filePath,
+      path,
       hash
     })
     .value()
 }
 
-module.exports.fileAdd = ({
-  filePath = '',
+module.exports.uploadedFileAdd = ({
+  path = '',
   hash = ''
 }) => {
-  db.get('files')
+  db.get('uploadedFiles')
     .push({
-      filePath,
+      path,
       hash
     })
     .write()

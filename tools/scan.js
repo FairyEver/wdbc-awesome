@@ -27,7 +27,6 @@ async function scan ({
 		if (parsed.name[0] === '.') continue
 		// 元素对象
 		element.size = stat.size
-		element.ext = parsed.ext.replace(/^\./, '')
 		element.name = parsed.name
 		if (isDir) {
 			element.elements = await scan({
@@ -37,14 +36,15 @@ async function scan ({
 			})
 		}
 		if (isFile) {
+			const url = new Date().valueOf() + parsed.ext
 			const uploaded = await upload({
-				filePath,
-				filePathFull
+				name: url,
+				path: filePathFull
 			})
 			if (uploaded) {
+				element.url = url
 				element.height = uploaded.height
 				element.width = uploaded.width
-				element.hash = uploaded.hash
 			}
 		}
 		result.push(element)

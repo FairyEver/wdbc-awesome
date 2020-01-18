@@ -1,12 +1,14 @@
 {
+  "base": "https://qiniucdn.fairyever.com/",
+  "prefix": "wdbc-awesome/",
   "library": [
     {
-      "id": "ttILDB5y",
+      "id": "ux9ByjGc",
       "size": 160,
       "name": "主题 1",
       "elements": [
         {
-          "id": "zMhk0CDRi",
+          "id": "3hBPxMQom",
           "size": 90325,
           "name": "名称",
           "url": "1579334436952.png",
@@ -14,7 +16,7 @@
           "width": 910
         },
         {
-          "id": "DPVgHBtmG",
+          "id": "OkPb$i8rv",
           "size": 195471,
           "name": "哈哈哈哈哈",
           "url": "1579334437469.png",
@@ -25,12 +27,12 @@
       "cover": "1579334436121.png"
     },
     {
-      "id": "Srmn9lot6",
+      "id": "Apf8MZDtj",
       "size": 192,
       "name": "主题 2",
       "elements": [
         {
-          "id": "Xc$LVDmTQ",
+          "id": "a@q$Q6G2Q",
           "size": 82335,
           "name": "一月又一月",
           "url": "1579334439042.png",
@@ -38,7 +40,7 @@
           "width": 602
         },
         {
-          "id": "puHB06nax",
+          "id": "5kmYwwiKf",
           "size": 58004,
           "name": "哎哎哎哎哎",
           "url": "1579334439580.png",
@@ -46,7 +48,7 @@
           "width": 542
         },
         {
-          "id": "8QHAmZhDQ",
+          "id": "0so0if5t9",
           "size": 181934,
           "name": "自己及",
           "url": "1579334440122.png",

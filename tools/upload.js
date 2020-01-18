@@ -24,7 +24,7 @@ async function upload ({
       log('已经上传过')
       return resolve(uploaded)
     }
-    const fileName = 'wdbc-awesome/' + url
+    const fileName = global.materials.prefix + url
     const putPolicy = new qiniu.rs.PutPolicy({
       scope: 'fairyever' + ':' + fileName,
       returnBody: '{"height":$(imageInfo.height), "width":$(imageInfo.width)}'

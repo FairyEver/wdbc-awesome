@@ -5,15 +5,7 @@
 <template>
   <div class="page-album">
     <a-row :gutter="10">
-      <a-col
-        v-for="n in 8"
-        :key="n"
-        :xs="24"
-        :sm="12"
-        :md="8"
-        :lg="6"
-        :xl="6"
-        class="is-mb-10">
+      <a-col v-for="el of $store.getters['materials/library']" :key="el.id" :xs="24" :sm="12" :md="8" :lg="6" :xl="6" class="is-mb-10">
         <a-card hoverable>
           <img
             alt="example"
@@ -25,7 +17,7 @@
             <a-icon type="edit" />
             <a-icon type="ellipsis" />
           </template>
-          <a-card-meta title="Card title" description="This is the description">
+          <a-card-meta :title="el.name" description="This is the description">
             <a-avatar slot="avatar" src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"/>
           </a-card-meta>
         </a-card>

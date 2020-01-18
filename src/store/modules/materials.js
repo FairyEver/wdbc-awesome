@@ -8,8 +8,8 @@ export default ({ api }) => ({
   getters: {
     /**
      * @description 资源数据
-     * @example store.getters['materials/library]
-     * @example this.$store.getters['materials/library]
+     * @example store.getters['materials/library']
+     * @example this.$store.getters['materials/library']
      */
     library (state, getters, rootState, rootGetters) {
       return state.value.library

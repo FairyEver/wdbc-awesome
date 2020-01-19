@@ -8,26 +8,21 @@
       <a-breadcrumb-item>
         <a-icon type="home"/>
       </a-breadcrumb-item>
-      <a-breadcrumb-item href="">
+      <a-breadcrumb-item
+        @click.native="$store.commit('materials/viewPathClean')"
+        href="">
         {{ $store.state.materials.viewPathBase.label }}
       </a-breadcrumb-item>
       <a-breadcrumb-item
         v-for="(item, index) of $store.state.materials.viewPath"
         :key="item.id"
-        href=""
-        @click.native="$store.commit('materials/viewPathToIndex', index)">
+        @click.native="$store.commit('materials/viewPathToIndex', index)"
+        href="">
         {{ item.label }}
       </a-breadcrumb-item>
     </a-breadcrumb>
     <a-row>
-      <a-col
-        v-for="(el, index) of $store.getters['materials/libraryView']"
-        :key="el.id"
-        :xs="12"
-        :sm="8"
-        :md="6"
-        :lg="4"
-        :xl="3">
+      <a-col v-for="(el, index) of $store.getters['materials/libraryView']" :key="el.id" :xs="12" :sm="8" :md="6" :lg="4" :xl="3">
         <library-element :value="el" :index="index"/>
       </a-col>
     </a-row>

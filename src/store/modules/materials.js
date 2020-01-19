@@ -70,6 +70,16 @@ export default ({ api }) => ({
       })
     },
     /**
+     * @description 物料库访问路径 文件路径 清空
+     * @param {Object} state state
+     * @param {Object} payload payload
+     * @example store.commit('materials/viewPathClean')
+     * @example this.$store.commit('materials/viewPathClean')
+     */
+    viewPathClean (state) {
+      state.viewPath = []
+    },
+    /**
      * @description 物料库访问路径 文件路径 设置到某一个
      * @param {Object} state state
      * @param {Object} payload payload

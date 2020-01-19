@@ -15,7 +15,7 @@ export default {
     }
   },
   mounted () {
-    this.throttledUpdateSize = throttle(this.updateSize, 300)
+    this.throttledUpdateSize = throttle(this.updateSize, 30)
     window.addEventListener('resize', this.throttledUpdateSize)
     this.throttledUpdateSize()
   },

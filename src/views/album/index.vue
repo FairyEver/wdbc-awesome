@@ -4,7 +4,7 @@
 
 <template>
   <div class="page-album">
-    <a-breadcrumb class="is-mb-20">
+    <a-breadcrumb class="is-mb-10">
       <a-breadcrumb-item>
         <a-icon type="home"/>
       </a-breadcrumb-item>
@@ -21,7 +21,7 @@
         {{ item.label }}
       </a-breadcrumb-item>
     </a-breadcrumb>
-    <a-row>
+    <a-row style="margin: 0 -10px;">
       <a-col v-for="(el, index) of $store.getters['materials/libraryView']" :key="el.id" :xs="12" :sm="8" :md="6" :lg="4" :xl="3">
         <library-element :value="el" :index="index"/>
       </a-col>

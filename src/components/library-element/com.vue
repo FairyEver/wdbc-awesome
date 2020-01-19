@@ -31,6 +31,7 @@
     }
   }
   &:hover {
+    background-color: rgba($COLOR_DARK, 0.05);
     .library-element--icon-group {
       box-shadow:
         0 2px 4px 0 rgba($COLOR_DARK, 0.2),

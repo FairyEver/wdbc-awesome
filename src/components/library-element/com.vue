@@ -1,22 +1,22 @@
 <style lang="scss">
 .library-element {
   $PADDING: 10px;
-  $TRANSITION_Y: 1px;
   $LABEL_HEIGHT: 20px;
   @extend .transition;
   @extend .unselect;
   @extend .radius4;
   padding: $PADDING;
-  .library-element--cover {
+  .library-element--icon-group {
     @extend .transition;
     @extend .radius2;
-    background-color: #FFF;
+    margin-bottom: $PADDING;
     padding: 2px;
-    margin-bottom: $PADDING - $TRANSITION_Y;
-    .library-element--cover-image {
-      @extend .square;
-      @extend .bg-cover;
+    background-color: #FFF;
+    .library-element--icon {
       @extend .radius2;
+      background-color: #FFF;
+      max-width: 100%;
+      max-height: 100%;
     }
   }
   .library-element--title {
@@ -31,16 +31,15 @@
     }
   }
   &:hover {
-    background-color: rgba($COLOR_DARK, 0.05);
-    .library-element--cover {
-      transform: translateY(-$TRANSITION_Y);
+    .library-element--icon-group {
       box-shadow:
-        0 2px 4px 0 rgba($COLOR_DARK, 0.1),
-        0 2px 20px 0 rgba($COLOR_DARK, 0.2);
+        0 2px 4px 0 rgba($COLOR_DARK, 0.2),
+        0 2px 20px 0 rgba($COLOR_DARK, 0.1);
     }
     .library-element--title {
       .library-element--title-label {
-        background-color: rgba($COLOR_DARK, .1);
+        background-color: #0058D0;
+        color: #FFF;
       }
     }
   }
@@ -49,11 +48,9 @@
 
 <template>
   <div class="library-element" @click="onClick">
-    <div class="library-element--cover">
-      <div
-        class="library-element--cover-image"
-        :style="{ backgroundImage: `url(${$url(value.cover || value.url)})` }"></div>
-    </div>
+    <square class="library-element--icon-group" flex="main:center cross:center">
+      <img class="library-element--icon" :src="$url(value.cover || value.url)">
+    </square>
     <div class="library-element--title" flex="main:center">
       <div class="library-element--title-label">
         {{ value.name }}
@@ -63,6 +60,7 @@
 </template>
 
 <script>
+import { isArray } from 'lodash'
 export default {
   name: 'library-element',
   props: {
@@ -77,9 +75,14 @@ export default {
       required: false
     }
   },
+  computed: {
+    isFolder () {
+      return isArray(this.value.elements)
+    }
+  },
   methods: {
     onClick () {
-      if (this.value.elements) {
+      if (this.isFolder) {
         this.$store.commit('materials/viewPathPush', {
           label: this.value.name,
           value: this.index

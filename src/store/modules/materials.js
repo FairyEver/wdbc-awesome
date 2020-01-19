@@ -1,9 +1,22 @@
 // https://vuex.vuejs.org/zh/api/
+import { get } from 'lodash'
 
 export default ({ api }) => ({
   namespaced: true,
   state: {
-    value: {}
+    // 物料库
+    value: {},
+    // 访问路径
+    viewPathBase: {
+      label: '资源库',
+      value: 'library'
+    },
+    viewPath: [
+      // {
+      //   label: '资源库',
+      //   value: 0
+      // }
+    ]
   },
   getters: {
     /**
@@ -13,6 +26,15 @@ export default ({ api }) => ({
      */
     library (state, getters, rootState, rootGetters) {
       return state.value.library || []
+    },
+    /**
+     * @description 资源数据 当前视图的内容
+     * @example store.getters['materials/libraryView']
+     * @example this.$store.getters['materials/libraryView']
+     */
+    libraryView (state, getters, rootState, rootGetters) {
+      const path = state.viewPathBase.value + state.viewPath.map(e => `[${e.value}].elements`).join('')
+      return get(state.value, path)
     },
     /**
      * @description 资源数据域名

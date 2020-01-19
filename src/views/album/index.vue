@@ -4,9 +4,17 @@
 
 <template>
   <div class="page-album">
+    <a-breadcrumb class="is-mb-20">
+      <a-breadcrumb-item>
+        <a-icon type="home"/>
+      </a-breadcrumb-item>
+      <a-breadcrumb-item href="">
+        Library
+      </a-breadcrumb-item>
+    </a-breadcrumb>
     <a-row :gutter="10">
       <a-col
-        v-for="el of $store.getters['materials/library']"
+        v-for="el of $store.getters['materials/libraryView']"
         :key="el.id"
         :xs="12"
         :sm="8"

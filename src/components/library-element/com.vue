@@ -45,7 +45,7 @@
     <div class="library-element--cover">
       <div
         class="library-element--cover-image"
-        :style="{ backgroundImage: `url(${$url(value.cover)})` }"></div>
+        :style="{ backgroundImage: `url(${$url(value.cover || value.url)})` }"></div>
     </div>
     <div class="library-element--title" flex="main:center">
       <div class="library-element--title-label">

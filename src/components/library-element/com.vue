@@ -1,14 +1,18 @@
 <style lang="scss">
 .library-element {
+  $PADDING: 10px;
+  $TRANSITION_Y: 1px;
+  $LABEL_HEIGHT: 20px;
   @extend .transition;
   @extend .unselect;
-  @extend .radius2;
-  padding: 10px 10px 0 10px;
+  @extend .radius4;
+  padding: $PADDING;
   .library-element--cover {
     @extend .transition;
     @extend .radius2;
     background-color: #FFF;
     padding: 2px;
+    margin-bottom: $PADDING - $TRANSITION_Y;
     .library-element--cover-image {
       @extend .square;
       @extend .bg-cover;
@@ -17,19 +21,19 @@
   }
   .library-element--title {
     font-size: 12px;
-    padding: 10px 0;
     .library-element--title-label {
       @extend .transition;
-      @extend .radius10;
-      height: 20px;
-      line-height: 20px;
-      padding: 0 8px;
+      @extend .nowrap;
+      height: $LABEL_HEIGHT;
+      line-height: $LABEL_HEIGHT;
+      border-radius: $LABEL_HEIGHT / 2;
+      padding: 0 $PADDING;
     }
   }
   &:hover {
     background-color: rgba($COLOR_DARK, 0.05);
     .library-element--cover {
-      transform: translateY(-1px);
+      transform: translateY(-$TRANSITION_Y);
       box-shadow:
         0 2px 4px 0 rgba($COLOR_DARK, 0.1),
         0 2px 20px 0 rgba($COLOR_DARK, 0.2);

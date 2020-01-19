@@ -24,7 +24,12 @@
 
 .radius2 { border-radius: 2px; }
 .radius4 { border-radius: 4px; }
-.radius10 { border-radius: 10px; }
+
+.nowrap {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
 
 // 边距相关
 $sizes: (0, 5px, 10px, 15px, 20px);

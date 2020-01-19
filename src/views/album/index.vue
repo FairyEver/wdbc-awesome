@@ -11,6 +11,13 @@
       <a-breadcrumb-item href="">
         {{ $store.state.materials.viewPathBase.label }}
       </a-breadcrumb-item>
+      <a-breadcrumb-item
+        v-for="(item, index) of $store.state.materials.viewPath"
+        :key="item.id"
+        href=""
+        @click.native="$store.commit('materials/viewPathToIndex', index)">
+        {{ item.label }}
+      </a-breadcrumb-item>
     </a-breadcrumb>
     <a-row>
       <a-col

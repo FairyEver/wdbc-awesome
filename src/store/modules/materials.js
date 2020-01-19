@@ -38,7 +38,7 @@ export default ({ api }) => ({
       return get(state.value, path)
     },
     /**
-     * @description 资源数据域名
+     * @description 资源数据 域名
      * @example store.getters['materials/libraryBase']
      * @example this.$store.getters['materials/libraryBase']
      */
@@ -46,7 +46,7 @@ export default ({ api }) => ({
       return state.value.base || ''
     },
     /**
-     * @description 资源数据目录地址
+     * @description 资源数据 目录地址
      * @example store.getters['materials/libraryPrefix']
      * @example this.$store.getters['materials/libraryPrefix']
      */
@@ -63,7 +63,22 @@ export default ({ api }) => ({
      * @example this.$store.commit('materials/viewPathPush')
      */
     viewPathPush (state, { label = 'Label', value = 0 }) {
-      state.viewPath.push({ label, value })
+      state.viewPath.push({
+        label,
+        value,
+        id: new Date().valueOf()
+      })
+    },
+    /**
+     * @description 物料库访问路径 文件路径 设置到某一个
+     * @param {Object} state state
+     * @param {Object} payload payload
+     * @example store.commit('materials/viewPathToIndex')
+     * @example this.$store.commit('materials/viewPathToIndex')
+     */
+    viewPathToIndex (state, index) {
+      if (index === state.viewPath.length - 1) return
+      state.viewPath.splice(index + 1, state.viewPath.length - (index + 1))
     },
     /**
      * @description 设置物料库

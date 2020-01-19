@@ -41,7 +41,7 @@
 </style>
 
 <template>
-  <div class="library-element">
+  <div class="library-element" @click="onClick">
     <div class="library-element--cover">
       <div
         class="library-element--cover-image"
@@ -59,10 +59,25 @@
 export default {
   name: 'library-element',
   props: {
+    index: {
+      type: Number,
+      default: 0,
+      required: false
+    },
     value: {
       type: Object,
       default: () => ({}),
       required: false
+    }
+  },
+  methods: {
+    onClick () {
+      if (this.value.elements) {
+        this.$store.commit('materials/viewPathPush', {
+          label: this.value.name,
+          value: this.index
+        })
+      }
     }
   }
 }

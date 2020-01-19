@@ -6,11 +6,12 @@ export default ({ api }) => ({
   state: {
     // 物料库
     value: {},
-    // 访问路径
+    // 访问路径 基础路径
     viewPathBase: {
       label: '资源库',
       value: 'library'
     },
+    // 访问路径
     viewPath: [
       // {
       //   label: '资源库',
@@ -56,6 +57,16 @@ export default ({ api }) => ({
   mutations: {
     /**
      * @description 设置物料库
+     * @param {Object} state state
+     * @param {Object} payload payload
+     * @example store.commit('materials/viewPathPush')
+     * @example this.$store.commit('materials/viewPathPush')
+     */
+    viewPathPush (state, { label = 'Label', value = 0 }) {
+      state.viewPath.push({ label, value })
+    },
+    /**
+     * @description 追加访问路径
      * @param {Object} state state
      * @param {Object} payload payload
      * @example store.commit('materials/set')

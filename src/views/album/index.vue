@@ -9,19 +9,19 @@
         <a-icon type="home"/>
       </a-breadcrumb-item>
       <a-breadcrumb-item href="">
-        Library
+        {{ $store.state.materials.viewPathBase.label }}
       </a-breadcrumb-item>
     </a-breadcrumb>
     <a-row :gutter="10">
       <a-col
-        v-for="el of $store.getters['materials/libraryView']"
+        v-for="(el, index) of $store.getters['materials/libraryView']"
         :key="el.id"
         :xs="12"
         :sm="8"
         :md="6"
         :lg="4"
         :xl="3">
-        <library-element :value="el"/>
+        <library-element :value="el" :index="index"/>
       </a-col>
     </a-row>
   </div>

@@ -12,8 +12,7 @@
         :sm="8"
         :md="6"
         :lg="4"
-        :xl="3"
-        class="is-mb-10">
+        :xl="3">
         <library-element :value="el"/>
       </a-col>
     </a-row>

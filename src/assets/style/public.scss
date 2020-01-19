@@ -1,6 +1,10 @@
 @import './color.scss';
 @import './var.scss';
 
+.transition {
+  transition: all .1s;
+}
+
 .unselect {
   user-select: none;
   cursor: pointer;
@@ -18,13 +22,9 @@
   background-position: center;
 }
 
-.radius2 {
-  border-radius: 2px;
-}
-
-.radius4 {
-  border-radius: 4px;
-}
+.radius2 { border-radius: 2px; }
+.radius4 { border-radius: 4px; }
+.radius10 { border-radius: 10px; }
 
 // 边距相关
 $sizes: (0, 5px, 10px, 15px, 20px);

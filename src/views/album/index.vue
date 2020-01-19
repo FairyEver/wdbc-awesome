@@ -12,7 +12,7 @@
         {{ $store.state.materials.viewPathBase.label }}
       </a-breadcrumb-item>
     </a-breadcrumb>
-    <a-row :gutter="10">
+    <a-row>
       <a-col
         v-for="(el, index) of $store.getters['materials/libraryView']"
         :key="el.id"

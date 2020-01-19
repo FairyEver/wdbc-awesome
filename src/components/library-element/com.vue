@@ -1,10 +1,12 @@
 <style lang="scss">
 .library-element {
+  @extend .transition;
   @extend .unselect;
-  position: relative;
+  @extend .radius2;
+  padding: 10px 10px 0 10px;
   .library-element--cover {
-    @extend .radius2;
     @extend .transition;
+    @extend .radius2;
     background-color: #FFF;
     padding: 2px;
     .library-element--cover-image {
@@ -25,11 +27,12 @@
     }
   }
   &:hover {
+    background-color: rgba($COLOR_DARK, 0.05);
     .library-element--cover {
       transform: translateY(-1px);
       box-shadow:
         0 2px 4px 0 rgba($COLOR_DARK, 0.1),
-        0 2px 20px 0 rgba($COLOR_DARK, 0.20);
+        0 2px 20px 0 rgba($COLOR_DARK, 0.2);
     }
     .library-element--title {
       .library-element--title-label {

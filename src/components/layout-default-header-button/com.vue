@@ -18,10 +18,10 @@
 .layout-default-header-button--popover-content {
   margin: -12px -16px;
   .layout-default-header-button--popover-content-content {
-    padding: 5px 16px;
+    padding: 8px 16px;
   }
   .layout-default-header-button--popover-content-footer {
-    padding: 5px 16px;
+    padding: 8px 16px;
     border-top: 1px solid #e8e8e8;
   }
 }
@@ -36,10 +36,10 @@
       v-if="this.$slots.content || this.$slots.footer"
       slot="content"
       class="layout-default-header-button--popover-content unselect">
-      <div class="layout-default-header-button--popover-content-content">
+      <div v-if="this.$slots.content" class="layout-default-header-button--popover-content-content">
         <slot name="content"/>
       </div>
-      <div class="layout-default-header-button--popover-content-footer">
+      <div v-if="this.$slots.footer" class="layout-default-header-button--popover-content-footer">
         <slot name="footer"/>
       </div>
     </div>

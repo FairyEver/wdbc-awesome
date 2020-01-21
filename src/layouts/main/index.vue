@@ -52,16 +52,16 @@ html, body {
         <layout-default-header-button icon="sync">
           <div slot="title">刷新数据</div>
           <div slot="content">
-            <p>此操作将重新请求服务器数据</p>
-            <p>将刷新本地资源列表</p>
-            <a-button type="danger" icon="sync" block>刷新数据</a-button>
+            此操作将重新请求服务器数据<br>
+            将刷新本地资源列表
           </div>
+          <a-button slot="footer" type="primary" icon="sync" block>刷新数据</a-button>
         </layout-default-header-button>
         <layout-default-header-button icon="bell" :count="$store.getters['log/length']">
           <div slot="title">消息</div>
           <log-list slot="content"/>
           <div slot="footer" flex="main:right">
-            <a-button size="small" icon="delete" type="danger" @click="$store.commit('log/clear')">
+            <a-button icon="delete" type="danger" @click="$store.commit('log/clear')">
               清空
             </a-button>
           </div>

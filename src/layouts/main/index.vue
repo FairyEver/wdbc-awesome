@@ -57,9 +57,9 @@ html, body {
             <a-button type="danger" icon="sync" block>刷新数据</a-button>
           </div>
         </layout-default-header-button>
-        <layout-default-header-button icon="bell">
+        <layout-default-header-button icon="bell" :count="$store.getters['log/length']">
           <div slot="title">消息</div>
-          <div slot="content">content</div>
+          <log-list slot="content"/>
         </layout-default-header-button>
       </div>
     </div>

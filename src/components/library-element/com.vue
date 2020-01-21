@@ -86,9 +86,7 @@
           v-for="col in 3"
           :key="col"
           class="library-element--icon-folder-col"
-          :class="{
-            'library-element--icon-folder-col__has-image': value.elements.length >= (3 * (row - 1) + col)
-          }"
+          :class="{ 'library-element--icon-folder-col__has-image': value.elements.length >= (3 * (row - 1) + col) }"
           flex="main:center cross:center">
           <img
             v-if="value.elements.length >= (3 * (row - 1) + col)"

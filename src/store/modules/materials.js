@@ -11,13 +11,8 @@ export default ({ api }) => ({
       label: '资源库',
       value: 'library'
     },
-    // 物料库访问路径 文件路径
-    viewPath: [
-      // {
-      //   label: '资源库',
-      //   value: 0
-      // }
-    ]
+    // 物料库访问路径 文件路径 { label: '资源库', value: 0 }
+    viewPath: []
   },
   getters: {
     /**
@@ -52,6 +47,25 @@ export default ({ api }) => ({
      */
     libraryPrefix (state, getters, rootState, rootGetters) {
       return state.value.prefix || ''
+    },
+    /**
+     * @description 资源数据 文件列表
+     * @example store.getters['materials/files']
+     * @example this.$store.getters['materials/files']
+     */
+    files (state, getters, rootState, rootGetters) {
+      let result = []
+      function scan (source) {
+        source.forEach(element => {
+          if (element.elements) {
+            scan(element.elements)
+          } else {
+            result.push(element)
+          }
+        })
+      }
+      scan(getters.library)
+      return result
     }
   },
   mutations: {
@@ -111,6 +125,7 @@ export default ({ api }) => ({
      */
     async fetch ({ state, rootState, commit, dispatch, getters, rootGetters }) {
       commit('set', await api.MATERIALS_FETCH())
+      commit('log/push', '请求远程物料库完成', { root: true })
     }
   }
 })

@@ -1,5 +1,7 @@
 <style lang="scss">
 .layout-default-header-button {
+  @extend .unselect;
+  @extend .unselect;
   .ant-badge {
     .ant-badge-count {
       $badge-height: 14px;
@@ -17,8 +19,12 @@
 
 <template>
   <a-popover class="layout-default-header-button" placement="bottomRight" :trigger="trigger">
-    <slot v-if="this.$slots.content" slot="content" name="content"/>
-    <slot v-if="this.$slots.title" slot="title" name="title"/>
+    <div v-if="this.$slots.content" slot="content" class="unselect">
+      <slot name="content"/>
+    </div>
+    <div v-if="this.$slots.title" slot="title" class="unselect">
+      <slot name="title"/>
+    </div>
     <div class="layout-header-button" flex="main:center cross:center">
       <a-badge :count="count" :offset="[1, -1]">
         <a-icon :type="icon" :spin="spin"/>

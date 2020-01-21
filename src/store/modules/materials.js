@@ -126,6 +126,14 @@ export default ({ api }) => ({
     async fetch ({ state, rootState, commit, dispatch, getters, rootGetters }) {
       commit('set', await api.MATERIALS_FETCH())
       commit('log/push', '请求远程物料库完成', { root: true })
+      commit('log/push', '请求远程物料库完成', { root: true })
+      commit('log/push', '请求远程物料库完成', { root: true })
+      commit('log/push', '请求远程物料库完成', { root: true })
+      commit('log/push', '请求远程物料库完成', { root: true })
+      commit('log/push', '请求远程物料库完成', { root: true })
+      commit('log/push', '请求远程物料库完成', { root: true })
+      commit('log/push', '请求远程物料库完成', { root: true })
+      commit('log/push', '请求远程物料库完成', { root: true })
     }
   }
 })

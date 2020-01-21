@@ -70,7 +70,7 @@
     background-color: rgba($COLOR_DARK, 0.05);
     .library-element--title {
       .library-element--title-label {
-        background-color: #0058D0;
+        background-color: $COLOR_TEXT_LABEL_ACTIVE;
         color: #FFF;
       }
     }

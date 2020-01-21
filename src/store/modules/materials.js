@@ -21,7 +21,7 @@ export default ({ api }) => ({
      * @example this.$store.getters['materials/library']
      */
     library (state, getters, rootState, rootGetters) {
-      return state.value.library || []
+      return get(state, 'value.library', [])
     },
     /**
      * @description 资源数据 当前视图的内容
@@ -30,7 +30,7 @@ export default ({ api }) => ({
      */
     libraryView (state, getters, rootState, rootGetters) {
       const path = state.viewPathBase.value + state.viewPath.map(e => `[${e.value}].elements`).join('')
-      return get(state.value, path)
+      return get(state.value, path, [])
     },
     /**
      * @description 资源数据 域名
@@ -38,7 +38,7 @@ export default ({ api }) => ({
      * @example this.$store.getters['materials/libraryBase']
      */
     libraryBase (state, getters, rootState, rootGetters) {
-      return state.value.base || ''
+      return get(state, 'value.base', '')
     },
     /**
      * @description 资源数据 目录地址
@@ -46,7 +46,7 @@ export default ({ api }) => ({
      * @example this.$store.getters['materials/libraryPrefix']
      */
     libraryPrefix (state, getters, rootState, rootGetters) {
-      return state.value.prefix || ''
+      return get(state, 'value.prefix', '')
     },
     /**
      * @description 资源数据 文件列表
@@ -125,15 +125,7 @@ export default ({ api }) => ({
      */
     async fetch ({ state, rootState, commit, dispatch, getters, rootGetters }) {
       commit('set', await api.MATERIALS_FETCH())
-      commit('log/push', '请求远程物料库完成请求远程物料库完成', { root: true })
-      commit('log/push', '请求远程物料库完成请求远程物料库完成', { root: true })
-      commit('log/push', '请求远程物料库完成请求远程物料库完成', { root: true })
-      commit('log/push', '请求远程物料库完成请求远程物料库完成', { root: true })
-      commit('log/push', '请求远程物料库完成请求远程物料库完成', { root: true })
-      commit('log/push', '请求远程物料库完成请求远程物料库完成', { root: true })
-      commit('log/push', '请求远程物料库完成请求远程物料库完成', { root: true })
-      commit('log/push', '请求远程物料库完成请求远程物料库完成', { root: true })
-      commit('log/push', '请求远程物料库完成请求远程物料库完成', { root: true })
+      commit('log/push', '远程物料库加载完成', { root: true })
     }
   }
 })

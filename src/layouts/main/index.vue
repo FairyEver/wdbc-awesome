@@ -47,7 +47,9 @@ html, body {
       <div flex="main:justify">
         <layout-default-header-button icon="database">
           <div slot="title">总览</div>
-          <div slot="content">content</div>
+          <div slot="content">
+            <a-icon type="file" /> x {{ $store.getters['materials/libraryFilesCount'] }}
+          </div>
         </layout-default-header-button>
         <layout-default-header-button icon="sync">
           <div slot="title">刷新数据</div>

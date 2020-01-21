@@ -130,7 +130,7 @@ export default {
   methods: {
     onClick () {
       if (this.isDir) {
-        this.$store.commit('materials/viewPathPush', {
+        this.$store.commit('view/push', {
           label: this.value.name,
           value: this.index
         })

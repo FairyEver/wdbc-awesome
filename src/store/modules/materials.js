@@ -1,20 +1,29 @@
 // https://vuex.vuejs.org/zh/api/
+
 import { get } from 'lodash'
 
 export default ({ api }) => ({
   namespaced: true,
   state: {
     // 物料库
-    value: {},
-    // 物料库访问路径 基础路径
-    viewPathBase: {
-      label: '资源库',
-      value: 'library'
-    },
-    // 物料库访问路径 文件路径 { label: '资源库', value: 0 }
-    viewPath: []
+    //  - base: ''
+    //  - library: []
+    //  - prefix: ''
+    value: {}
   },
   getters: {
+    /**
+     * @description 数据
+     * @example store.getters['materials/value']
+     * @example this.$store.getters['materials/value']
+     */
+    value (state, getters, rootState, rootGetters) {
+      return get(state, 'value', {
+        base: '',
+        library: [],
+        prefix: ''
+      })
+    },
     /**
      * @description 资源数据
      * @example store.getters['materials/library']
@@ -22,15 +31,6 @@ export default ({ api }) => ({
      */
     library (state, getters, rootState, rootGetters) {
       return get(state, 'value.library', [])
-    },
-    /**
-     * @description 资源数据 当前视图的内容
-     * @example store.getters['materials/libraryView']
-     * @example this.$store.getters['materials/libraryView']
-     */
-    libraryView (state, getters, rootState, rootGetters) {
-      const path = state.viewPathBase.value + state.viewPath.map(e => `[${e.value}].elements`).join('')
-      return get(state.value, path, [])
     },
     /**
      * @description 资源数据 域名
@@ -50,10 +50,10 @@ export default ({ api }) => ({
     },
     /**
      * @description 资源数据 文件列表
-     * @example store.getters['materials/files']
-     * @example this.$store.getters['materials/files']
+     * @example store.getters['materials/libraryFiles']
+     * @example this.$store.getters['materials/libraryFiles']
      */
-    files (state, getters, rootState, rootGetters) {
+    libraryFiles (state, getters, rootState, rootGetters) {
       let result = []
       function scan (source) {
         source.forEach(element => {
@@ -66,44 +66,17 @@ export default ({ api }) => ({
       }
       scan(getters.library)
       return result
+    },
+    /**
+     * @description 资源数据 文件数量
+     * @example store.getters['materials/libraryFilesCount']
+     * @example this.$store.getters['materials/libraryFilesCount']
+     */
+    libraryFilesCount (state, getters, rootState, rootGetters) {
+      return getters.libraryFiles.length
     }
   },
   mutations: {
-    /**
-     * @description 物料库访问路径 文件路径 追加
-     * @param {Object} state state
-     * @param {Object} payload payload
-     * @example store.commit('materials/viewPathPush')
-     * @example this.$store.commit('materials/viewPathPush')
-     */
-    viewPathPush (state, { label = 'Label', value = 0 }) {
-      state.viewPath.push({
-        label,
-        value,
-        id: new Date().valueOf()
-      })
-    },
-    /**
-     * @description 物料库访问路径 文件路径 清空
-     * @param {Object} state state
-     * @param {Object} payload payload
-     * @example store.commit('materials/viewPathClean')
-     * @example this.$store.commit('materials/viewPathClean')
-     */
-    viewPathClean (state) {
-      state.viewPath = []
-    },
-    /**
-     * @description 物料库访问路径 文件路径 设置到某一个
-     * @param {Object} state state
-     * @param {Object} payload payload
-     * @example store.commit('materials/viewPathToIndex')
-     * @example this.$store.commit('materials/viewPathToIndex')
-     */
-    viewPathToIndex (state, index) {
-      if (index === state.viewPath.length - 1) return
-      state.viewPath.splice(index + 1, state.viewPath.length - (index + 1))
-    },
     /**
      * @description 设置物料库
      * @param {Object} state state

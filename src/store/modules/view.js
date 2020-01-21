@@ -6,7 +6,7 @@ export default ({ api }) => ({
   namespaced: true,
   state: {
     // 物料库访问路径 基础路径
-    pathBase: {
+    base: {
       label: '资源库',
       value: 'library'
     },
@@ -20,7 +20,7 @@ export default ({ api }) => ({
      * @example this.$store.getters['view/list']
      */
     list (state, getters, rootState, rootGetters) {
-      const path = state.pathBase.value + state.path.map(e => `[${e.value}].elements`).join('')
+      const path = state.base.value + state.path.map(e => `[${e.value}].elements`).join('')
       return get(rootGetters['materials/value'], path, [])
     }
   },

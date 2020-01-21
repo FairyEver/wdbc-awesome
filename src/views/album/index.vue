@@ -9,7 +9,7 @@
         <a-icon type="home"/>
       </a-breadcrumb-item>
       <a-breadcrumb-item @click.native="$store.commit('view/clean')" href="">
-        {{ $store.state.view.pathBase.label }}
+        {{ $store.state.view.base.label }}
       </a-breadcrumb-item>
       <a-breadcrumb-item
         v-for="(item, index) of $store.state.view.path"

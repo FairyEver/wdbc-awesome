@@ -60,6 +60,11 @@ html, body {
         <layout-default-header-button icon="bell" :count="$store.getters['log/length']">
           <div slot="title">消息</div>
           <log-list slot="content"/>
+          <div slot="footer" flex="main:right">
+            <a-button size="small" icon="delete" type="danger" @click="$store.commit('log/clear')">
+              清空
+            </a-button>
+          </div>
         </layout-default-header-button>
       </div>
     </div>

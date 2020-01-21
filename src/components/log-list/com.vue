@@ -3,6 +3,7 @@
   @extend .unselect;
   margin: 0 -16px;
   height: 200px;
+  max-width: 200px;
   overflow: scroll;
   .log-list-item {
     @extend .nowrap;

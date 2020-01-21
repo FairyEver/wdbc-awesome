@@ -15,15 +15,33 @@
     }
   }
 }
+.layout-default-header-button--popover-content {
+  margin: -12px -16px;
+  .layout-default-header-button--popover-content-content {
+    padding: 5px 16px;
+  }
+  .layout-default-header-button--popover-content-footer {
+    padding: 5px 16px;
+    border-top: 1px solid #e8e8e8;
+  }
+}
 </style>
 
 <template>
   <a-popover class="layout-default-header-button" placement="bottomRight" :trigger="trigger">
-    <div v-if="this.$slots.content" slot="content" class="unselect">
-      <slot name="content"/>
-    </div>
     <div v-if="this.$slots.title" slot="title" class="unselect">
       <slot name="title"/>
+    </div>
+    <div
+      v-if="this.$slots.content || this.$slots.footer"
+      slot="content"
+      class="layout-default-header-button--popover-content unselect">
+      <div class="layout-default-header-button--popover-content-content">
+        <slot name="content"/>
+      </div>
+      <div class="layout-default-header-button--popover-content-footer">
+        <slot name="footer"/>
+      </div>
     </div>
     <div class="layout-header-button" flex="main:center cross:center">
       <a-badge :count="count" :offset="[1, -1]">

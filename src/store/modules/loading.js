@@ -1,5 +1,4 @@
 // https://vuex.vuejs.org/zh/api/
-import Vue from 'vue'
 
 const shortid = require('shortid')
 
@@ -15,9 +14,7 @@ export default ({ api }) => ({
      * @example this.$store.getters['loading/value']
      */
     value (state, getters, rootState, rootGetters) {
-      return Object.keys(state.value).reduce((result, element) => {
-        return result || state.value[element]
-      }, false)
+      return Object.keys(state.value).reduce((result, element) => result || state.value[element], false)
     }
   },
   actions: {
@@ -45,7 +42,9 @@ export default ({ api }) => ({
      * @example this.store.commit('name/start')
      */
     start (state, id) {
-      Vue.set(state.value, id, true)
+      let obj = {}
+      obj[id] = true
+      state.value = Object.assign({}, state.value, obj)
     },
     /**
      * @description 结束一个 loading
@@ -55,7 +54,9 @@ export default ({ api }) => ({
      * @example this.store.commit('name/stop')
      */
     stop (state, id) {
-      Vue.set(state.value, id, false)
+      let obj = {}
+      obj[id] = false
+      state.value = Object.assign({}, state.value, obj)
     }
   }
 })

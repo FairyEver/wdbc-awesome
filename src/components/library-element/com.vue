@@ -91,12 +91,12 @@
           <img
             v-if="value.elements.length >= (3 * (row - 1) + col)"
             class="library-element--icon-folder"
-            :src="$url(value.elements[3 * (row - 1) + col - 1].url, '/icon/folder.png')">
+            :src="url(value.elements[3 * (row - 1) + col - 1].url, '/icon/folder.png')">
         </div>
       </div>
     </square>
     <square v-else class="library-element--icon-group" flex="main:center cross:center">
-      <img class="library-element--icon-file" :src="$url(value.cover || value.url)">
+      <img class="library-element--icon-file" :src="url(value.cover || value.url)">
     </square>
     <div class="library-element--title" flex="main:center">
       <div class="library-element--title-label">
@@ -128,6 +128,9 @@ export default {
     }
   },
   methods: {
+    /**
+     * @description 用户点击时触发
+     */
     onClick () {
       if (this.isDir) {
         this.$store.commit('view/push', {
@@ -135,6 +138,13 @@ export default {
           value: this.index
         })
       }
+    },
+    /**
+     * @description 计算文件真实的资源地址
+     */
+    url (url = '', def = '') {
+      if (!url) return def
+      return this.$store.getters['materials/libraryBase'] + this.$store.getters['materials/libraryPrefix'] + url
     }
   }
 }

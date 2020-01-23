@@ -97,8 +97,8 @@ export default ({ api }) => ({
       const stop = await dispatch('loading/start', undefined, { root: true })
       commit('set', await api.MATERIALS_FETCH())
       stop()
-      await dispatch('save')
       commit('log/push', '远程物料库加载完成', { root: true })
+      await dispatch('save')
     },
     /**
      * @description 加载本地缓存的物料库

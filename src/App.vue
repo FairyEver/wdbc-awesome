@@ -20,6 +20,8 @@ export default {
     //   defaultValue: '{ "name": "liyang" }'
     // })
     // console.log(fileValue)
+    // const stop = await this.$store.dispatch('loading/start')
+    // stop()
   }
 }
 </script>

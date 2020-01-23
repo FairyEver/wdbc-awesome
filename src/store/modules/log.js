@@ -1,7 +1,6 @@
 // https://vuex.vuejs.org/zh/api/
 
 import shortid from 'shortid'
-shortid.characters('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ$@')
 
 export default ({ api }) => ({
   namespaced: true,

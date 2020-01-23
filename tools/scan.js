@@ -3,8 +3,6 @@ const path = require('path')
 const shortid = require('shortid')
 const upload = require('./upload')
 
-shortid.characters('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ$@')
-
 async function scan ({
   folderPath,
 	needCheckIsFolder = true,

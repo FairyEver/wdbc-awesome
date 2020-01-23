@@ -51,13 +51,20 @@ html, body {
             <a-icon type="file" /> x {{ $store.getters['materials/libraryFilesCount'] }}
           </div>
         </layout-default-header-button>
-        <layout-default-header-button icon="sync">
+        <layout-default-header-button icon="sync" :spin="$store.getters['loading/value']">
           <div slot="title">刷新数据</div>
           <div slot="content">
             此操作将重新请求服务器数据<br>
             将刷新本地资源列表
           </div>
-          <a-button slot="footer" type="primary" icon="sync" block>刷新数据</a-button>
+          <a-button
+            slot="footer"
+            type="primary"
+            icon="sync"
+            @click="$store.dispatch('materials/fetch')"
+            block>
+            刷新数据
+          </a-button>
         </layout-default-header-button>
         <layout-default-header-button icon="bell" :count="$store.getters['log/length']">
           <div slot="title">消息</div>

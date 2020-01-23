@@ -1,6 +1,6 @@
 // https://vuex.vuejs.org/zh/api/
 
-import { get } from 'lodash'
+const { get } = require('lodash')
 
 export default ({ api }) => ({
   namespaced: true,
@@ -57,11 +57,8 @@ export default ({ api }) => ({
       let result = []
       function scan (source) {
         source.forEach(element => {
-          if (element.elements) {
-            scan(element.elements)
-          } else {
-            result.push(element)
-          }
+          if (element.elements) scan(element.elements)
+          else result.push(element)
         })
       }
       scan(getters.library)
@@ -98,7 +95,36 @@ export default ({ api }) => ({
      */
     async fetch ({ state, rootState, commit, dispatch, getters, rootGetters }) {
       commit('set', await api.MATERIALS_FETCH())
+      await dispatch('save')
       commit('log/push', '远程物料库加载完成', { root: true })
+    },
+    /**
+     * @description 加载本地缓存的物料库
+     * @param {Object} context context
+     * @param {Object} payload payload
+     * @example store.dispatch('materials/load')
+     * @example this.$store.dispatch('materials/load')
+     */
+    async load ({ state, rootState, commit, dispatch, getters, rootGetters }) {
+      commit('set', JSON.parse(await dispatch('local/read', {
+        fileName: 'materials.json',
+        defaultValue: '{}'
+      }, { root: true })))
+      commit('log/push', '本地物料库加载完成', { root: true })
+    },
+    /**
+     * @description 保存远程资料库数据
+     * @param {Object} context context
+     * @param {Object} payload payload
+     * @example store.dispatch('materials/save')
+     * @example this.$store.dispatch('materials/save')
+     */
+    async save ({ state, rootState, commit, dispatch, getters, rootGetters }) {
+      await dispatch('local/write', {
+        fileName: 'materials.json',
+        fileValue: JSON.stringify(state.value, null, 2)
+      }, { root: true })
+      commit('log/push', '本地物料库保存完成', { root: true })
     }
   }
 })

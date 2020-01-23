@@ -25,5 +25,5 @@
   // 扫描资料库
   materials.library = maker(await scan({ folderPath: folder })).elements
   // 生成文件
-  await write(resolve('../build/materials.json'), JSON.stringify(materials, null, 2))
+  await write(resolve('../build'), 'materials.json', JSON.stringify(materials, null, 2))
 })()

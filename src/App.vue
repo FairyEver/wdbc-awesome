@@ -10,6 +10,9 @@
 // dl.on('progress', (stats) => console.log(stats))
 // dl.start()
 export default {
+  async created () {
+    this.$store.dispatch('materials/load')
+  },
   async mounted () {
     // await this.$store.dispatch('local/write', {
     //   fileName: 'demo.json',

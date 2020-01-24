@@ -12,7 +12,7 @@
   const resolve = dir => path.join(__dirname, dir)
   const { scan, maker } = require('./scan')
   const path = require('path')
-  const write = require('./write')
+  const write = require('../src/utils/write')
   const folder = resolve('../library')
   // 设置
   global.materials.base = 'https://qiniucdn.fairyever.com/'

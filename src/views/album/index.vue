@@ -36,7 +36,6 @@ export default {
     //   event.preventDefault()
     //   ipcRenderer.send('ondragstart', '/path/to/item')
     // }
-    this.$store.dispatch('materials/load')
   },
   methods: {
   }

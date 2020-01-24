@@ -1,6 +1,7 @@
 // https://vuex.vuejs.org/zh/api/
 
 import shortid from 'shortid'
+import { cloneDeep } from 'lodash'
 
 export default ({ api }) => ({
   namespaced: true,
@@ -14,7 +15,7 @@ export default ({ api }) => ({
      * @example this.$store.getters['log/list']
      */
     list (state, getters, rootState, rootGetters) {
-      return state.value
+      return cloneDeep(state.value).reverse()
     },
     /**
      * @description description

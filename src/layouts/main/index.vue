@@ -5,29 +5,37 @@ html, body {
   background-color: $COLOR_BACKGROUND !important;
   .layout {
     .layout-header {
+      @extend .unselect;
       position: fixed;
       top: 0px;
       left: 0px;
       width: 100%;
       z-index: 999;
-      box-shadow: 0 2px 10px 0 rgba(0,0,0,0.10);
-      background-color: #011528;
-      padding: 0 $LAYOUT_MAIN_PADDING;
-      .layout-header-button {
-        height: $LAYOUT_HEADER_HEIGHT;
-        width: $LAYOUT_HEADER_HEIGHT;
-        color: $COLOR_HEADER_TEXT_NORMAL;
-        user-select: none;
-        cursor: pointer;
-        &:hover {
-          background-color: $COLOR_PRIMARY;
-          color: $COLOR_HEADER_TEXT_ACTIVE;
+      .layout-header--menu {
+        background-color: #011528;
+        padding: 0 $LAYOUT_MAIN_PADDING;
+        box-shadow: 0 2px 10px 0 rgba(0,0,0,0.10);
+        .layout-header-button {
+          height: $LAYOUT_HEADER_HEIGHT;
+          width: $LAYOUT_HEADER_HEIGHT;
+          color: $COLOR_HEADER_TEXT_NORMAL;
+          user-select: none;
+          cursor: pointer;
+          &:hover {
+            background-color: $COLOR_PRIMARY;
+            color: $COLOR_HEADER_TEXT_ACTIVE;
+          }
         }
+      }
+      .layout-header--breadcrumb {
+        height: $LAYOUT_HEADER_HEIGHT;
+        padding: 0 $LAYOUT_MAIN_PADDING;
+        background-color: rgba($COLOR_BACKGROUND, .9);
       }
     }
     .layout-main {
       padding: $LAYOUT_MAIN_PADDING;
-      padding-top: $LAYOUT_HEADER_HEIGHT + $LAYOUT_MAIN_PADDING;
+      padding-top: 2 * $LAYOUT_HEADER_HEIGHT;
     }
   }
 }
@@ -35,47 +43,66 @@ html, body {
 
 <template>
   <div class="layout">
-    <div class="layout-header" flex="main:justify cross:center">
-      <a-menu mode="horizontal" theme="dark">
-        <a-menu-item key="mail">
-          <a-icon type="appstore"/>画廊
-        </a-menu-item>
-        <a-menu-item key="app">
-          <a-icon type="setting"/>设置
-        </a-menu-item>
-      </a-menu>
-      <div flex="main:justify">
-        <layout-default-header-button icon="database">
-          <div slot="title">总览</div>
-          <div slot="content">
-            <a-icon type="file" /> x {{ $store.getters['materials/libraryFilesCount'] }}
-          </div>
-        </layout-default-header-button>
-        <layout-default-header-button icon="sync" :spin="$store.getters['loading/value']">
-          <div slot="title">刷新数据</div>
-          <div slot="content">
-            此操作将重新请求服务器数据<br>
-            将刷新本地资源列表
-          </div>
-          <a-button
-            slot="footer"
-            type="primary"
-            icon="sync"
-            :loading="$store.getters['loading/value']"
-            @click="$store.dispatch('materials/fetch')"
-            block>
-            刷新数据
-          </a-button>
-        </layout-default-header-button>
-        <layout-default-header-button icon="bell" :count="$store.getters['log/length']">
-          <div slot="title">消息</div>
-          <log-list slot="content"/>
-          <div slot="footer" flex="main:right">
-            <a-button icon="delete" type="danger" @click="$store.commit('log/clear')">
-              清空
+    <div class="layout-header">
+      <div class="layout-header--menu" flex="main:justify cross:center">
+        <a-menu mode="horizontal" theme="dark">
+          <a-menu-item key="mail">
+            <a-icon type="appstore"/>画廊
+          </a-menu-item>
+          <a-menu-item key="app">
+            <a-icon type="setting"/>设置
+          </a-menu-item>
+        </a-menu>
+        <div flex="main:justify">
+          <layout-default-header-button icon="database">
+            <div slot="title">总览</div>
+            <div slot="content">
+              <a-icon type="file" /> x {{ $store.getters['materials/libraryFilesCount'] }}
+            </div>
+          </layout-default-header-button>
+          <layout-default-header-button icon="sync" :spin="$store.getters['loading/value']">
+            <div slot="title">刷新数据</div>
+            <div slot="content">
+              此操作将重新请求服务器数据<br>
+              将刷新本地资源列表
+            </div>
+            <a-button
+              slot="footer"
+              type="primary"
+              icon="sync"
+              :loading="$store.getters['loading/value']"
+              @click="$store.dispatch('materials/fetch')"
+              block>
+              刷新数据
             </a-button>
-          </div>
-        </layout-default-header-button>
+          </layout-default-header-button>
+          <layout-default-header-button icon="bell" :count="$store.getters['log/length']">
+            <div slot="title">消息</div>
+            <log-list slot="content"/>
+            <div slot="footer" flex="main:right">
+              <a-button icon="delete" type="danger" @click="$store.commit('log/clear')">
+                清空
+              </a-button>
+            </div>
+          </layout-default-header-button>
+        </div>
+      </div>
+      <div class="layout-header--breadcrumb" flex="cross:center">
+        <a-breadcrumb>
+          <a-breadcrumb-item>
+            <a-icon type="home"/>
+          </a-breadcrumb-item>
+          <a-breadcrumb-item @click.native="$store.commit('view/clean')" href="">
+            {{ $store.state.view.base.label }}
+          </a-breadcrumb-item>
+          <a-breadcrumb-item
+            v-for="(item, index) of $store.state.view.path"
+            :key="item.id"
+            @click.native="$store.commit('view/pathSet', index)"
+            href="">
+            {{ item.label }}
+          </a-breadcrumb-item>
+        </a-breadcrumb>
       </div>
     </div>
     <div class="layout-main">

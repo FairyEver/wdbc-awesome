@@ -61,6 +61,7 @@ html, body {
             slot="footer"
             type="primary"
             icon="sync"
+            :loading="$store.getters['loading/value']"
             @click="$store.dispatch('materials/fetch')"
             block>
             刷新数据

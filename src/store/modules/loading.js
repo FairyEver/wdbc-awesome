@@ -29,7 +29,9 @@ export default ({ api }) => ({
       const id = shortid.generate()
       commit('start', id)
       return function () {
-        commit('stop', id)
+        setTimeout(() => {
+          commit('stop', id)
+        }, 300)
       }
     }
   },

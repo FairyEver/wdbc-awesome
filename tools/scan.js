@@ -61,13 +61,17 @@ function maker (source) {
 	let elements = []
 	// 被筛选出来的特殊属性
 	let customProps = {}
+	function sortFunction (a, b) {
+		if (a.elements) return -1
+		return 1
+	}
 	source.forEach(el => {
 		if (el.elements) {
 			const result = maker(el.elements)
 			for (const key in result.customProps) {
 				el[key] = result.customProps[key]
 			}
-			el.elements = result.elements
+			el.elements = result.elements.sort(sortFunction)
 			elements.push(el)
 		} else if (/^_/.test(el.name)) {
 			customProps[el.name.replace(/^_/, '')] = el.url

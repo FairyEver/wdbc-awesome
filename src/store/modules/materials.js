@@ -108,11 +108,14 @@ export default ({ api }) => ({
      * @example this.$store.dispatch('materials/load')
      */
     async load ({ state, rootState, commit, dispatch, getters, rootGetters }) {
-      commit('set', JSON.parse(await dispatch('local/read', {
-        fileName: 'materials.json',
-        defaultValue: '{}'
-      }, { root: true })))
-      commit('log/push', '本地物料库加载完成', { root: true })
+      const data = await dispatch('local/read', { fileName: 'materials.json' }, { root: true })
+      if (data) {
+        commit('set', JSON.parse(data))
+        commit('log/push', '本地物料库加载完成', { root: true })
+      } else {
+        commit('log/push', '未检测到本地物料 尝试获取远程物料库', { root: true })
+        dispatch('fetch')
+      }
     },
     /**
      * @description 保存远程资料库数据

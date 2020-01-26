@@ -91,12 +91,16 @@
           <v-lazy-image
             v-if="value.elements.length >= (3 * (row - 1) + col)"
             class="library-element--icon-folder"
-            :src="url(value.elements[3 * (row - 1) + col - 1].url, '/icon/folder.png', 100)"/>
+            :src="url(value.elements[3 * (row - 1) + col - 1].url, '/icon/folder.png', 100)"
+            src-placeholder="/icon/file-placeholder.png"/>
         </div>
       </div>
     </square>
     <square v-else class="library-element--icon-group" flex="main:center cross:center">
-      <v-lazy-image class="library-element--icon-file" :src="url(value.cover || value.url, '', 200)"/>
+      <v-lazy-image
+        class="library-element--icon-file"
+        :src="url(value.cover || value.url, '', 200)"
+        src-placeholder="/icon/file-placeholder.png"/>
     </square>
     <div class="library-element--title" flex="main:center">
       <div class="library-element--title-label">

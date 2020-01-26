@@ -108,8 +108,12 @@
 
 <script>
 import { isArray } from 'lodash'
+import url from '@/mixins/url.js'
 export default {
   name: 'library-element',
+  mixins: [
+    url
+  ],
   props: {
     index: {
       type: Number,
@@ -138,13 +142,6 @@ export default {
           value: this.index
         })
       }
-    },
-    /**
-     * @description 计算文件真实的资源地址
-     */
-    url (url = '', def = '') {
-      if (!url) return def
-      return this.$store.getters['materials/libraryBase'] + this.$store.getters['materials/libraryPrefix'] + url
     }
   }
 }

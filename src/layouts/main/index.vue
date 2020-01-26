@@ -2,8 +2,9 @@
 html, body {
   margin: 0px;
   padding: 0px;
-  background-color: $COLOR_BACKGROUND !important;
   .layout {
+    min-height: 100vh;
+    background-color: $COLOR_BACKGROUND !important;
     .layout-header {
       @extend .unselect;
       position: fixed;

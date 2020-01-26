@@ -4,6 +4,8 @@ import App from './App.vue'
 import Antd from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css'
 
+import { VLazyImagePlugin } from 'v-lazy-image'
+
 import router from './router'
 import store from './store'
 
@@ -14,6 +16,7 @@ import 'flex.css'
 
 Vue.config.productionTip = false
 
+Vue.use(VLazyImagePlugin)
 Vue.use(Antd)
 Vue.use(api)
 

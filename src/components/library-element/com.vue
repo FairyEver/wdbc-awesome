@@ -80,7 +80,7 @@
 
 <template>
   <div class="library-element" @click="onClick">
-    <square v-if="isDir" class="library-element--folder-group" flex="dir:top main:justify box:mean">
+    <square v-if="isDir(value)" class="library-element--folder-group" flex="dir:top main:justify box:mean">
       <div v-for="row in 3" :key="row" class="library-element--icon-folder-row" flex="main:justify box:mean">
         <div
           v-for="col in 3"
@@ -88,15 +88,15 @@
           class="library-element--icon-folder-col"
           :class="{ 'library-element--icon-folder-col__has-image': value.elements.length >= (3 * (row - 1) + col) }"
           flex="main:center cross:center">
-          <img
+          <v-lazy-image
             v-if="value.elements.length >= (3 * (row - 1) + col)"
             class="library-element--icon-folder"
-            :src="url(value.elements[3 * (row - 1) + col - 1].url, '/icon/folder.png', 80)">
+            :src="url(value.elements[3 * (row - 1) + col - 1].url, '/icon/folder.png', 80)"/>
         </div>
       </div>
     </square>
     <square v-else class="library-element--icon-group" flex="main:center cross:center">
-      <img class="library-element--icon-file" :src="url(value.cover || value.url, '', 200)">
+      <v-lazy-image class="library-element--icon-file" :src="url(value.cover || value.url, '', 200)"/>
     </square>
     <div class="library-element--title" flex="main:center">
       <div class="library-element--title-label">
@@ -126,17 +126,19 @@ export default {
       required: false
     }
   },
-  computed: {
-    isDir () {
-      return isArray(this.value.elements)
-    }
-  },
   methods: {
+    /**
+     * @description 判断是否为文件夹
+     * @param {Object} item 需要检测的项目
+     */
+    isDir (item) {
+      return item.elements && isArray(item.elements)
+    },
     /**
      * @description 用户点击时触发
      */
     onClick () {
-      if (this.isDir) {
+      if (this.isDir(this.value)) {
         this.$store.commit('view/push', {
           label: this.value.name,
           value: this.index

@@ -91,7 +91,7 @@
           <v-lazy-image
             v-if="value.elements.length >= (3 * (row - 1) + col)"
             class="library-element--icon-folder"
-            :src="url(value.elements[3 * (row - 1) + col - 1].url, '/icon/folder.png', 80)"/>
+            :src="url(value.elements[3 * (row - 1) + col - 1].url, '/icon/folder.png', 100)"/>
         </div>
       </div>
     </square>

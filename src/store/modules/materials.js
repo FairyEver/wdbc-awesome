@@ -98,9 +98,30 @@ export default ({ api }) => ({
       const data = await api.MATERIALS_FETCH()
       commit('view/clean', undefined, { root: true })
       commit('set', data)
-      stop()
       commit('log/push', '远程物料库加载完成', { root: true })
+      stop()
       await dispatch('save')
+      await dispatch('download')
+    },
+    /**
+     * @description 下载物料
+     * @param {Object} context context
+     * @param {Object} payload payload
+     * @example store.dispatch('materials/download')
+     * @example this.$store.dispatch('materials/download')
+     */
+    async download ({ state, rootState, commit, dispatch, getters, rootGetters }) {
+      commit('log/push', '开始建立下载任务', { root: true })
+      // 清空现有任务
+      dispatch('download/clean', undefined, { root: true })
+      // 遍历文件
+      const files = getters.libraryFiles
+      files.forEach(file => {
+        dispatch('download/push', {
+          remoteFilename: file.url
+        }, { root: true })
+      })
+      commit('log/push', `建立 ${getters.libraryFilesCount} 个下载任务`, { root: true })
     },
     /**
      * @description 加载本地缓存的物料库

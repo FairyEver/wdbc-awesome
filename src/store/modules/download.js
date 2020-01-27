@@ -1,38 +1,105 @@
 // https://vuex.vuejs.org/zh/api/
 
+// https://www.npmjs.com/package/node-downloader-helper
+
+const path = require('path')
+const { app } = require('electron').remote
+const { DownloaderHelper } = require('node-downloader-helper')
+
+/**
+ * @description 下载任务的一项
+ */
+class Task {
+  constructor ({ url, destinationFolder, fileName }) {
+    const options = {
+      fileName,
+      retry: { maxRetries: 3, delay: 1000 },
+      override: true
+    }
+    const dl = new DownloaderHelper(url, destinationFolder, options)
+    dl.on('end', () => console.log('Download Completed'))
+    dl.on('progress', (stats) => console.log(stats))
+    this.dl = dl
+  }
+  start () {
+    this.dl.start()
+  }
+  stop () {}
+}
+
 export default ({ api }) => ({
   namespaced: true,
   state: {
-    value: 'state demo'
+    value: []
   },
   getters: {
     /**
-     * @description description
-     * @example store.getters['download/getterDemo]
-     * @example this.store.getters['download/getterDemo]
+     * @description 任务数量
+     * @example store.getters['download/length]
+     * @example this.store.getters['download/length]
      */
-    getterDemo (state, getters, rootState, rootGetters) {
-      return state.stateDemo
+    length (state, getters, rootState, rootGetters) {
+      return state.value.length
     }
   },
   mutations: {
     /**
-     * @description description
+     * @description 设置下载任务
      * @param {Object} state state
      * @param {Object} payload payload
-     * @example store.commit('download/mutationDemo')
-     * @example this.store.commit('download/mutationDemo')
+     * @example store.commit('download/set')
+     * @example this.store.commit('download/set')
      */
-    mutationDemo (state, payload) {}
+    set (state, payload) {
+      state.value = payload
+    },
+    /**
+     * @description 增加新的下载任务
+     * @param {Object} state state
+     * @param {Object} payload payload
+     * @example store.commit('download/push')
+     * @example this.store.commit('download/push')
+     */
+    push (state, payload) {
+      state.value.push(payload)
+    }
   },
   actions: {
     /**
-     * @description description
+     * @description 清空下载任务
      * @param {Object} context context
      * @param {Object} payload payload
-     * @example store.dispatch('download/actionDemo')
-     * @example this.store.dispatch('download/actionDemo')
+     * @example store.dispatch('download/clean')
+     * @example this.$store.dispatch('download/clean')
      */
-    async actionDemo ({ state, rootState, commit, dispatch, getters, rootGetters }) {}
+    async clean ({ state, rootState, commit, dispatch, getters, rootGetters }) {
+      commit('set', [])
+    },
+    /**
+     * @description 增加新的下载任务
+     * @param {Object} context context
+     * @param {Object} payload payload
+     * @example store.dispatch('download/push')
+     * @example this.$store.dispatch('download/push')
+     */
+    async push (
+      { state, rootState, commit, dispatch, getters, rootGetters },
+      {
+        remoteFilename = ''
+      } = {}
+    ) {
+      // 计算图片的真实下载地址
+      const libraryBase = rootGetters['materials/libraryBase']
+      const libraryPrefix = rootGetters['materials/libraryPrefix']
+      const url = libraryBase + libraryPrefix + remoteFilename
+      // 计算下载目录
+      const destinationFolder = path.join(app.getPath('userData'), ...[ 'library' ])
+      // 建立下载队列
+      commit('push', new Task({
+        url,
+        destinationFolder,
+        fileName: remoteFilename
+      }))
+    }
   }
 })

@@ -131,7 +131,10 @@ export default ({ api }) => ({
      * @example this.$store.dispatch('download/start')
      */
     async start ({ state, rootState, commit, dispatch, getters, rootGetters }) {
-      console.log('start')
+      const waitDownloadIndex = getters.list.findIndex(e => e.done === false)
+      if (waitDownloadIndex >= 0) {
+        state.value[waitDownloadIndex].start()
+      }
     },
     /**
      * @description 增加新的下载任务

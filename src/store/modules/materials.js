@@ -117,10 +117,9 @@ export default ({ api }) => ({
       // 遍历文件
       const files = getters.libraryFiles
       for (const file of files) {
-        dispatch('download/push', {
-          remoteFilename: file.url
-        }, { root: true })
+        await dispatch('download/push', { remoteFilename: file.url }, { root: true })
       }
+      dispatch('download/start', undefined, { root: true })
       commit('log/push', `建立 ${getters.libraryFilesCount} 个下载任务`, { root: true })
     },
     /**

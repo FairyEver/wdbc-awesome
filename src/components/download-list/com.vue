@@ -3,7 +3,7 @@
   @extend .unselect;
   margin: 0 -16px;
   height: 300px;
-  width: 240px;
+  width: 300px;
   overflow: scroll;
   .download-list-item {
     @extend .nowrap;
@@ -16,10 +16,11 @@
 <template>
   <div class="download-list">
     <div class="download-list-item" v-for="item of $store.getters['download/list']" :key="item.id">
-      <a-progress :percent="30" size="small" />
-      <!-- <a-progress :percent="50" size="small" status="active" />
-      <a-progress :percent="70" size="small" status="exception" />
-      <a-progress :percent="100" size="small" /> -->
+      <div>
+        <div>{{ item.fileName }}</div>
+        <div>{{ item.downloaded }} / {{ item.total }}</div>
+      </div>
+      <a-progress :percent="item.progress" size="small" />
     </div>
   </div>
 </template>

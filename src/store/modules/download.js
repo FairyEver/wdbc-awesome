@@ -13,23 +13,43 @@ const mkdir = require('@/utils/mkdir')
  */
 class Task {
   constructor ({ url, destinationFolder, fileName }) {
+    this.id = shortid.generate()
+    this.fileName = fileName
+    this.done = false
+
+    this.downloaded = 0 // 195471
+    this.progress = 0 // 100
+    this.speed = 0 // 81728
+    this.total = 0 // 195471
+
     const options = {
       fileName,
       retry: { maxRetries: 3, delay: 1000 },
       override: true
     }
     const dl = new DownloaderHelper(url, destinationFolder, options)
-    dl.on('end', () => console.log('Download Completed'))
-    dl.on('progress', (stats) => console.log(stats))
-    // 设置自身属性
-    this.id = shortid.generate()
+    dl.on('end', downloadInfo => {
+      this.done = true
+    })
+    dl.on('error', error => {
+      console.log(error)
+    })
+    dl.on('progress', stats => {
+      this.downloaded = stats.downloaded
+      this.progress = Math.round(stats.progress)
+      this.speed = stats.speed
+      this.total = stats.total
+    })
+
     this.dl = dl
-    this.progress = 0
+    dl.start()
   }
   start () {
     this.dl.start()
   }
-  stop () {}
+  stop () {
+    this.dl.stop()
+  }
 }
 
 export default ({ api }) => ({
@@ -78,6 +98,15 @@ export default ({ api }) => ({
     }
   },
   actions: {
+    /**
+     * @description 开始下载队列
+     * @param {Object} context context
+     * @param {Object} payload payload
+     * @example store.dispatch('download/start')
+     * @example this.$store.dispatch('download/start')
+     */
+    async start ({ state, rootState, commit, dispatch, getters, rootGetters }) {
+    },
     /**
      * @description 增加新的下载任务
      * @param {Object} context context

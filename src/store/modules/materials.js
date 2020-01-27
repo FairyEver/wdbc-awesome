@@ -116,11 +116,14 @@ export default ({ api }) => ({
       commit('download/clean', undefined, { root: true })
       // 遍历文件
       const files = getters.libraryFiles
-      files.forEach(file => {
-        dispatch('download/push', {
-          remoteFilename: file.url
-        }, { root: true })
-      })
+      dispatch('download/push', { remoteFilename: files[0].url }, { root: true })
+      // dispatch('download/push', { remoteFilename: files[1].url }, { root: true })
+      // dispatch('download/push', { remoteFilename: files[2].url }, { root: true })
+      // files.forEach(file => {
+      //   dispatch('download/push', {
+      //     remoteFilename: file.url
+      //   }, { root: true })
+      // })
       commit('log/push', `建立 ${getters.libraryFilesCount} 个下载任务`, { root: true })
     },
     /**

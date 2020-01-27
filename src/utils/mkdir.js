@@ -5,7 +5,7 @@ const path = require('path')
  * 读取路径信息
  * @param {string} path 路径
  */
-function getStat(path){
+function getStat (path) {
   return new Promise((resolve, reject) => {
     fs.stat(path, (err, stats) => {
       if (err) resolve(false)
@@ -18,7 +18,7 @@ function getStat(path){
 * 创建路径
 * @param {string} dir 路径
 */
-function mkdir(dir){
+function mkdir (dir) {
   return new Promise((resolve, reject) => {
     fs.mkdir(dir, err => {
       if (err) resolve(false)
@@ -31,7 +31,7 @@ function mkdir(dir){
 * 路径是否存在，不存在则创建
 * @param {string} dir 路径
 */
-async function dirExists(dir){
+async function dirExists (dir) {
   let isExists = await getStat(dir)
   // 如果该路径且不是文件，返回true
   if (isExists && isExists.isDirectory()) return true
@@ -41,7 +41,7 @@ async function dirExists(dir){
   // 递归判断，如果上级目录也不存在，则会代码会在此处继续循环执行，直到目录存在
   let status = await dirExists(tempDir)
   let mkdirStatus
-  if(status){
+  if (status) {
     mkdirStatus = await mkdir(dir)
   }
   return mkdirStatus

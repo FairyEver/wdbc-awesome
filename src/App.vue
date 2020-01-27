@@ -13,9 +13,6 @@ export default {
   async created () {
     // 加载本地数据
     await this.$store.dispatch('materials/load')
-    await this.$store.dispatch('download/push', {
-      remoteFilename: '1579334439580.png'
-    })
   },
   async mounted () {
     // await this.$store.dispatch('local/write', {

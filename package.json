@@ -5,6 +5,7 @@
   "scripts": {
     "build": "vue-cli-service electron:build",
     "dev": "vue-cli-service electron:serve",
+    "lint": "vue-cli-service lint --fix",
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps"
   },

@@ -5,6 +5,7 @@
 const path = require('path')
 const { app } = require('electron').remote
 const { DownloaderHelper } = require('node-downloader-helper')
+const mkdir = require('@/utils/mkdir')
 
 /**
  * @description 下载任务的一项
@@ -19,7 +20,9 @@ class Task {
     const dl = new DownloaderHelper(url, destinationFolder, options)
     dl.on('end', () => console.log('Download Completed'))
     dl.on('progress', (stats) => console.log(stats))
+    // 设置自身属性
     this.dl = dl
+    this.progress = 0
   }
   start () {
     this.dl.start()
@@ -94,6 +97,7 @@ export default ({ api }) => ({
       const url = libraryBase + libraryPrefix + remoteFilename
       // 计算下载目录
       const destinationFolder = path.join(app.getPath('userData'), ...[ 'library' ])
+      await mkdir(destinationFolder)
       // 建立下载队列
       commit('push', new Task({
         url,

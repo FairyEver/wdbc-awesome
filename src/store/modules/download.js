@@ -2,6 +2,7 @@
 
 // https://www.npmjs.com/package/node-downloader-helper
 
+const shortid = require('shortid')
 const path = require('path')
 const { app } = require('electron').remote
 const { DownloaderHelper } = require('node-downloader-helper')
@@ -21,6 +22,7 @@ class Task {
     dl.on('end', () => console.log('Download Completed'))
     dl.on('progress', (stats) => console.log(stats))
     // 设置自身属性
+    this.id = shortid.generate()
     this.dl = dl
     this.progress = 0
   }
@@ -37,6 +39,14 @@ export default ({ api }) => ({
   },
   getters: {
     /**
+     * @description description
+     * @example store.getters['download/list']
+     * @example this.$store.getters['download/list']
+     */
+    list (state, getters, rootState, rootGetters) {
+      return state.value
+    },
+    /**
      * @description 任务数量
      * @example store.getters['download/length]
      * @example this.store.getters['download/length]
@@ -47,14 +57,14 @@ export default ({ api }) => ({
   },
   mutations: {
     /**
-     * @description 设置下载任务
+     * @description 清空下载任务
      * @param {Object} state state
      * @param {Object} payload payload
-     * @example store.commit('download/set')
-     * @example this.store.commit('download/set')
+     * @example store.commit('download/clean')
+     * @example this.store.commit('download/clean')
      */
-    set (state, payload) {
-      state.value = payload
+    clean (state, payload) {
+      state.value = []
     },
     /**
      * @description 增加新的下载任务
@@ -68,16 +78,6 @@ export default ({ api }) => ({
     }
   },
   actions: {
-    /**
-     * @description 清空下载任务
-     * @param {Object} context context
-     * @param {Object} payload payload
-     * @example store.dispatch('download/clean')
-     * @example this.$store.dispatch('download/clean')
-     */
-    async clean ({ state, rootState, commit, dispatch, getters, rootGetters }) {
-      commit('set', [])
-    },
     /**
      * @description 增加新的下载任务
      * @param {Object} context context

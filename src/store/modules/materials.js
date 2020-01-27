@@ -113,7 +113,7 @@ export default ({ api }) => ({
     async download ({ state, rootState, commit, dispatch, getters, rootGetters }) {
       commit('log/push', '开始建立下载任务', { root: true })
       // 清空现有任务
-      dispatch('download/clean', undefined, { root: true })
+      commit('download/clean', undefined, { root: true })
       // 遍历文件
       const files = getters.libraryFiles
       files.forEach(file => {

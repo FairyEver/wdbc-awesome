@@ -1,7 +1,7 @@
 // https://vuex.vuejs.org/zh/api/
 
-import shortid from 'shortid'
-import { cloneDeep } from 'lodash'
+const shortid = require('shortid')
+const { cloneDeep } = require('lodash')
 
 export default ({ api }) => ({
   namespaced: true,
@@ -44,10 +44,10 @@ export default ({ api }) => ({
      * @description 日志 清空
      * @param {Object} state state
      * @param {Object} payload payload
-     * @example store.commit('log/clear')
-     * @example this.$store.commit('log/clear')
+     * @example store.commit('log/clean')
+     * @example this.$store.commit('log/clean')
      */
-    clear (state, payload) {
+    clean (state, payload) {
       state.value = []
     }
   }

@@ -55,10 +55,13 @@ html, body {
           </a-menu-item>
         </a-menu>
         <div flex="main:justify">
-          <layout-default-header-button icon="database">
-            <div slot="title">总览</div>
-            <div slot="content">
-              <a-icon type="file" /> x {{ $store.getters['materials/libraryFilesCount'] }}
+          <layout-default-header-button icon="database" :count="$store.getters['download/length']">
+            <div slot="title">下载</div>
+            <download-list slot="content"/>
+            <div slot="footer" flex="main:right">
+              <a-button icon="delete" type="danger" @click="$store.commit('download/clean')">
+                清空
+              </a-button>
             </div>
           </layout-default-header-button>
           <layout-default-header-button icon="sync" :spin="$store.getters['loading/value']">
@@ -81,7 +84,7 @@ html, body {
             <div slot="title">消息</div>
             <log-list slot="content"/>
             <div slot="footer" flex="main:right">
-              <a-button icon="delete" type="danger" @click="$store.commit('log/clear')">
+              <a-button icon="delete" type="danger" @click="$store.commit('log/clean')">
                 清空
               </a-button>
             </div>

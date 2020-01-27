@@ -13,16 +13,7 @@
 </template>
 
 <script>
-// import { ipcRenderer } from 'electron'
 export default {
-  name: 'page-album',
-  async mounted () {
-    // this.$refs.img.ondragstart = (event) => {
-    //   event.preventDefault()
-    //   ipcRenderer.send('ondragstart', '/path/to/item')
-    // }
-  },
-  methods: {
-  }
+  name: 'page-album'
 }
 </script>

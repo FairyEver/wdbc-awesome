@@ -98,9 +98,11 @@
     </square>
     <square v-else class="library-element--icon-group" flex="main:center cross:center">
       <v-lazy-image
+        ref="img"
         class="library-element--icon-file"
         :src="url(value.cover || value.url, '', 200)"
-        src-placeholder="/icon/file-placeholder.png"/>
+        src-placeholder="/icon/file-placeholder.png"
+        @load="onImageLoad"/>
     </square>
     <div class="library-element--title" flex="main:center">
       <div class="library-element--title-label">
@@ -111,6 +113,7 @@
 </template>
 
 <script>
+import { ipcRenderer } from 'electron'
 import { isArray } from 'lodash'
 import url from '@/mixins/url.js'
 export default {
@@ -147,6 +150,12 @@ export default {
           label: this.value.name,
           value: this.index
         })
+      }
+    },
+    onImageLoad () {
+      this.$refs.img.$el.ondragstart = event => {
+        event.preventDefault()
+        ipcRenderer.send('ondragstart', '/path/to/item')
       }
     }
   }

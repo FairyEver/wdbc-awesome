@@ -1,42 +1,25 @@
 <style lang="scss">
-html, body {
-  margin: 0px;
-  padding: 0px;
-  background-color: $COLOR_BACKGROUND !important;
-  .layout {
-    min-height: 100vh;
-    .layout-header {
-      @extend .unselect;
-      position: fixed;
-      top: 0px;
-      left: 0px;
-      width: 100%;
-      z-index: 999;
-      .layout-header--menu {
-        background-color: #011528;
-        padding: 0 $LAYOUT_MAIN_PADDING;
-        box-shadow: 0 2px 10px 0 rgba(0,0,0,0.10);
-        .layout-header-button {
-          height: $LAYOUT_HEADER_HEIGHT;
-          width: $LAYOUT_HEADER_HEIGHT;
-          color: $COLOR_HEADER_TEXT_NORMAL;
-          user-select: none;
-          cursor: pointer;
-          &:hover {
-            background-color: $COLOR_PRIMARY;
-            color: $COLOR_HEADER_TEXT_ACTIVE;
-          }
-        }
-      }
-      .layout-header--breadcrumb {
-        height: $LAYOUT_HEADER_HEIGHT;
-        padding: 0 $LAYOUT_MAIN_PADDING;
-        background-color: rgba($COLOR_BACKGROUND, .9);
-      }
-    }
-    .layout-main {
+.layout {
+  @extend .full;
+  .layout--layer {
+    @extend .full;
+  }
+  .layout--header {
+    background-color: #011528;
+    box-shadow: 0 2px 10px 0 rgba(0,0,0,0.50);
+  }
+  .layout--main {
+    position: relative;
+    .layout--main-view {
+      @extend .full;
       padding: $LAYOUT_MAIN_PADDING;
-      padding-top: 2 * $LAYOUT_HEADER_HEIGHT;
+      padding-top: $LAYOUT_HEADER_HEIGHT;
+    }
+    .layout--main-breadcrumb {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
     }
   }
 }
@@ -44,76 +27,18 @@ html, body {
 
 <template>
   <div class="layout">
-    <div class="layout-header">
-      <div class="layout-header--menu" flex="main:justify cross:center">
-        <a-menu mode="horizontal" theme="dark">
-          <a-menu-item key="mail">
-            <a-icon type="appstore"/>画廊
-          </a-menu-item>
-          <a-menu-item key="app">
-            <a-icon type="setting"/>设置
-          </a-menu-item>
-        </a-menu>
-        <div flex="main:justify">
-          <layout-default-header-button icon="database" :count="$store.getters['download/length']">
-            <div slot="title" flex="main:justify">
-              <span>下载</span>
-              <span>{{ $store.getters['download/speed'] }}</span>
-            </div>
-            <download-list slot="content"/>
-            <div slot="footer" flex="main:right">
-              <a-button icon="delete" type="danger" @click="$store.commit('download/clean')">
-                清空
-              </a-button>
-            </div>
-          </layout-default-header-button>
-          <layout-default-header-button icon="sync" :spin="$store.getters['loading/value']">
-            <div slot="title">刷新数据</div>
-            <div slot="content">
-              此操作将重新请求服务器数据<br>
-              将刷新本地资源列表
-            </div>
-            <a-button
-              slot="footer"
-              type="primary"
-              icon="sync"
-              :loading="$store.getters['loading/value']"
-              @click="$store.dispatch('materials/fetch')"
-              block>
-              刷新数据
-            </a-button>
-          </layout-default-header-button>
-          <layout-default-header-button icon="bell" :count="$store.getters['log/length']">
-            <div slot="title">消息</div>
-            <log-list slot="content"/>
-            <div slot="footer" flex="main:right">
-              <a-button icon="delete" type="danger" @click="$store.commit('log/clean')">
-                清空
-              </a-button>
-            </div>
-          </layout-default-header-button>
+    <div class="layout--layer" flex="dir:top main:justify box:first">
+      <div class="layout--header">
+        <layout-default-header/>
+      </div>
+      <div class="layout--main" flex="dir:top main:justify box:first">
+        <div class="layout--main-view">
+          <router-view/>
+        </div>
+        <div class="layout--main-breadcrumb">
+          <layout-default-breadcrumb/>
         </div>
       </div>
-      <div class="layout-header--breadcrumb" flex="cross:center">
-        <a-breadcrumb>
-          <a-breadcrumb-item>
-            <a-icon type="home"/>
-          </a-breadcrumb-item>
-          <a-breadcrumb-item @click.native="$store.commit('view/clean')" href="">
-            {{ $store.state.view.base.label }}
-          </a-breadcrumb-item>
-          <a-breadcrumb-item
-            v-for="(item, index) of $store.state.view.path"
-            :key="item.id"
-            @click.native="$store.commit('view/pathSet', index)"
-            href="">
-            {{ item.label }}
-          </a-breadcrumb-item>
-        </a-breadcrumb>
-      </div>
-    </div>
-    <div class="layout-main">
-      <router-view/>
     </div>
   </div>
 </template>

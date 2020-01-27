@@ -1,6 +1,15 @@
 @import './color.scss';
 @import './var.scss';
 
+.full {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: auto;
+}
+
 .transition {
   transition: all .1s;
 }

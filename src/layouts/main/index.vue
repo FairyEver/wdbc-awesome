@@ -56,7 +56,10 @@ html, body {
         </a-menu>
         <div flex="main:justify">
           <layout-default-header-button icon="database" :count="$store.getters['download/length']">
-            <div slot="title">下载</div>
+            <div slot="title" flex="main:justify">
+              <span>下载</span>
+              <span>{{ $store.getters['download/speed'] }}</span>
+            </div>
             <download-list slot="content"/>
             <div slot="footer" flex="main:right">
               <a-button icon="delete" type="danger" @click="$store.commit('download/clean')">

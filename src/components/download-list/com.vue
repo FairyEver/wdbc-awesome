@@ -16,7 +16,7 @@
 <template>
   <div class="download-list">
     <div class="download-list-item" v-for="item of $store.getters['download/list']" :key="item.id">
-      <div>
+      <div flex="main:justify">
         <div>{{ item.fileName }}</div>
         <div>{{ item.downloaded }} / {{ item.total }}</div>
       </div>

@@ -2,6 +2,8 @@
 
 // https://www.npmjs.com/package/node-downloader-helper
 
+import byteTo from '@/utils/byte.js'
+
 const shortid = require('shortid')
 const path = require('path')
 const { app } = require('electron').remote
@@ -12,15 +14,21 @@ const mkdir = require('@/utils/mkdir')
  * @description 下载任务的一项
  */
 class Task {
-  constructor ({ url, destinationFolder, fileName }) {
+  constructor ({
+    url,
+    destinationFolder,
+    fileName,
+    onSpeed = function (speed) { console.log(speed) },
+    onEnd = function () { }
+  }) {
     this.id = shortid.generate()
     this.fileName = fileName
     this.done = false
 
-    this.downloaded = 0 // 195471
-    this.progress = 0 // 100
-    this.speed = 0 // 81728
-    this.total = 0 // 195471
+    this.downloaded = 0
+    this.progress = 0
+    this.speed = 0
+    this.total = 0
 
     const options = {
       fileName,
@@ -30,19 +38,17 @@ class Task {
     const dl = new DownloaderHelper(url, destinationFolder, options)
     dl.on('end', downloadInfo => {
       this.done = true
+      onEnd()
     })
-    dl.on('error', error => {
-      console.log(error)
-    })
+    dl.on('error', error => { console.log(error) })
     dl.on('progress', stats => {
-      this.downloaded = stats.downloaded
       this.progress = Math.round(stats.progress)
-      this.speed = stats.speed
-      this.total = stats.total
+      this.downloaded = byteTo(stats.downloaded)
+      this.total = byteTo(stats.total)
+      onSpeed(stats.speed)
     })
 
     this.dl = dl
-    dl.start()
   }
   start () {
     this.dl.start()
@@ -55,7 +61,8 @@ class Task {
 export default ({ api }) => ({
   namespaced: true,
   state: {
-    value: []
+    value: [],
+    speed: 0
   },
   getters: {
     /**
@@ -68,11 +75,19 @@ export default ({ api }) => ({
     },
     /**
      * @description 任务数量
-     * @example store.getters['download/length]
-     * @example this.store.getters['download/length]
+     * @example store.getters['download/length']
+     * @example this.store.getters['download/length']
      */
     length (state, getters, rootState, rootGetters) {
       return state.value.length
+    },
+    /**
+     * @description 格式化后的速度
+     * @example store.getters['download/speed']
+     * @example this.store.getters['download/speed']
+     */
+    speed (state, getters, rootState, rootGetters) {
+      return `${byteTo(state.speed)} / s`
     }
   },
   mutations: {
@@ -95,17 +110,28 @@ export default ({ api }) => ({
      */
     push (state, payload) {
       state.value.push(payload)
+    },
+    /**
+     * @description 设置下载速度
+     * @param {Object} state state
+     * @param {Object} payload payload
+     * @example store.commit('download/speedSet')
+     * @example this.store.commit('download/speedSet')
+     */
+    speedSet (state, payload) {
+      state.speed = payload
     }
   },
   actions: {
     /**
-     * @description 开始下载队列
+     * @description 开始下载队列 | 进行下一个
      * @param {Object} context context
      * @param {Object} payload payload
      * @example store.dispatch('download/start')
      * @example this.$store.dispatch('download/start')
      */
     async start ({ state, rootState, commit, dispatch, getters, rootGetters }) {
+      console.log('start')
     },
     /**
      * @description 增加新的下载任务
@@ -131,7 +157,9 @@ export default ({ api }) => ({
       commit('push', new Task({
         url,
         destinationFolder,
-        fileName: remoteFilename
+        fileName: remoteFilename,
+        onSpeed: function (speed) { commit('speedSet', speed) },
+        onEnd: function () { dispatch('start') }
       }))
     }
   }

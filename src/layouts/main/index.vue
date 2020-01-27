@@ -29,14 +29,14 @@
   <div class="layout">
     <div class="layout--layer" flex="dir:top main:justify box:first">
       <div class="layout--header">
-        <layout-default-header/>
+        <layout-main-header/>
       </div>
       <div class="layout--main" flex="dir:top main:justify box:first">
         <div class="layout--main-view">
           <router-view/>
         </div>
         <div class="layout--main-breadcrumb">
-          <layout-default-breadcrumb/>
+          <layout-main-breadcrumb/>
         </div>
       </div>
     </div>

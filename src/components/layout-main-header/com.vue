@@ -1,8 +1,8 @@
 <style lang="scss">
-.layout-default-header {
+.layout-main-header {
   @extend .unselect;
   padding: 0 $LAYOUT_MAIN_PADDING;
-  .layout-default-header-button {
+  .layout-main-header-button {
     height: $LAYOUT_HEADER_HEIGHT;
     width: $LAYOUT_HEADER_HEIGHT;
     color: $COLOR_HEADER_TEXT_NORMAL;
@@ -17,7 +17,7 @@
 </style>
 
 <template>
-  <div class="layout-default-header" flex="main:justify cross:center">
+  <div class="layout-main-header" flex="main:justify cross:center">
     <a-menu mode="horizontal" theme="dark">
       <a-menu-item key="mail">
         <a-icon type="appstore"/>画廊
@@ -27,7 +27,7 @@
       </a-menu-item>
     </a-menu>
     <div flex="main:justify">
-      <layout-default-header-button icon="database" :count="$store.getters['download/length']">
+      <layout-main-header-button icon="database" :count="$store.getters['download/length']">
         <div slot="title" flex="main:justify">
           <span>下载</span>
           <span>{{ $store.getters['download/speed'] }}</span>
@@ -38,8 +38,8 @@
             清空
           </a-button>
         </div>
-      </layout-default-header-button>
-      <layout-default-header-button icon="sync" :spin="$store.getters['loading/value']">
+      </layout-main-header-button>
+      <layout-main-header-button icon="sync" :spin="$store.getters['loading/value']">
         <div slot="title">刷新数据</div>
         <div slot="content">
           此操作将重新请求服务器数据<br>
@@ -54,8 +54,8 @@
           block>
           刷新数据
         </a-button>
-      </layout-default-header-button>
-      <layout-default-header-button icon="bell" :count="$store.getters['log/length']">
+      </layout-main-header-button>
+      <layout-main-header-button icon="bell" :count="$store.getters['log/length']">
         <div slot="title">消息</div>
         <log-list slot="content"/>
         <div slot="footer" flex="main:right">
@@ -63,13 +63,13 @@
             清空
           </a-button>
         </div>
-      </layout-default-header-button>
+      </layout-main-header-button>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'layout-default-header'
+  name: 'layout-main-header'
 }
 </script>

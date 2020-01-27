@@ -1,5 +1,5 @@
 <style lang="scss">
-.layout-default-header-button {
+.layout-main-header-button {
   @extend .unselect;
   @extend .unselect;
   .ant-badge {
@@ -15,12 +15,12 @@
     }
   }
 }
-.layout-default-header-button--popover-content {
+.layout-main-header-button--popover-content {
   margin: -12px -16px;
-  .layout-default-header-button--popover-content-content {
+  .layout-main-header-button--popover-content-content {
     padding: 8px 16px;
   }
-  .layout-default-header-button--popover-content-footer {
+  .layout-main-header-button--popover-content-footer {
     padding: 8px 16px;
     border-top: 1px solid #e8e8e8;
   }
@@ -28,18 +28,18 @@
 </style>
 
 <template>
-  <a-popover class="layout-default-header-button" placement="bottomRight" :trigger="trigger">
+  <a-popover class="layout-main-header-button" placement="bottomRight" :trigger="trigger">
     <div v-if="this.$slots.title" slot="title" class="unselect">
       <slot name="title"/>
     </div>
     <div
       v-if="this.$slots.content || this.$slots.footer"
       slot="content"
-      class="layout-default-header-button--popover-content unselect">
-      <div v-if="this.$slots.content" class="layout-default-header-button--popover-content-content">
+      class="layout-main-header-button--popover-content unselect">
+      <div v-if="this.$slots.content" class="layout-main-header-button--popover-content-content">
         <slot name="content"/>
       </div>
-      <div v-if="this.$slots.footer" class="layout-default-header-button--popover-content-footer">
+      <div v-if="this.$slots.footer" class="layout-main-header-button--popover-content-footer">
         <slot name="footer"/>
       </div>
     </div>
@@ -53,7 +53,7 @@
 
 <script>
 export default {
-  name: 'layout-default-header-button',
+  name: 'layout-main-header-button',
   props: {
     icon: {
       type: String,

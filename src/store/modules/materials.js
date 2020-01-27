@@ -95,7 +95,9 @@ export default ({ api }) => ({
      */
     async fetch ({ state, rootState, commit, dispatch, getters, rootGetters }) {
       const stop = await dispatch('loading/start', undefined, { root: true })
-      commit('set', await api.MATERIALS_FETCH())
+      const data = await api.MATERIALS_FETCH()
+      commit('view/clean', undefined, { root: true })
+      commit('set', data)
       stop()
       commit('log/push', '远程物料库加载完成', { root: true })
       await dispatch('save')

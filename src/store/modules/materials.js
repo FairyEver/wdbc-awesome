@@ -94,7 +94,22 @@ export default ({ api }) => ({
     setFilePath (state, { fileName = '', filePath = '' }) {
       console.log(fileName)
       console.log(filePath)
-      // state.value = payload
+      function scan (source) {
+        return source.map(e => {
+          if (e.url === fileName) {
+            e.filePath = filePath
+            console.log(e.filePath)
+          }
+          if (e.elements) {
+            e.elements = scan(e.elements)
+          }
+          return e
+        })
+      }
+      state.value = {
+        ...state.value,
+        library: scan(state.value.library)
+      }
     }
   },
   actions: {

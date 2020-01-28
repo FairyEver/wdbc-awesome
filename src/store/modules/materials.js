@@ -83,6 +83,18 @@ export default ({ api }) => ({
      */
     set (state, payload) {
       state.value = payload
+    },
+    /**
+     * @description 设置某个文件的本地路径
+     * @param {Object} state state
+     * @param {Object} payload payload
+     * @example store.commit('materials/setFilePath')
+     * @example this.$store.commit('materials/setFilePath')
+     */
+    setFilePath (state, { fileName = '', filePath = '' }) {
+      console.log(fileName)
+      console.log(filePath)
+      // state.value = payload
     }
   },
   actions: {

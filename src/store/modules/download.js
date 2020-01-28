@@ -19,7 +19,7 @@ class Task {
     destinationFolder,
     fileName,
     onSpeed = function (speed) { console.log(speed) },
-    onEnd = function () { }
+    onEnd = function (downloadInfo) { console.log(downloadInfo) }
   }) {
     this.id = shortid.generate()
     this.fileName = fileName
@@ -38,7 +38,7 @@ class Task {
     const dl = new DownloaderHelper(url, destinationFolder, options)
     dl.on('end', downloadInfo => {
       this.done = true
-      onEnd()
+      onEnd(downloadInfo)
     })
     dl.on('error', error => { console.log(error) })
     dl.on('progress', stats => {
@@ -162,7 +162,10 @@ export default ({ api }) => ({
         destinationFolder,
         fileName: remoteFilename,
         onSpeed: function (speed) { commit('speedSet', speed) },
-        onEnd: function () { dispatch('start') }
+        onEnd: function (downloadInfo) {
+          commit('materials/setFilePath', downloadInfo, { root: true })
+          dispatch('start')
+        }
       }))
     }
   }

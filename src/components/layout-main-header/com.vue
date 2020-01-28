@@ -2,17 +2,6 @@
 .layout-main-header {
   @extend .unselect;
   padding: 0 $LAYOUT_MAIN_PADDING;
-  .layout-main-header-button {
-    height: $LAYOUT_HEADER_HEIGHT;
-    width: $LAYOUT_HEADER_HEIGHT;
-    color: $COLOR_HEADER_TEXT_NORMAL;
-    user-select: none;
-    cursor: pointer;
-    &:hover {
-      background-color: $COLOR_PRIMARY;
-      color: $COLOR_HEADER_TEXT_ACTIVE;
-    }
-  }
 }
 </style>
 

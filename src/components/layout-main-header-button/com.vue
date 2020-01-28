@@ -2,6 +2,15 @@
 .layout-main-header-button {
   @extend .unselect;
   @extend .unselect;
+  height: $LAYOUT_HEADER_HEIGHT;
+  width: $LAYOUT_HEADER_HEIGHT;
+  color: $COLOR_HEADER_TEXT_NORMAL;
+  user-select: none;
+  cursor: pointer;
+  &:hover {
+    background-color: $COLOR_PRIMARY;
+    color: $COLOR_HEADER_TEXT_ACTIVE;
+  }
   .ant-badge {
     .ant-badge-count {
       $badge-height: 14px;

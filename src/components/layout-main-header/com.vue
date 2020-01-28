@@ -16,7 +16,7 @@
       </a-menu-item>
     </a-menu>
     <div flex="main:justify">
-      <layout-main-header-button icon="download" :count="$store.getters['download/length']">
+      <layout-main-header-button icon="download" :count="$store.getters['download/lengthWait']">
         <div slot="title" flex="main:justify">
           <span>下载</span>
           <span>{{ $store.getters['download/speed'] }}</span>

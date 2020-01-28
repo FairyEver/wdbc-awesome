@@ -74,12 +74,12 @@ export default ({ api }) => ({
       return state.value
     },
     /**
-     * @description 任务数量
-     * @example store.getters['download/length']
-     * @example this.store.getters['download/length']
+     * @description 等待中的任务数量
+     * @example store.getters['download/lengthWait']
+     * @example this.store.getters['download/lengthWait']
      */
-    length (state, getters, rootState, rootGetters) {
-      return state.value.length
+    lengthWait (state, getters, rootState, rootGetters) {
+      return state.value.filter(e => !e.done).length
     },
     /**
      * @description 格式化后的速度

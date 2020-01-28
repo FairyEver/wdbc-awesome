@@ -92,13 +92,10 @@ export default ({ api }) => ({
      * @example this.$store.commit('materials/setFilePath')
      */
     setFilePath (state, { fileName = '', filePath = '' }) {
-      console.log(fileName)
-      console.log(filePath)
       function scan (source) {
         return source.map(e => {
           if (e.url === fileName) {
             e.filePath = filePath
-            console.log(e.filePath)
           }
           if (e.elements) {
             e.elements = scan(e.elements)

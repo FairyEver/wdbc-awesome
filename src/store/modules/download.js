@@ -164,6 +164,7 @@ export default ({ api }) => ({
         onSpeed: function (speed) { commit('speedSet', speed) },
         onEnd: function (downloadInfo) {
           commit('materials/setFilePath', downloadInfo, { root: true })
+          dispatch('materials/save', undefined, { root: true })
           dispatch('start')
         }
       }))

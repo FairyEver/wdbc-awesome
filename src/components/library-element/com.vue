@@ -11,12 +11,12 @@
     .library-element--box-badge {
       $height: 16px;
       height: $height;
-      border-radius: $height / 2;
-      padding: 0 $height / 3;
+      border-radius: 2px;
+      padding: 0 $height / 4;
       background-color: #57C22D;
       position: absolute;
-      top: - $height / 3;
-      right: - $height / 3;
+      top: 2px;
+      right: 2px;
       color: #FFF;
       font-size: 10px;
       i {
@@ -117,6 +117,10 @@
             src-placeholder="/icon/file-placeholder.png"/>
         </div>
       </div>
+      <div v-if="isHdd(value)" class="library-element--box-badge" flex="main:center cross:center">
+        <a-icon type="hdd"/>
+        <span>HDD</span>
+      </div>
     </square>
     <square v-else class="library-element--box library-element--file-box" flex="main:center cross:center">
       <v-lazy-image
@@ -125,7 +129,7 @@
         :src="url(value.cover || value.url, '', 200)"
         src-placeholder="/icon/file-placeholder.png"
         @load="onImageLoad"/>
-      <div v-if="value.filePath" class="library-element--box-badge" flex="main:center cross:center">
+      <div v-if="isHdd(value)" class="library-element--box-badge" flex="main:center cross:center">
         <a-icon type="hdd"/>
         <span>HDD</span>
       </div>
@@ -166,6 +170,20 @@ export default {
      */
     isDir (item) {
       return item.elements && isArray(item.elements)
+    },
+    /**
+     * @description 判断是否在本地 如果是文件夹 检查文件夹内是否全部在本地
+     * @param {Object} item 需要检测的项目
+     */
+    isHdd (item) {
+      if (this.isDir(item)) {
+        return item.elements.reduce((result, element) => {
+          if (result === false) return false
+          if (!this.isHdd(element)) return false
+          return true
+        }, true)
+      }
+      return item.filePath
     },
     /**
      * @description 用户点击时触发

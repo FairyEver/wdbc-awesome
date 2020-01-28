@@ -1,5 +1,5 @@
 <style lang="scss">
-.layout-main-breadcrumb {
+.album-breadcrumb {
   height: $LAYOUT_HEADER_HEIGHT;
   padding: 0 $LAYOUT_MAIN_PADDING;
   background-color: rgba($COLOR_BACKGROUND, .9);
@@ -7,7 +7,7 @@
 </style>
 
 <template>
-  <div class="layout-main-breadcrumb" flex="cross:center">
+  <div class="album-breadcrumb" flex="cross:center">
     <a-breadcrumb>
       <a-breadcrumb-item>
         <a-icon type="home"/>
@@ -28,6 +28,6 @@
 
 <script>
 export default {
-  name: 'layout-main-breadcrumb'
+  name: 'album-breadcrumb'
 }
 </script>

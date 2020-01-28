@@ -6,21 +6,10 @@
   }
   .layout--header {
     background-color: #011528;
-    box-shadow: 0 2px 10px 0 rgba(0,0,0,0.50);
+    box-shadow: 0 2px 10px 0 rgba(0,0,0,0.05);
   }
   .layout--main {
     position: relative;
-    .layout--main-view {
-      @extend .full;
-      padding: $LAYOUT_MAIN_PADDING;
-      padding-top: $LAYOUT_HEADER_HEIGHT;
-    }
-    .layout--main-breadcrumb {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-    }
   }
 }
 </style>
@@ -31,13 +20,8 @@
       <div class="layout--header">
         <layout-main-header/>
       </div>
-      <div class="layout--main" flex="dir:top main:justify box:first">
-        <div class="layout--main-view">
-          <router-view/>
-        </div>
-        <div class="layout--main-breadcrumb">
-          <layout-main-breadcrumb/>
-        </div>
+      <div class="layout--main">
+        <router-view/>
       </div>
     </div>
   </div>

@@ -14,7 +14,7 @@ export default ({ api }) => ({
   getters: {
     /**
      * @description 数据
-     * @example store.getters['materials/value']
+     * @example $store.getters['materials/value']
      * @example this.$store.getters['materials/value']
      */
     value (state, getters, rootState, rootGetters) {
@@ -26,7 +26,7 @@ export default ({ api }) => ({
     },
     /**
      * @description 资源数据
-     * @example store.getters['materials/library']
+     * @example $store.getters['materials/library']
      * @example this.$store.getters['materials/library']
      */
     library (state, getters, rootState, rootGetters) {
@@ -34,7 +34,7 @@ export default ({ api }) => ({
     },
     /**
      * @description 资源数据 域名
-     * @example store.getters['materials/libraryBase']
+     * @example $store.getters['materials/libraryBase']
      * @example this.$store.getters['materials/libraryBase']
      */
     libraryBase (state, getters, rootState, rootGetters) {
@@ -42,7 +42,7 @@ export default ({ api }) => ({
     },
     /**
      * @description 资源数据 目录地址
-     * @example store.getters['materials/libraryPrefix']
+     * @example $store.getters['materials/libraryPrefix']
      * @example this.$store.getters['materials/libraryPrefix']
      */
     libraryPrefix (state, getters, rootState, rootGetters) {
@@ -50,7 +50,7 @@ export default ({ api }) => ({
     },
     /**
      * @description 资源数据 文件列表
-     * @example store.getters['materials/libraryFiles']
+     * @example $store.getters['materials/libraryFiles']
      * @example this.$store.getters['materials/libraryFiles']
      */
     libraryFiles (state, getters, rootState, rootGetters) {
@@ -66,7 +66,7 @@ export default ({ api }) => ({
     },
     /**
      * @description 资源数据 文件数量
-     * @example store.getters['materials/libraryFilesCount']
+     * @example $store.getters['materials/libraryFilesCount']
      * @example this.$store.getters['materials/libraryFilesCount']
      */
     libraryFilesCount (state, getters, rootState, rootGetters) {
@@ -78,7 +78,7 @@ export default ({ api }) => ({
      * @description 设置物料库
      * @param {Object} state state
      * @param {Object} payload payload
-     * @example store.commit('materials/set')
+     * @example $store.commit('materials/set')
      * @example this.$store.commit('materials/set')
      */
     set (state, payload) {
@@ -88,7 +88,7 @@ export default ({ api }) => ({
      * @description 设置某个文件的本地路径
      * @param {Object} state state
      * @param {Object} payload payload
-     * @example store.commit('materials/setFilePath')
+     * @example $store.commit('materials/setFilePath')
      * @example this.$store.commit('materials/setFilePath')
      */
     setFilePath (state, { fileName = '', filePath = '' }) {
@@ -114,7 +114,7 @@ export default ({ api }) => ({
      * @description 请求远程物料库
      * @param {Object} context context
      * @param {Object} payload payload
-     * @example store.dispatch('materials/fetch')
+     * @example $store.dispatch('materials/fetch')
      * @example this.$store.dispatch('materials/fetch')
      */
     async fetch ({ state, rootState, commit, dispatch, getters, rootGetters }) {
@@ -132,7 +132,7 @@ export default ({ api }) => ({
      * @description 下载物料
      * @param {Object} context context
      * @param {Object} payload payload
-     * @example store.dispatch('materials/download')
+     * @example $store.dispatch('materials/download')
      * @example this.$store.dispatch('materials/download')
      */
     async download ({ state, rootState, commit, dispatch, getters, rootGetters }) {
@@ -151,7 +151,7 @@ export default ({ api }) => ({
      * @description 加载本地缓存的物料库
      * @param {Object} context context
      * @param {Object} payload payload
-     * @example store.dispatch('materials/load')
+     * @example $store.dispatch('materials/load')
      * @example this.$store.dispatch('materials/load')
      */
     async load ({ state, rootState, commit, dispatch, getters, rootGetters }) {
@@ -168,7 +168,7 @@ export default ({ api }) => ({
      * @description 保存远程资料库数据
      * @param {Object} context context
      * @param {Object} payload payload
-     * @example store.dispatch('materials/save')
+     * @example $store.dispatch('materials/save')
      * @example this.$store.dispatch('materials/save')
      */
     async save ({ state, rootState, commit, dispatch, getters, rootGetters }) {

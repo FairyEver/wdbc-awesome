@@ -8,6 +8,7 @@
 <template>
   <div class="layout-main-header" flex="main:justify cross:center">
     <layout-main-header-menu/>
+    <progress-download-overview/>
     <div flex="main:justify">
       <layout-main-header-button-download/>
       <layout-main-header-button-refresh/>

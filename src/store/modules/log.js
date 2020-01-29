@@ -11,7 +11,7 @@ export default ({ api }) => ({
   getters: {
     /**
      * @description description
-     * @example store.getters['log/list']
+     * @example $store.getters['log/list']
      * @example this.$store.getters['log/list']
      */
     list (state, getters, rootState, rootGetters) {
@@ -19,7 +19,7 @@ export default ({ api }) => ({
     },
     /**
      * @description description
-     * @example store.getters['log/length']
+     * @example $store.getters['log/length']
      * @example this.$store.getters['log/length']
      */
     length (state, getters, rootState, rootGetters) {
@@ -31,7 +31,7 @@ export default ({ api }) => ({
      * @description 日志 添加
      * @param {Object} state state
      * @param {String} log 日志信息
-     * @example store.commit('log/push')
+     * @example $store.commit('log/push')
      * @example this.$store.commit('log/push')
      */
     push (state, log = '') {
@@ -44,7 +44,7 @@ export default ({ api }) => ({
      * @description 日志 清空
      * @param {Object} state state
      * @param {Object} payload payload
-     * @example store.commit('log/clean')
+     * @example $store.commit('log/clean')
      * @example this.$store.commit('log/clean')
      */
     clean (state, payload) {

@@ -16,7 +16,7 @@ export default ({ api }) => ({
   getters: {
     /**
      * @description 资源数据 当前视图的内容
-     * @example store.getters['view/list']
+     * @example $store.getters['view/list']
      * @example this.$store.getters['view/list']
      */
     list (state, getters, rootState, rootGetters) {
@@ -29,7 +29,7 @@ export default ({ api }) => ({
      * @description 物料库访问路径 文件路径 追加
      * @param {Object} state state
      * @param {Object} payload payload
-     * @example store.commit('view/push')
+     * @example $store.commit('view/push')
      * @example this.$store.commit('view/push')
      */
     push (state, { label = 'Label', value = 0 }) {
@@ -43,7 +43,7 @@ export default ({ api }) => ({
      * @description 物料库访问路径 文件路径 清空
      * @param {Object} state state
      * @param {Object} payload payload
-     * @example store.commit('view/clean')
+     * @example $store.commit('view/clean')
      * @example this.$store.commit('view/clean')
      */
     clean (state) {
@@ -53,7 +53,7 @@ export default ({ api }) => ({
      * @description 物料库访问路径 文件路径 设置到某一个
      * @param {Object} state state
      * @param {Object} payload payload
-     * @example store.commit('view/pathSet')
+     * @example $store.commit('view/pathSet')
      * @example this.$store.commit('view/pathSet')
      */
     pathSet (state, index) {

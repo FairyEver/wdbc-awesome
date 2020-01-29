@@ -67,27 +67,51 @@ export default ({ api }) => ({
   getters: {
     /**
      * @description description
-     * @example store.getters['download/list']
+     * @example $store.getters['download/list']
      * @example this.$store.getters['download/list']
      */
     list (state, getters, rootState, rootGetters) {
       return state.value
     },
     /**
+     * @description 全部的任务数量
+     * @example $store.getters['download/length']
+     * @example this.$store.getters['download/length']
+     */
+    length (state, getters, rootState, rootGetters) {
+      return state.value.length
+    },
+    /**
      * @description 等待中的任务数量
-     * @example store.getters['download/lengthWait']
-     * @example this.store.getters['download/lengthWait']
+     * @example $store.getters['download/lengthWait']
+     * @example this.$store.getters['download/lengthWait']
      */
     lengthWait (state, getters, rootState, rootGetters) {
       return state.value.filter(e => !e.done).length
     },
     /**
+     * @description 完成的任务数量
+     * @example $store.getters['download/lengthDone']
+     * @example this.$store.getters['download/lengthDone']
+     */
+    lengthDone (state, getters, rootState, rootGetters) {
+      return state.value.filter(e => e.done).length
+    },
+    /**
      * @description 格式化后的速度
-     * @example store.getters['download/speed']
-     * @example this.store.getters['download/speed']
+     * @example $store.getters['download/speed']
+     * @example this.$store.getters['download/speed']
      */
     speed (state, getters, rootState, rootGetters) {
       return `${byteTo(state.speed)} / s`
+    },
+    /**
+     * @description 整体进度
+     * @example $store.getters['download/progress']
+     * @example this.$store.getters['download/progress']
+     */
+    progress (state, getters, rootState, rootGetters) {
+      return Math.round(getters.lengthDone / getters.length * 100)
     }
   },
   mutations: {
@@ -95,8 +119,8 @@ export default ({ api }) => ({
      * @description 清空下载任务
      * @param {Object} state state
      * @param {Object} payload payload
-     * @example store.commit('download/clean')
-     * @example this.store.commit('download/clean')
+     * @example $store.commit('download/clean')
+     * @example this.$store.commit('download/clean')
      */
     clean (state, payload) {
       state.value = []
@@ -105,8 +129,8 @@ export default ({ api }) => ({
      * @description 增加新的下载任务
      * @param {Object} state state
      * @param {Object} payload payload
-     * @example store.commit('download/push')
-     * @example this.store.commit('download/push')
+     * @example $store.commit('download/push')
+     * @example this.$store.commit('download/push')
      */
     push (state, payload) {
       state.value.push(payload)
@@ -115,8 +139,8 @@ export default ({ api }) => ({
      * @description 设置下载速度
      * @param {Object} state state
      * @param {Object} payload payload
-     * @example store.commit('download/speedSet')
-     * @example this.store.commit('download/speedSet')
+     * @example $store.commit('download/speedSet')
+     * @example this.$store.commit('download/speedSet')
      */
     speedSet (state, payload) {
       state.speed = payload
@@ -127,7 +151,7 @@ export default ({ api }) => ({
      * @description 开始下载队列 | 进行下一个
      * @param {Object} context context
      * @param {Object} payload payload
-     * @example store.dispatch('download/start')
+     * @example $store.dispatch('download/start')
      * @example this.$store.dispatch('download/start')
      */
     async start ({ state, rootState, commit, dispatch, getters, rootGetters }) {
@@ -140,7 +164,7 @@ export default ({ api }) => ({
      * @description 增加新的下载任务
      * @param {Object} context context
      * @param {Object} payload payload
-     * @example store.dispatch('download/push')
+     * @example $store.dispatch('download/push')
      * @example this.$store.dispatch('download/push')
      */
     async push (
@@ -161,8 +185,15 @@ export default ({ api }) => ({
         url,
         destinationFolder,
         fileName: remoteFilename,
-        onSpeed: function (speed) { commit('speedSet', speed) },
+        onSpeed: function (speed) {
+          if (speed) {
+            commit('speedSet', speed)
+          }
+        },
         onEnd: function (downloadInfo) {
+          if (getters.lengthWait === 0) {
+            commit('speedSet', 0)
+          }
           commit('materials/setFilePath', downloadInfo, { root: true })
           dispatch('materials/save', undefined, { root: true })
           dispatch('start')

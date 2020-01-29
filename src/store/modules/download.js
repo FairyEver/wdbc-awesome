@@ -192,9 +192,7 @@ export default ({ api }) => ({
      */
     async push (
       { state, rootState, commit, dispatch, getters, rootGetters },
-      {
-        remoteFilename = ''
-      } = {}
+      { remoteFilename = '' } = {}
     ) {
       // 计算图片的真实下载地址
       const libraryBase = rootGetters['materials/libraryBase']

@@ -31,15 +31,15 @@ class Task {
     this.total = 0
 
     // [ downloader.state ]
-    // -> IDLE
-    // -> STARTED
-    // -> DOWNLOADING
-    // -> PAUSED
-    // -> RESUMED
-    // -> STOPPED
-    // -> FINISHED
-    // -> FAILED
-    // -> RETRY
+    // -> IDLE 等待
+    // -> STARTED 已经开始
+    // -> DOWNLOADING 正在下载
+    // -> PAUSED 暂停
+    // -> RESUMED 已经重新开始
+    // -> STOPPED 已经停止
+    // -> FINISHED 已经完成
+    // -> FAILED 已经失败
+    // -> RETRY 重试
 
     this.downloader = new DownloaderHelper(url, destinationFolder, {
       fileName,

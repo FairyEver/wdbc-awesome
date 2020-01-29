@@ -1,5 +1,6 @@
 <style lang="scss">
 .album-breadcrumb {
+  @extend .unselect;
   height: $LAYOUT_HEADER_HEIGHT;
   padding: 0 $LAYOUT_MAIN_PADDING;
   background-color: rgba($COLOR_BACKGROUND, .9);

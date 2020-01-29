@@ -106,18 +106,18 @@ export default ({ api }) => ({
     },
     /**
      * @description 等待中的任务数量
-     * @example $store.getters['download/lengthIDLE']
-     * @example this.$store.getters['download/lengthIDLE']
+     * @example $store.getters['download/lengthIdle']
+     * @example this.$store.getters['download/lengthIdle']
      */
-    lengthIDLE (state, getters, rootState, rootGetters) {
+    lengthIdle (state, getters, rootState, rootGetters) {
       return state.value.filter(e => e.downloader.state === 'IDLE').length
     },
     /**
      * @description 完成的任务数量
-     * @example $store.getters['download/lengthFINISHED']
-     * @example this.$store.getters['download/lengthFINISHED']
+     * @example $store.getters['download/lengthFinished']
+     * @example this.$store.getters['download/lengthFinished']
      */
-    lengthFINISHED (state, getters, rootState, rootGetters) {
+    lengthFinished (state, getters, rootState, rootGetters) {
       return state.value.filter(e => e.downloader.state === 'FINISHED').length
     },
     /**
@@ -135,7 +135,7 @@ export default ({ api }) => ({
      */
     progress (state, getters, rootState, rootGetters) {
       if (getters.length === 0) return 0
-      return Math.round(getters.lengthFINISHED / getters.length * 100)
+      return Math.round(getters.lengthFinished / getters.length * 100)
     }
   },
   mutations: {
@@ -217,7 +217,7 @@ export default ({ api }) => ({
         onEnd: function (downloadInfo) {
           commit('materials/setFilePath', downloadInfo, { root: true })
           dispatch('materials/save', undefined, { root: true })
-          if (getters.lengthIDLE === 0) {
+          if (getters.lengthIdle === 0) {
             commit('setSpeed', 0)
           }
           dispatch('start')

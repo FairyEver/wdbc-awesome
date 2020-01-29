@@ -20,23 +20,55 @@
 </style>
 
 <template>
-  <div class="progress-download-overview">
-    <div class="progress-download-overview--title">
-      {{ title }}
+  <transition name="fade">
+    <div v-if="show" class="progress-download-overview">
+      <div class="progress-download-overview--title">
+        {{ title }}
+      </div>
+      <a-progress
+        :percent="$store.getters['download/progress']"
+        size="small"
+        :show-info="false"/>
     </div>
-    <a-progress :percent="$store.getters['download/progress']" size="small" :show-info="false"/>
-  </div>
+  </transition>
 </template>
 
 <script>
 export default {
   name: 'progress-download-overview',
+  data () {
+    return {
+      show: false,
+      showTimer: null
+    }
+  },
   computed: {
+    active () {
+      return this.$store.getters['download/playing']
+    },
     title () {
       const speed = this.$store.getters['download/speed']
       const length = this.$store.getters['download/length']
       const lengthDone = this.$store.getters['download/lengthDone']
-      return `正在更新 ${lengthDone} / ${length} ${speed}`
+      const done = lengthDone === length
+      return done ? '完成' : `正在同步 ${lengthDone}/${length} ${speed}`
+    }
+  },
+  watch: {
+    active: {
+      handler (value) {
+        if (this.showTimer) {
+          clearTimeout(this.showTimer)
+        }
+        if (value) {
+          this.show = true
+        } else {
+          this.showTimer = setTimeout(() => {
+            this.show = false
+          }, 1000)
+        }
+      },
+      immediate: true
     }
   }
 }

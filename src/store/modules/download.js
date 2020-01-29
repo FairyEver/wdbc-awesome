@@ -61,12 +61,24 @@ class Task {
 export default ({ api }) => ({
   namespaced: true,
   state: {
+    // 下载列表
     value: [],
-    speed: 0
+    // 整体下载速度
+    speed: 0,
+    // 是否正在下载
+    playing: false
   },
   getters: {
     /**
-     * @description description
+     * @description 是否正在下载
+     * @example $store.getters['download/playing']
+     * @example this.$store.getters['download/playing']
+     */
+    playing (state, getters, rootState, rootGetters) {
+      return state.playing
+    },
+    /**
+     * @description 下载列表
      * @example $store.getters['download/list']
      * @example this.$store.getters['download/list']
      */
@@ -103,7 +115,7 @@ export default ({ api }) => ({
      * @example this.$store.getters['download/speed']
      */
     speed (state, getters, rootState, rootGetters) {
-      return `${byteTo(state.speed)} / s`
+      return `${byteTo(state.speed)}/s`
     },
     /**
      * @description 整体进度
@@ -140,11 +152,21 @@ export default ({ api }) => ({
      * @description 设置下载速度
      * @param {Object} state state
      * @param {Object} payload payload
-     * @example $store.commit('download/speedSet')
-     * @example this.$store.commit('download/speedSet')
+     * @example $store.commit('download/setSpeed')
+     * @example this.$store.commit('download/setSpeed')
      */
-    speedSet (state, payload) {
+    setSpeed (state, payload) {
       state.speed = payload
+    },
+    /**
+     * @description 设置是否正在下载
+     * @param {Object} state state
+     * @param {Object} payload payload
+     * @example $store.commit('download/setPlaying')
+     * @example this.$store.commit('download/setPlaying')
+     */
+    setPlaying (state, payload) {
+      state.playing = !!payload
     }
   },
   actions: {
@@ -158,7 +180,10 @@ export default ({ api }) => ({
     async start ({ state, rootState, commit, dispatch, getters, rootGetters }) {
       const waitDownloadIndex = getters.list.findIndex(e => e.done === false)
       if (waitDownloadIndex >= 0) {
+        commit('setPlaying', true)
         state.value[waitDownloadIndex].start()
+      } else {
+        commit('setPlaying', false)
       }
     },
     /**
@@ -188,16 +213,18 @@ export default ({ api }) => ({
         fileName: remoteFilename,
         onSpeed: function (speed) {
           if (speed) {
-            commit('speedSet', speed)
+            commit('setSpeed', speed)
           }
         },
         onEnd: function (downloadInfo) {
-          if (getters.lengthWait === 0) {
-            commit('speedSet', 0)
-          }
           commit('materials/setFilePath', downloadInfo, { root: true })
           dispatch('materials/save', undefined, { root: true })
-          dispatch('start')
+          if (getters.lengthWait === 0) {
+            commit('setSpeed', 0)
+            commit('setPlaying', false)
+          } else {
+            dispatch('start')
+          }
         }
       }))
     }

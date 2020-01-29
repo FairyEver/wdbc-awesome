@@ -21,9 +21,20 @@ class Task {
     onSpeed = function (speed) { console.log(speed) },
     onEnd = function (downloadInfo) { console.log(downloadInfo) }
   }) {
+
+    // state
+    // -> IDLE
+    // -> STARTED
+    // -> DOWNLOADING
+    // -> PAUSED
+    // -> RESUMED
+    // -> STOPPED
+    // -> FINISHED
+    // -> FAILED
+    // -> RETRY
+
     this.id = shortid.generate()
     this.fileName = fileName
-    this.done = false
 
     this.downloaded = 0
     this.progress = 0
@@ -35,26 +46,25 @@ class Task {
       retry: { maxRetries: 3, delay: 1000 },
       override: true
     }
-    const dl = new DownloaderHelper(url, destinationFolder, options)
-    dl.on('end', downloadInfo => {
-      this.done = true
+    const downloader = new DownloaderHelper(url, destinationFolder, options)
+    downloader.on('end', downloadInfo => {
       onEnd(downloadInfo)
     })
-    dl.on('error', error => { console.log(error) })
-    dl.on('progress', stats => {
+    downloader.on('error', error => { console.log(error) })
+    downloader.on('progress', stats => {
       this.progress = Math.round(stats.progress)
       this.downloaded = byteTo(stats.downloaded)
       this.total = byteTo(stats.total)
       onSpeed(stats.speed)
     })
 
-    this.dl = dl
+    this.downloader = downloader
   }
   start () {
-    this.dl.start()
+    this.downloader.start()
   }
   stop () {
-    this.dl.stop()
+    this.downloader.stop()
   }
 }
 
@@ -97,7 +107,7 @@ export default ({ api }) => ({
      * @example this.$store.getters['download/lengthWait']
      */
     lengthWait (state, getters, rootState, rootGetters) {
-      return state.value.filter(e => !e.done).length
+      return state.value.filter(e => e.downloader.state === 'IDLE').length
     },
     /**
      * @description 完成的任务数量
@@ -105,7 +115,7 @@ export default ({ api }) => ({
      * @example this.$store.getters['download/lengthDone']
      */
     lengthDone (state, getters, rootState, rootGetters) {
-      return state.value.filter(e => e.done).length
+      return state.value.filter(e => e.downloader.state === 'FINISHED').length
     },
     /**
      * @description 格式化后的速度
@@ -166,7 +176,7 @@ export default ({ api }) => ({
      * @example this.$store.dispatch('download/start')
      */
     async start ({ state, rootState, commit, dispatch, getters, rootGetters }) {
-      const waitDownloadIndex = getters.list.findIndex(e => e.done === false)
+      const waitDownloadIndex = getters.list.findIndex(e => e.downloader.state !== 'FINISHED')
       if (waitDownloadIndex >= 0) {
         state.value[waitDownloadIndex].start()
       }

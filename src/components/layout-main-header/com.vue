@@ -1,7 +1,7 @@
 <style lang="scss">
 .layout-main-header {
   @extend .unselect;
-  padding: 0 $LAYOUT_MAIN_PADDING;
+  padding-right: $LAYOUT_MAIN_PADDING;
 }
 </style>
 

@@ -76,7 +76,7 @@ export default {
     },
     trigger: {
       type: String,
-      default: 'click', // focus | hover | click
+      default: 'hover', // focus | hover | click
       required: false
     },
     count: {

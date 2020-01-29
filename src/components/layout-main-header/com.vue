@@ -44,7 +44,7 @@
           刷新数据
         </a-button>
       </layout-main-header-button>
-      <layout-main-header-button icon="bell" :count="$store.getters['log/length']">
+      <layout-main-header-button icon="bell" :count="$store.getters['log/length']" dot>
         <div slot="title">消息</div>
         <log-list slot="content"/>
         <div slot="footer" flex="main:right">

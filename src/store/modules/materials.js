@@ -125,6 +125,7 @@ export default ({ api }) => ({
       commit('log/push', '远程物料库加载完成', { root: true })
       stop()
       await dispatch('save')
+      commit('log/push', '本地物料库保存完成', { root: true })
       await dispatch('download')
     },
     /**
@@ -175,7 +176,6 @@ export default ({ api }) => ({
         fileName: 'materials.json',
         fileValue: JSON.stringify(state.value, null, 2)
       }, { root: true })
-      commit('log/push', '本地物料库保存完成', { root: true })
     }
   }
 })

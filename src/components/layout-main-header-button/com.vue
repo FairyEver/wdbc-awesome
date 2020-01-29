@@ -53,7 +53,7 @@
       </div>
     </div>
     <div class="layout-header-button" flex="main:center cross:center">
-      <a-badge :count="count" :offset="[1, -1]">
+      <a-badge :count="count" :dot="dot" :offset="[1, -1]">
         <a-icon :type="icon" :spin="spin"/>
       </a-badge>
     </div>
@@ -70,6 +70,11 @@ export default {
       required: false
     },
     spin: {
+      type: Boolean,
+      default: false,
+      required: false
+    },
+    dot: {
       type: Boolean,
       default: false,
       required: false

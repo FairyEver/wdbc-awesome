@@ -111,6 +111,7 @@ export default ({ api }) => ({
      * @example this.$store.getters['download/progress']
      */
     progress (state, getters, rootState, rootGetters) {
+      if (getters.length === 0) return 0
       return Math.round(getters.lengthDone / getters.length * 100)
     }
   },

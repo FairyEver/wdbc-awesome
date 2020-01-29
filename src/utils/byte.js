@@ -1,5 +1,5 @@
 export default function byteTo (limit) {
-  const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
+  const sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
   const getPowAndMult = (limit, p) => {
     if (limit >= 1024) {
       return getPowAndMult(limit / 1024, p + 1)

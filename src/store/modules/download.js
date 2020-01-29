@@ -96,30 +96,6 @@ export default ({ api }) => ({
       return state.value
     },
     /**
-     * @description 全部的任务数量
-     * @example $store.getters['download/countAll']
-     * @example this.$store.getters['download/countAll']
-     */
-    countAll (state, getters, rootState, rootGetters) {
-      return state.value.length
-    },
-    /**
-     * @description 等待中的任务数量
-     * @example $store.getters['download/countIdle']
-     * @example this.$store.getters['download/countIdle']
-     */
-    countIdle (state, getters, rootState, rootGetters) {
-      return state.value.filter(e => e.downloader.state === 'IDLE').length
-    },
-    /**
-     * @description 完成的任务数量
-     * @example $store.getters['download/countFinished']
-     * @example this.$store.getters['download/countFinished']
-     */
-    countFinished (state, getters, rootState, rootGetters) {
-      return state.value.filter(e => e.downloader.state === 'FINISHED').length
-    },
-    /**
      * @description 格式化后的速度
      * @example $store.getters['download/speed']
      * @example this.$store.getters['download/speed']
@@ -135,6 +111,30 @@ export default ({ api }) => ({
     progress (state, getters, rootState, rootGetters) {
       if (getters.length === 0) return 0
       return Math.round(getters.countFinished / getters.length * 100)
+    },
+    /**
+     * @description [ 任务数量 ] 全部
+     * @example $store.getters['download/countAll']
+     * @example this.$store.getters['download/countAll']
+     */
+    countAll (state, getters, rootState, rootGetters) {
+      return state.value.length
+    },
+    /**
+     * @description [ 任务数量 ] 等待中
+     * @example $store.getters['download/countIdle']
+     * @example this.$store.getters['download/countIdle']
+     */
+    countIdle (state, getters, rootState, rootGetters) {
+      return state.value.filter(e => e.downloader.state === 'IDLE').length
+    },
+    /**
+     * @description [ 任务数量 ] 已完成
+     * @example $store.getters['download/countFinished']
+     * @example this.$store.getters['download/countFinished']
+     */
+    countFinished (state, getters, rootState, rootGetters) {
+      return state.value.filter(e => e.downloader.state === 'FINISHED').length
     }
   },
   mutations: {
@@ -178,9 +178,10 @@ export default ({ api }) => ({
      * @example this.$store.dispatch('download/start')
      */
     async start ({ state, rootState, commit, dispatch, getters, rootGetters }) {
-      const waitDownloadIndex = getters.list.findIndex(e => e.downloader.state !== 'FINISHED')
-      if (waitDownloadIndex >= 0) {
-        state.value[waitDownloadIndex].start()
+      // 找到没有下载完成的任务 index
+      const index = state.value.findIndex(e => e.downloader.state !== 'FINISHED')
+      if (index >= 0) {
+        state.value[index].start()
       }
     },
     /**

@@ -4,6 +4,7 @@
 
 import byteTo from '@/utils/byte.js'
 
+const { cloneDeep } = require('lodash')
 const shortid = require('shortid')
 const path = require('path')
 const { app } = require('electron').remote
@@ -88,12 +89,12 @@ export default ({ api }) => ({
       return true
     },
     /**
-     * @description 下载列表
+     * @description 下载列表 优化排序 仅用于显示
      * @example $store.getters['download/list']
      * @example this.$store.getters['download/list']
      */
     list (state, getters, rootState, rootGetters) {
-      return state.value
+      return cloneDeep(state.value).sort((a, b) => b.downloader.state === 'FINISHED' ? -1 : 1)
     },
     /**
      * @description 格式化后的速度

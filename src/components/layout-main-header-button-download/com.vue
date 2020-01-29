@@ -1,5 +1,5 @@
 <template>
-  <layout-main-header-button icon="download" :count="$store.getters['download/lengthIdle']">
+  <layout-main-header-button icon="download" :count="$store.getters['download/countIdle']">
     <div slot="title">
       下载
     </div>

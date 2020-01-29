@@ -48,10 +48,10 @@ export default {
     },
     title () {
       const speed = this.$store.getters['download/speed']
-      const length = this.$store.getters['download/length']
-      const lengthFinished = this.$store.getters['download/lengthFinished']
-      const done = lengthFinished === length
-      return done ? '完成' : `正在同步 ${lengthFinished}/${length} ${speed}`
+      const countAll = this.$store.getters['download/countAll']
+      const countFinished = this.$store.getters['download/countFinished']
+      const done = countFinished === countAll
+      return done ? '完成' : `正在同步 ${countFinished}/${countAll} ${speed}`
     }
   },
   watch: {

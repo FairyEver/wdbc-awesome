@@ -21,7 +21,6 @@ class Task {
     onSpeed = function (speed) { console.log(speed) },
     onEnd = function (downloadInfo) { console.log(downloadInfo) }
   }) {
-
     this.id = shortid.generate()
     this.fileName = fileName
 
@@ -98,26 +97,26 @@ export default ({ api }) => ({
     },
     /**
      * @description 全部的任务数量
-     * @example $store.getters['download/length']
-     * @example this.$store.getters['download/length']
+     * @example $store.getters['download/countAll']
+     * @example this.$store.getters['download/countAll']
      */
-    length (state, getters, rootState, rootGetters) {
+    countAll (state, getters, rootState, rootGetters) {
       return state.value.length
     },
     /**
      * @description 等待中的任务数量
-     * @example $store.getters['download/lengthIdle']
-     * @example this.$store.getters['download/lengthIdle']
+     * @example $store.getters['download/countIdle']
+     * @example this.$store.getters['download/countIdle']
      */
-    lengthIdle (state, getters, rootState, rootGetters) {
+    countIdle (state, getters, rootState, rootGetters) {
       return state.value.filter(e => e.downloader.state === 'IDLE').length
     },
     /**
      * @description 完成的任务数量
-     * @example $store.getters['download/lengthFinished']
-     * @example this.$store.getters['download/lengthFinished']
+     * @example $store.getters['download/countFinished']
+     * @example this.$store.getters['download/countFinished']
      */
-    lengthFinished (state, getters, rootState, rootGetters) {
+    countFinished (state, getters, rootState, rootGetters) {
       return state.value.filter(e => e.downloader.state === 'FINISHED').length
     },
     /**
@@ -135,7 +134,7 @@ export default ({ api }) => ({
      */
     progress (state, getters, rootState, rootGetters) {
       if (getters.length === 0) return 0
-      return Math.round(getters.lengthFinished / getters.length * 100)
+      return Math.round(getters.countFinished / getters.length * 100)
     }
   },
   mutations: {
@@ -217,7 +216,7 @@ export default ({ api }) => ({
         onEnd: function (downloadInfo) {
           commit('materials/setFilePath', downloadInfo, { root: true })
           dispatch('materials/save', undefined, { root: true })
-          if (getters.lengthIdle === 0) {
+          if (getters.countIdle === 0) {
             commit('setSpeed', 0)
           }
           dispatch('start')

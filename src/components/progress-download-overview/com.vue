@@ -20,7 +20,7 @@
 </style>
 
 <template>
-  <transition name="fade">
+  <transition name="fade-progress">
     <div v-if="show" class="progress-download-overview">
       <div class="progress-download-overview--title">
         {{ title }}

@@ -1,11 +1,11 @@
 <style lang="scss">
-.log-list {
+.list-log {
   @extend .unselect;
   margin: 0 -16px;
   height: 300px;
   width: 240px;
   overflow: scroll;
-  .log-list-item {
+  .list-log-item {
     @extend .nowrap;
     font-size: 12px;
     padding: 5px 16px;
@@ -28,9 +28,9 @@
 </style>
 
 <template>
-  <div class="log-list">
+  <div class="list-log">
     <div
-      class="log-list-item"
+      class="list-log-item"
       v-for="(item, index) of $store.getters['log/list']"
       :key="item.id"
       :class="`index-${index + 1}`">
@@ -41,6 +41,6 @@
 
 <script>
 export default {
-  name: 'log-list'
+  name: 'list-log'
 }
 </script>

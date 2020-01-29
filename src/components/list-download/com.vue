@@ -1,11 +1,11 @@
 <style lang="scss">
-.download-list {
+.list-download {
   @extend .unselect;
   margin: 0 -16px;
   height: 300px;
   width: 300px;
   overflow: scroll;
-  .download-list-item {
+  .list-download-item {
     @extend .nowrap;
     font-size: 12px;
     padding: 5px 16px;
@@ -14,8 +14,8 @@
 </style>
 
 <template>
-  <div class="download-list">
-    <div class="download-list-item" v-for="item of $store.getters['download/list']" :key="item.id">
+  <div class="list-download">
+    <div class="list-download-item" v-for="item of $store.getters['download/list']" :key="item.id">
       <div flex="main:justify">
         <div>{{ item.fileName }}</div>
         <div>{{ item.downloaded }} / {{ item.total }}</div>
@@ -27,6 +27,6 @@
 
 <script>
 export default {
-  name: 'download-list'
+  name: 'list-download'
 }
 </script>

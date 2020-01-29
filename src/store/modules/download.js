@@ -22,7 +22,15 @@ class Task {
     onEnd = function (downloadInfo) { console.log(downloadInfo) }
   }) {
 
-    // state
+    this.id = shortid.generate()
+    this.fileName = fileName
+
+    this.downloaded = 0
+    this.progress = 0
+    this.speed = 0
+    this.total = 0
+
+    // [ downloader.state ]
     // -> IDLE
     // -> STARTED
     // -> DOWNLOADING
@@ -33,32 +41,27 @@ class Task {
     // -> FAILED
     // -> RETRY
 
-    this.id = shortid.generate()
-    this.fileName = fileName
-
-    this.downloaded = 0
-    this.progress = 0
-    this.speed = 0
-    this.total = 0
-
-    const options = {
+    this.downloader = new DownloaderHelper(url, destinationFolder, {
       fileName,
       retry: { maxRetries: 3, delay: 1000 },
       override: true
-    }
-    const downloader = new DownloaderHelper(url, destinationFolder, options)
-    downloader.on('end', downloadInfo => {
+    })
+
+    // 下载完成
+    this.downloader.on('end', downloadInfo => {
       onEnd(downloadInfo)
     })
-    downloader.on('error', error => { console.log(error) })
-    downloader.on('progress', stats => {
+    // 下载失败
+    this.downloader.on('error', error => {
+      console.log(error)
+    })
+    // 下载中
+    this.downloader.on('progress', stats => {
       this.progress = Math.round(stats.progress)
       this.downloaded = byteTo(stats.downloaded)
       this.total = byteTo(stats.total)
       onSpeed(stats.speed)
     })
-
-    this.downloader = downloader
   }
   start () {
     this.downloader.start()
@@ -103,18 +106,18 @@ export default ({ api }) => ({
     },
     /**
      * @description 等待中的任务数量
-     * @example $store.getters['download/lengthWait']
-     * @example this.$store.getters['download/lengthWait']
+     * @example $store.getters['download/lengthIDLE']
+     * @example this.$store.getters['download/lengthIDLE']
      */
-    lengthWait (state, getters, rootState, rootGetters) {
+    lengthIDLE (state, getters, rootState, rootGetters) {
       return state.value.filter(e => e.downloader.state === 'IDLE').length
     },
     /**
      * @description 完成的任务数量
-     * @example $store.getters['download/lengthDone']
-     * @example this.$store.getters['download/lengthDone']
+     * @example $store.getters['download/lengthFINISHED']
+     * @example this.$store.getters['download/lengthFINISHED']
      */
-    lengthDone (state, getters, rootState, rootGetters) {
+    lengthFINISHED (state, getters, rootState, rootGetters) {
       return state.value.filter(e => e.downloader.state === 'FINISHED').length
     },
     /**
@@ -132,7 +135,7 @@ export default ({ api }) => ({
      */
     progress (state, getters, rootState, rootGetters) {
       if (getters.length === 0) return 0
-      return Math.round(getters.lengthDone / getters.length * 100)
+      return Math.round(getters.lengthFINISHED / getters.length * 100)
     }
   },
   mutations: {
@@ -214,7 +217,7 @@ export default ({ api }) => ({
         onEnd: function (downloadInfo) {
           commit('materials/setFilePath', downloadInfo, { root: true })
           dispatch('materials/save', undefined, { root: true })
-          if (getters.lengthWait === 0) {
+          if (getters.lengthIDLE === 0) {
             commit('setSpeed', 0)
           }
           dispatch('start')

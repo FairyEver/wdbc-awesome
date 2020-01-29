@@ -2,7 +2,7 @@
 .list-log {
   @extend .unselect;
   margin: 0 -16px;
-  height: 300px;
+  height: 200px;
   width: 240px;
   overflow: scroll;
   .list-log-item {

@@ -2,8 +2,8 @@
 .list-download {
   @extend .unselect;
   margin: 0 -16px;
-  height: 300px;
-  width: 300px;
+  height: 200px;
+  width: 250px;
   overflow: scroll;
   .list-download-item {
     @extend .nowrap;

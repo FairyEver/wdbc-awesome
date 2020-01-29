@@ -111,7 +111,7 @@ export default ({ api }) => ({
      */
     progress (state, getters, rootState, rootGetters) {
       if (getters.length === 0) return 0
-      return Math.round(getters.countFinished / getters.length * 100)
+      return Math.round(getters.countFinished / getters.countAll * 100)
     },
     /**
      * @description [ 任务数量 ] 全部

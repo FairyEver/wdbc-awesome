@@ -64,9 +64,7 @@ export default ({ api }) => ({
     // 下载列表
     value: [],
     // 整体下载速度
-    speed: 0,
-    // 是否正在下载
-    playing: false
+    speed: 0
   },
   getters: {
     /**
@@ -75,7 +73,7 @@ export default ({ api }) => ({
      * @example this.$store.getters['download/playing']
      */
     playing (state, getters, rootState, rootGetters) {
-      return state.playing
+      return true
     },
     /**
      * @description 下载列表
@@ -157,16 +155,6 @@ export default ({ api }) => ({
      */
     setSpeed (state, payload) {
       state.speed = payload
-    },
-    /**
-     * @description 设置是否正在下载
-     * @param {Object} state state
-     * @param {Object} payload payload
-     * @example $store.commit('download/setPlaying')
-     * @example this.$store.commit('download/setPlaying')
-     */
-    setPlaying (state, payload) {
-      state.playing = !!payload
     }
   },
   actions: {
@@ -180,10 +168,7 @@ export default ({ api }) => ({
     async start ({ state, rootState, commit, dispatch, getters, rootGetters }) {
       const waitDownloadIndex = getters.list.findIndex(e => e.done === false)
       if (waitDownloadIndex >= 0) {
-        commit('setPlaying', true)
         state.value[waitDownloadIndex].start()
-      } else {
-        commit('setPlaying', false)
       }
     },
     /**
@@ -221,10 +206,8 @@ export default ({ api }) => ({
           dispatch('materials/save', undefined, { root: true })
           if (getters.lengthWait === 0) {
             commit('setSpeed', 0)
-            commit('setPlaying', false)
-          } else {
-            dispatch('start')
           }
+          dispatch('start')
         }
       }))
     }

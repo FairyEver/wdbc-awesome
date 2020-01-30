@@ -1,6 +1,8 @@
 <style lang="scss">
 .file-detail {
-  @extend .full;
+  width: 460px;
+  margin: auto;
+  margin-top: $LAYOUT_MAIN_PADDING;
   .image-box {
     @extend .unselect;
     @extend .radius2;
@@ -49,7 +51,7 @@
 </style>
 
 <template>
-  <div class="file-detail" flex="dir:top main:center cross:center">
+  <div class="file-detail">
     <div class="image-box" :style="imageBoxStyle">
       <v-lazy-image ref="img" :src="imageUrl" :src-placeholder="imageUrlPlaceholder"/>
     </div>

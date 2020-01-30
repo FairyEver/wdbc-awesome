@@ -1,10 +1,10 @@
 <style lang="scss">
 .file-detail {
+  @extend .unselect;
   width: 460px;
   margin: auto;
   margin-top: $LAYOUT_MAIN_PADDING;
   .image-box {
-    @extend .unselect;
     @extend .radius2;
     border: 4px solid #FFF;
     overflow: hidden;
@@ -78,7 +78,7 @@
     <div class="image-title">{{ file.name }}</div>
     <div class="image-info">{{ file.width }} x {{ file.height }} {{ size }}</div>
     <div class="image-guide" flex="dir:top main:center cross:center">
-      <img src="/image/image-use-guide.png">
+      <img src="/image/image-use-guide.png" draggable="false">
       <div class="image-guide-label">请将图片拖至其它应用程序使用</div>
     </div>
   </div>

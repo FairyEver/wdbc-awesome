@@ -4,6 +4,7 @@
   .image-box {
     @extend .unselect;
     @extend .radius2;
+    border: 4px solid #FFF;
     overflow: hidden;
     transition: all .3s;
     box-shadow:

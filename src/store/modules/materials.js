@@ -85,7 +85,7 @@ export default ({ api }) => ({
       state.value = payload
     },
     /**
-     * @description 设置某个文件的本地路径
+     * @description 设置某个文件的本地路径 单指图片文件 不包括封面
      * @param {Object} state state
      * @param {Object} payload payload
      * @example $store.commit('materials/setImageFilePath')
@@ -94,12 +94,8 @@ export default ({ api }) => ({
     setImageFilePath (state, { fileName = '', filePath = '' }) {
       function scan (source) {
         return source.map(e => {
-          if (e.url === fileName) {
-            e.filePath = filePath
-          }
-          if (e.elements) {
-            e.elements = scan(e.elements)
-          }
+          if (e.url === fileName) e.filePath = filePath
+          if (e.elements) e.elements = scan(e.elements)
           return e
         })
       }
@@ -142,7 +138,7 @@ export default ({ api }) => ({
       // 遍历文件
       const files = getters.libraryFiles
       for (const file of files) {
-        await dispatch('download/push', { remoteFilename: file.url }, { root: true })
+        await dispatch('download/pushImageTask', { remoteFilename: file.url }, { root: true })
       }
       dispatch('download/start', undefined, { root: true })
       commit('log/push', `建立 ${getters.libraryFilesCount} 个下载任务`, { root: true })

@@ -184,7 +184,7 @@ export default ({ api }) => ({
      * @example $store.dispatch('download/push')
      * @example this.$store.dispatch('download/push')
      */
-    async push (
+    async pushImageTask (
       { state, rootState, commit, dispatch, getters, rootGetters },
       { remoteFilename = '' } = {}
     ) {

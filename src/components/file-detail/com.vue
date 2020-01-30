@@ -10,18 +10,21 @@
     box-shadow:
       0 2px 10px 0 rgba(0, 0, 0, 0.05),
       0 4px 15px 0 rgba(0, 0, 0, 0.05);
+    background-image: linear-gradient(45deg,rgba(0,0,0,.25) 25%,transparent 0,transparent 75%,rgba(0,0,0,.25) 0),
+                      linear-gradient(45deg,rgba(0,0,0,.25) 25%,transparent 0,transparent 75%,rgba(0,0,0,.25) 0);
+    background-color: #eee;
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px;
     img {
       display: block;
       width: 100%;
     }
     .v-lazy-image {
-      filter: blur(10px) grayscale(100%);
-      transform: scale(1.4);
-      transition: all 1s;
+      filter: grayscale(100%);
+      transition: all .2s;
     }
     .v-lazy-image-loaded {
-      filter: blur(0);
-      transform: scale(1);
+      filter: grayscale(0%);
     }
     &:hover {
       transform: translateY(-2px);

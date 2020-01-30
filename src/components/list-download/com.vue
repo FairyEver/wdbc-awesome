@@ -2,7 +2,7 @@
 .list-download {
   @extend .unselect;
   margin: 0 -16px;
-  height: 200px;
+  height: 400px;
   width: 250px;
   overflow: scroll;
   .list-download-item {

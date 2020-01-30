@@ -81,14 +81,6 @@ export default ({ api }) => ({
   },
   getters: {
     /**
-     * @description 是否正在下载
-     * @example $store.getters['download/playing']
-     * @example this.$store.getters['download/playing']
-     */
-    playing (state, getters, rootState, rootGetters) {
-      return true
-    },
-    /**
      * @description 下载列表 优化排序 仅用于显示
      * @example $store.getters['download/list']
      * @example this.$store.getters['download/list']

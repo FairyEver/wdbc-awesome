@@ -44,7 +44,9 @@ export default {
   },
   computed: {
     active () {
-      return this.$store.getters['download/playing']
+      const countAll = this.$store.getters['download/countAll']
+      const countFinished = this.$store.getters['download/countFinished']
+      return countAll !== countFinished
     },
     title () {
       const speed = this.$store.getters['download/speed']

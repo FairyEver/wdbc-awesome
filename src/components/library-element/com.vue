@@ -198,6 +198,8 @@ export default {
           label: this.value.name,
           value: this.index
         })
+      } else {
+        this.$store.commit('view/setFileId', this.value.id)
       }
     },
     onMouseenter () {

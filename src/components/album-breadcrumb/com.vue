@@ -19,9 +19,12 @@
       <a-breadcrumb-item
         v-for="(item, index) of $store.state.view.path"
         :key="item.id"
-        @click.native="$store.commit('view/pathSet', index)"
+        @click.native="$store.commit('view/goPathIndex', index)"
         href="">
         {{ item.label }}
+      </a-breadcrumb-item>
+      <a-breadcrumb-item v-if="file" href="">
+        {{ file.name }}
       </a-breadcrumb-item>
     </a-breadcrumb>
   </div>
@@ -29,6 +32,11 @@
 
 <script>
 export default {
-  name: 'album-breadcrumb'
+  name: 'album-breadcrumb',
+  computed: {
+    file () {
+      return this.$store.getters['view/file']
+    }
+  }
 }
 </script>

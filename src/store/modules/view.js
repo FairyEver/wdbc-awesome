@@ -11,17 +11,30 @@ export default ({ api }) => ({
       value: 'library'
     },
     // 物料库访问路径 文件路径 { label: '资源库', value: 0 }
-    path: []
+    path: [],
+    // 文件 id
+    fileId: ''
   },
   getters: {
     /**
-     * @description 资源数据 当前视图的内容
+     * @description [ 当前视图的内容 ] 资源数据
      * @example $store.getters['view/list']
      * @example this.$store.getters['view/list']
      */
     list (state, getters, rootState, rootGetters) {
       const path = state.base.value + state.path.map(e => `[${e.value}].elements`).join('')
       return get(rootGetters['materials/value'], path, [])
+    },
+    /**
+     * @description [ 当前视图的内容 ] 资源数据
+     * @example $store.getters['view/file']
+     * @example this.$store.getters['view/file']
+     */
+    file (state, getters, rootState, rootGetters) {
+      if (state.fileId) {
+        return getters.list.find(e => e.id === state.fileId)
+      }
+      return undefined
     }
   },
   mutations: {
@@ -40,7 +53,7 @@ export default ({ api }) => ({
       })
     },
     /**
-     * @description 物料库访问路径 文件路径 清空
+     * @description 清空访问信息
      * @param {Object} state state
      * @param {Object} payload payload
      * @example $store.commit('view/clean')
@@ -48,17 +61,28 @@ export default ({ api }) => ({
      */
     clean (state) {
       state.path = []
+      state.fileId = ''
     },
     /**
      * @description 物料库访问路径 文件路径 设置到某一个
      * @param {Object} state state
      * @param {Object} payload payload
-     * @example $store.commit('view/pathSet')
-     * @example this.$store.commit('view/pathSet')
+     * @example $store.commit('view/goPathIndex')
+     * @example this.$store.commit('view/goPathIndex')
      */
-    pathSet (state, index) {
-      if (index === state.path.length - 1) return
+    goPathIndex (state, index) {
+      state.fileId = ''
       state.path.splice(index + 1, state.path.length - (index + 1))
+    },
+    /**
+     * @description 设置文件 id
+     * @param {Object} state state
+     * @param {Object} payload payload
+     * @example $store.commit('view/setFileId')
+     * @example this.$store.commit('view/setFileId')
+     */
+    setFileId (state, id) {
+      state.fileId = id
     }
   }
 })

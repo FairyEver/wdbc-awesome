@@ -101,7 +101,11 @@
 </style>
 
 <template>
-  <div class="library-element" @click="onClick">
+  <div
+    class="library-element"
+    @click="onClick"
+    @mouseenter="onMouseenter"
+    @mouseleave="onMouseleave">
     <square v-if="isDir(value)" class="library-element--box library-element--folder-box" flex="dir:top main:justify box:mean">
       <div v-for="row in 3" :key="row" class="library-element--folder-row" flex="main:justify box:mean">
         <div
@@ -195,6 +199,12 @@ export default {
           value: this.index
         })
       }
+    },
+    onMouseenter () {
+      console.log('onMouseenter')
+    },
+    onMouseleave () {
+      console.log('onMouseleave')
     },
     onImageLoad () {
       this.$refs.img.$el.ondragstart = event => {

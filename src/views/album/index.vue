@@ -18,18 +18,9 @@
 <template>
   <div class="page-album">
     <div class="page-album--layer-main">
-      <div v-if="file">
-        {{ file }}
-      </div>
+      <file-detail v-if="$store.getters['view/file']"/>
       <a-row v-else style="margin: 0 -10px;">
-        <a-col
-          v-for="(el, index) of list"
-          :key="el.id"
-          :xs="8"
-          :sm="6"
-          :md="4"
-          :lg="3"
-          :xl="2">
+        <a-col v-for="(el, index) of $store.getters['view/list']" :key="el.id" v-bind="colSetting">
           <library-element :value="el" :index="index"/>
         </a-col>
       </a-row>
@@ -43,12 +34,15 @@
 <script>
 export default {
   name: 'page-album',
-  computed: {
-    file () {
-      return this.$store.getters['view/file']
-    },
-    list () {
-      return this.$store.getters['view/list']
+  data () {
+    return {
+      colSetting: {
+        xs: 8,
+        sm: 6,
+        md: 4,
+        lg: 3,
+        xl: 2
+      }
     }
   }
 }

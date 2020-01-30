@@ -46,6 +46,22 @@
     font-size: 12px;
     text-align: center;
     color: rgba(#000, .45);
+    margin-bottom: $LAYOUT_MAIN_PADDING;
+  }
+  .image-guide {
+    @extend .unselect;
+    @extend .radius2;
+    padding: $LAYOUT_MAIN_PADDING * 2 0;
+    background-color: #FFF;
+    img {
+      display: block;
+      width: 150px;
+      height: 80px;
+      margin-bottom: $LAYOUT_MAIN_PADDING / 2;
+    }
+    .image-guide-label {
+      font-size: 12px;
+    }
   }
 }
 </style>
@@ -61,6 +77,10 @@
     </div>
     <div class="image-title">{{ file.name }}</div>
     <div class="image-info">{{ file.width }} x {{ file.height }} {{ size }}</div>
+    <div class="image-guide" flex="dir:top main:center cross:center">
+      <img src="/image/image-use-guide.png">
+      <div class="image-guide-label">请将图片拖至其它应用程序使用</div>
+    </div>
   </div>
 </template>
 

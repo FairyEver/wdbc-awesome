@@ -130,7 +130,7 @@
       <v-lazy-image
         ref="img"
         class="library-element--file"
-        :src="url(value.cover || value.url, '', 200)"
+        :src="url(value.url, '', 200)"
         src-placeholder="/icon/file-placeholder.png"
         @load="onImageLoad"/>
       <div v-if="isHdd(value)" class="library-element--box-badge" flex="main:center cross:center">
@@ -201,10 +201,10 @@ export default {
       }
     },
     onMouseenter () {
-      console.log('onMouseenter')
+      // console.log('onMouseenter')
     },
     onMouseleave () {
-      console.log('onMouseleave')
+      // console.log('onMouseleave')
     },
     onImageLoad () {
       this.$refs.img.$el.ondragstart = event => {

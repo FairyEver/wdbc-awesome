@@ -88,10 +88,10 @@ export default ({ api }) => ({
      * @description 设置某个文件的本地路径
      * @param {Object} state state
      * @param {Object} payload payload
-     * @example $store.commit('materials/setFilePath')
-     * @example this.$store.commit('materials/setFilePath')
+     * @example $store.commit('materials/setImageFilePath')
+     * @example this.$store.commit('materials/setImageFilePath')
      */
-    setFilePath (state, { fileName = '', filePath = '' }) {
+    setImageFilePath (state, { fileName = '', filePath = '' }) {
       function scan (source) {
         return source.map(e => {
           if (e.url === fileName) {

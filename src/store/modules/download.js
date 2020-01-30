@@ -205,13 +205,13 @@ export default ({ api }) => ({
             commit('setSpeed', speed)
           }
         },
-        onEnd: function (downloadInfo) {
-          commit('materials/setFilePath', downloadInfo, { root: true })
-          dispatch('materials/save', undefined, { root: true })
+        onEnd: async function (downloadInfo) {
+          commit('materials/setImageFilePath', downloadInfo, { root: true })
+          await dispatch('materials/save', undefined, { root: true })
           if (getters.countIdle === 0) {
             commit('setSpeed', 0)
           }
-          dispatch('start')
+          await dispatch('start')
         }
       }))
     }

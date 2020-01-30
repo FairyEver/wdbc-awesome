@@ -7,8 +7,8 @@
     width: 100%;
   }
   .v-lazy-image {
-    filter: blur(10px);
-    transition: filter 0.7s;
+    filter: blur(2px) grayscale(100%);
+    transition: filter .3s;
   }
   .v-lazy-image-loaded {
     filter: blur(0);

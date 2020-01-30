@@ -22,8 +22,8 @@ function createWindow () {
   win = new BrowserWindow({
     width: 500,
     minWidth: 500,
-    height: 500,
-    minHeight: 500,
+    height: 700,
+    minHeight: 700,
     webPreferences: {
       webSecurity: false,
       nodeIntegration: true
@@ -99,7 +99,7 @@ if (isDevelopment) {
 
 ipcMain.on('ondragstart', (event, filePath) => {
   event.sender.startDrag({
-    file: require('path').join(app.getPath('userData'), 'card.png'),
+    file: filePath,
     icon: resolve('icon/start-drag.png')
   })
 })

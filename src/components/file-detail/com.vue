@@ -53,7 +53,11 @@
 <template>
   <div class="file-detail">
     <div class="image-box" :style="imageBoxStyle">
-      <v-lazy-image ref="img" :src="imageUrl" :src-placeholder="imageUrlPlaceholder"/>
+      <v-lazy-image
+        ref="img"
+        :src="imageUrl"
+        :src-placeholder="imageUrlPlaceholder"
+        @load="onImageLoad"/>
     </div>
     <div class="image-title">{{ file.name }}</div>
     <div class="image-info">{{ file.width }} x {{ file.height }} {{ size }}</div>
@@ -61,6 +65,7 @@
 </template>
 
 <script>
+import { ipcRenderer } from 'electron'
 import url from '@/mixins/url.js'
 import byte from '@/utils/byte.js'
 export default {
@@ -94,6 +99,16 @@ export default {
     },
     size () {
       return byte(this.file.size)
+    }
+  },
+  methods: {
+    onImageLoad () {
+      this.$refs.img.$el.ondragstart = event => {
+        if (this.file.filePath) {
+          ipcRenderer.send('ondragstart', this.file.filePath)
+          event.preventDefault()
+        }
+      }
     }
   }
 }

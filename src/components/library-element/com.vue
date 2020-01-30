@@ -211,8 +211,10 @@ export default {
     },
     onImageLoad () {
       this.$refs.img.$el.ondragstart = event => {
-        event.preventDefault()
-        ipcRenderer.send('ondragstart', '/path/to/item')
+        if (this.value.filePath) {
+          ipcRenderer.send('ondragstart', this.value.filePath)
+          event.preventDefault()
+        }
       }
     }
   }

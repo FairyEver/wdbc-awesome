@@ -1,31 +1,56 @@
 <style lang="scss">
 .file-detail {
-  @extend .unselect;
-  max-width: 400px;
-  margin: 0 auto;
-  .preview {
-    width: 100%;
+  @extend .full;
+  .image-box {
+    @extend .unselect;
+    @extend .radius2;
+    overflow: hidden;
+    transition: all .3s;
+    box-shadow:
+      0 2px 10px 0 rgba(0, 0, 0, 0.05),
+      0 4px 15px 0 rgba(0, 0, 0, 0.05);
+    img {
+      display: block;
+      width: 100%;
+    }
+    .v-lazy-image {
+      filter: blur(10px) grayscale(100%);
+      transform: scale(1.4);
+      transition: all 1s;
+    }
+    .v-lazy-image-loaded {
+      filter: blur(0);
+      transform: scale(1);
+    }
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow:
+        0 2px 10px 0 rgba(0, 0, 0, 0.1),
+        0 4px 15px 0 rgba(0, 0, 0, 0.1),
+        0 10px 20px 0 rgba(0, 0, 0, 0.1),
+        0 10px 40px 0 rgba(0, 0, 0, 0.05);
+    }
   }
-  .v-lazy-image {
-    filter: blur(2px) grayscale(100%);
-    transition: filter .3s;
+  .image-title {
+    font-size: 14px;
+    text-align: center;
+    margin-top: 20px;
   }
-  .v-lazy-image-loaded {
-    filter: blur(0);
+  .image-info {
+    font-size: 12px;
+    text-align: center;
+    color: rgba(#000, .45);
   }
 }
 </style>
 
 <template>
-  <div class="file-detail">
-    <v-lazy-image
-      class="preview"
-      ref="img"
-      :src="imageUrl"
-      :src-placeholder="imageUrlPlaceholder"/>
-    <div>{{ file.name }}</div>
-    <div>{{ file.width }} x {{ file.height }}</div>
-    <div>{{ size }}</div>
+  <div class="file-detail" flex="dir:top main:center cross:center">
+    <div class="image-box" :style="imageBoxStyle">
+      <v-lazy-image ref="img" :src="imageUrl" :src-placeholder="imageUrlPlaceholder"/>
+    </div>
+    <div class="image-title">{{ file.name }}</div>
+    <div class="image-info">{{ file.width }} x {{ file.height }} {{ size }}</div>
   </div>
 </template>
 
@@ -37,7 +62,18 @@ export default {
   mixins: [
     url
   ],
+  data () {
+    return {
+      width: 460
+    }
+  },
   computed: {
+    imageBoxStyle () {
+      return {
+        height: this.width / this.file.width * this.file.height + 'px',
+        width: this.width + 'px'
+      }
+    },
     file () {
       return this.$store.getters['view/file']
     },

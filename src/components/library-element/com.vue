@@ -150,6 +150,7 @@
 import { ipcRenderer } from 'electron'
 import { isArray } from 'lodash'
 import url from '@/mixins/url.js'
+
 export default {
   name: 'library-element',
   mixins: [

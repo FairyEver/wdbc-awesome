@@ -10,6 +10,7 @@ import router from './router'
 import store from './store'
 
 import api from '@/plugins/api'
+import publicPath from '@/plugins/public-path'
 
 import '@/components'
 import 'flex.css'
@@ -19,6 +20,7 @@ Vue.config.productionTip = false
 Vue.use(VLazyImagePlugin)
 Vue.use(Antd)
 Vue.use(api)
+Vue.use(publicPath)
 
 new Vue({
   router,

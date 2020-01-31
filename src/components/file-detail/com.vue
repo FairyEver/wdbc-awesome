@@ -68,7 +68,7 @@
 
 <template>
   <div class="file-detail">
-    <div class="image-box" :style="imageBoxStyle">
+    <div class="image-box">
       <v-lazy-image
         ref="img"
         :src="imageUrl"

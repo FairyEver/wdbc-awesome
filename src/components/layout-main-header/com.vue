@@ -10,6 +10,10 @@
     &:hover {
       background-color: $COLOR_BACKGROUND;
     }
+    &.disabled {
+      opacity: .5;
+      cursor: wait;
+    }
     &.active {
       background-color: $COLOR_TEXT_LABEL_ACTIVE;
       color: #FFF;
@@ -41,8 +45,9 @@
           {{ menu.label }}
         </div>
       </div>
-      <div class="layout-main-header--button" @click="$store.dispatch('materials/fetch')">
-        <a-icon type="sync"/>
+      <div class="layout-main-header--button" :class="{ disabled: loading }" @click="onRefresh">
+        <a-icon v-if="loading" type="loading"/>
+        <a-icon v-else type="sync"/>
       </div>
     </div>
     <progress-download-overview/>
@@ -59,6 +64,17 @@ export default {
         { label: '下载', value: 'download' },
         { label: '日志', value: 'log' }
       ]
+    }
+  },
+  computed: {
+    loading () {
+      return this.$store.getters['loading/value']
+    }
+  },
+  methods: {
+    onRefresh () {
+      if (this.loading) return
+      this.$store.dispatch('materials/fetch')
     }
   }
 }

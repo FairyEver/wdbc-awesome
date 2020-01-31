@@ -18,6 +18,7 @@
     img {
       display: block;
       width: 100%;
+      cursor: move;
     }
     .v-lazy-image {
       filter: grayscale(100%);

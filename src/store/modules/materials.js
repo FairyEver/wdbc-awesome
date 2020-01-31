@@ -140,6 +140,7 @@ export default ({ api }) => ({
       for (const file of files) {
         await dispatch('download/pushImageTask', { remoteFilename: file.url }, { root: true })
       }
+      // 开始下载
       dispatch('download/start', undefined, { root: true })
       commit('log/push', `建立 ${getters.libraryFilesCount} 个下载任务`, { root: true })
     },

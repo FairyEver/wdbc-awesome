@@ -8,24 +8,10 @@
   padding: $PADDING;
   .library-element--box {
     position: relative;
-    .library-element--box-badge {
-      $height: 16px;
-      height: $height;
-      border-radius: 2px;
-      padding: 0 $height / 4;
-      background-color: #57C22D;
+    .library-element--box-badge-group {
       position: absolute;
       top: 2px;
       right: 2px;
-      color: #FFF;
-      font-size: 10px;
-      i {
-        margin-right: 2px;
-      }
-      span {
-        font-size: 10px;
-        line-height: 10px;
-      }
     }
   }
   // 文件夹
@@ -101,11 +87,7 @@
 </style>
 
 <template>
-  <div
-    class="library-element"
-    @click="onClick"
-    @mouseenter="onMouseenter"
-    @mouseleave="onMouseleave">
+  <div class="library-element" @click="onClick" @mouseenter="onMouseenter" @mouseleave="onMouseleave">
     <square v-if="isDir(value)" class="library-element--box library-element--folder-box" flex="dir:top main:justify box:mean">
       <div v-for="row in 3" :key="row" class="library-element--folder-row" flex="main:justify box:mean">
         <div
@@ -121,9 +103,8 @@
             src-placeholder="/icon/file-placeholder.png"/>
         </div>
       </div>
-      <div v-if="isHdd(value)" class="library-element--box-badge" flex="main:center cross:center">
-        <a-icon type="hdd"/>
-        <span>HDD</span>
+      <div class="library-element--box-badge-group">
+        <library-element-badge v-if="isHdd(value)" type="hdd"/>
       </div>
     </square>
     <square v-else class="library-element--box library-element--file-box" flex="main:center cross:center">
@@ -133,9 +114,8 @@
         :src="url(value.url, '', 200)"
         src-placeholder="/icon/file-placeholder.png"
         @load="onImageLoad"/>
-      <div v-if="isHdd(value)" class="library-element--box-badge" flex="main:center cross:center">
-        <a-icon type="hdd"/>
-        <span>HDD</span>
+      <div class="library-element--box-badge-group">
+        <library-element-badge v-if="isHdd(value)" type="hdd"/>
       </div>
     </square>
     <div class="library-element--title" flex="main:center">

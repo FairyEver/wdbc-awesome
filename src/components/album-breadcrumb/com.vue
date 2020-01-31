@@ -24,7 +24,7 @@
         {{ item.label }}
       </a-breadcrumb-item>
       <a-breadcrumb-item v-if="file" href="">
-        {{ file.name }}
+        {{ fileName }}
       </a-breadcrumb-item>
     </a-breadcrumb>
   </div>
@@ -36,6 +36,14 @@ export default {
   computed: {
     file () {
       return this.$store.getters['view/file']
+    },
+    fileName () {
+      if (!this.file) return ''
+      if (this.file.name.length > 20) {
+        return this.file.name.substring(0, 15) + '...'
+      } else {
+        return this.file.name
+      }
     }
   }
 }

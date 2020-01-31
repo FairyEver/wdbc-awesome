@@ -15,14 +15,16 @@
                       linear-gradient(45deg,rgba(0,0,0,.25) 25%,transparent 0,transparent 75%,rgba(0,0,0,.25) 0);
     background-color: #eee;
     background-size: 20px 20px;
-    background-position: 0 0, 10px 10px; 
-    display: block;
-    width: 100%;
-    &.v-lazy-image {
-      filter: grayscale(100%);
-      transition: all .2s;
+    background-position: 0 0, 10px 10px;
+    img {
+      display: block;
+      width: 100%;
     }
-    &.v-lazy-image-loaded {
+    .v-lazy-image {
+      filter: grayscale(100%);
+      transition: all .3s;
+    }
+    .v-lazy-image-loaded {
       filter: grayscale(0%);
     }
     &:hover {
@@ -65,12 +67,13 @@
 
 <template>
   <div class="file-detail">
-    <v-lazy-image
-      class="preview"
-      ref="img"
-      :src="imageUrl"
-      :src-placeholder="imageUrlPlaceholder"
-      @load="onImageLoad"/>
+    <div class="preview" flex="main:center cross:center">
+      <v-lazy-image
+        ref="img"
+        :src="imageUrl"
+        :src-placeholder="imageUrlPlaceholder"
+        @load="onImageLoad"/>
+    </div>
     <div class="image-title">{{ file.name }}</div>
     <div class="image-info">{{ file.width }} x {{ file.height }} {{ size }}</div>
     <div class="image-guide" flex="dir:top main:center cross:center">

@@ -99,24 +99,30 @@ export default {
     }
   },
   computed: {
+    // 图片容器样式
     imageBoxStyle () {
       return {
         height: this.width / this.file.width * this.file.height + 'px',
         width: this.width + 'px'
       }
     },
+    // 图片文件对象
     file () {
       return this.$store.getters['view/file']
     },
-    filePath () {
+    // 图片 url 本地路径
+    imageUrlLocal () {
       return this.file.filePath ? 'file://' + this.file.filePath : ''
     },
+    // 图片 url CDN
     imageUrl () {
       return this.url(this.file.url)
     },
+    // 图片 url CDN 小图
     imageUrlPlaceholder () {
       return this.url(this.file.url, '', 200)
     },
+    // 图片体积格式化
     size () {
       return byte(this.file.size)
     }

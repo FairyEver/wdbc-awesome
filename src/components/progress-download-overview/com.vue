@@ -1,10 +1,9 @@
 <style lang="scss">
 .progress-download-overview {
-  width: 160px;
-  margin: 0 $LAYOUT_MAIN_PADDING / 2;
+  @extend .radius2;
+  padding: $LAYOUT_MAIN_PADDING / 4 $LAYOUT_MAIN_PADDING / 2;
   .progress-download-overview--title {
     text-align: center;
-    color: rgba(#FFF, 0.65);
     font-size: 10px;
     line-height: 10px;
     margin-bottom: $LAYOUT_MAIN_PADDING / 4;

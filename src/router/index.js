@@ -3,6 +3,15 @@ import VueRouter from 'vue-router'
 
 import layoutMain from '@/layouts/main'
 
+const VueRouterPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push (location) {
+  return VueRouterPush.call(this, location).catch(err => err)
+}
+const VueRouterReplace = VueRouter.prototype.replace
+VueRouter.prototype.replace = function replace (location) {
+  return VueRouterReplace.call(this, location).catch(err => err)
+}
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -16,6 +25,16 @@ const routes = [
         name: 'album',
         path: 'album',
         component: () => import('@/views/album')
+      },
+      {
+        name: 'download',
+        path: 'download',
+        component: () => import('@/views/download')
+      },
+      {
+        name: 'log',
+        path: 'log',
+        component: () => import('@/views/log')
       }
     ]
   }

@@ -3,25 +3,23 @@
   @extend .full;
   .layout--layer {
     @extend .full;
-  }
-  .layout--header {
-    background-color: #011528;
-    box-shadow: 0 2px 10px 0 rgba(0,0,0,0.05);
-  }
-  .layout--main {
-    position: relative;
+    .layout--main {
+      position: relative;
+    }
   }
 }
 </style>
 
 <template>
   <div class="layout">
-    <div class="layout--layer" flex="dir:top main:justify box:first">
-      <div class="layout--header">
+    <div class="layout--layer" flex="dir:top main:justify">
+      <div class="layout--header" flex-box="0">
         <layout-main-header/>
       </div>
-      <div class="layout--main">
-        <router-view/>
+      <div class="layout--main" flex-box="1">
+        <transition name="fade-router">
+          <router-view/>
+        </transition>
       </div>
     </div>
   </div>

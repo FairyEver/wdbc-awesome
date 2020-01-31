@@ -1,7 +1,7 @@
 <style lang="scss">
 .file-detail {
   @extend .unselect;
-  width: 460px;
+  width: 360px;
   margin: auto;
   margin-top: $LAYOUT_MAIN_PADDING;
   .preview {
@@ -79,19 +79,7 @@ export default {
   mixins: [
     url
   ],
-  data () {
-    return {
-      width: 460
-    }
-  },
   computed: {
-    // 图片容器样式
-    imageBoxStyle () {
-      return {
-        height: this.width / this.file.width * this.file.height + 'px',
-        width: this.width + 'px'
-      }
-    },
     // 图片文件对象
     file () {
       return this.$store.getters['view/file']

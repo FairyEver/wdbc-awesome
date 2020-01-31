@@ -2,8 +2,8 @@
 .layout-main-header-button {
   @extend .unselect;
   @extend .unselect;
-  height: $LAYOUT_HEADER_HEIGHT;
-  width: $LAYOUT_HEADER_HEIGHT;
+  height: 46px;
+  width: 46px;
   color: $COLOR_HEADER_TEXT_NORMAL;
   user-select: none;
   cursor: pointer;

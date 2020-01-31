@@ -4,7 +4,7 @@
   .page-album--layer-main {
     @extend .full;
     padding: $LAYOUT_MAIN_PADDING;
-    padding-top: $LAYOUT_HEADER_HEIGHT;
+    padding-top: 46px;
   }
   .page-album--layer-header {
     position: absolute;

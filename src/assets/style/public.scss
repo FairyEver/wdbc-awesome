@@ -47,7 +47,7 @@ $sizes-name: (0, 5, 10, 15, 20);
   .is-pl-#{nth($sizes-name, $index)} { padding-left: #{nth($sizes, $index)} !important; }
 }
 
-// 过渡动画 缩放渐变
+// 过渡动画
 .fade-progress-leave-active,
 .fade-progress-enter-active {
   transition: all 0.3s;
@@ -59,4 +59,18 @@ $sizes-name: (0, 5, 10, 15, 20);
 .fade-progress-leave-to {
   opacity: 0;
   transform: translateY(-10px);
+}
+
+// 过渡动画
+.fade-router-leave-active,
+.fade-router-enter-active {
+  transition: all 0.3s;
+}
+.fade-router-enter {
+  opacity: 0;
+  transform: translateX(10px);
+}
+.fade-router-leave-to {
+  opacity: 0;
+  transform: translateX(-10px);
 }

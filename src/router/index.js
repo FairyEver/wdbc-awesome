@@ -27,9 +27,9 @@ const routes = [
         component: () => import('@/views/album')
       },
       {
-        name: 'download',
-        path: 'download',
-        component: () => import('@/views/download')
+        name: 'sync',
+        path: 'sync',
+        component: () => import('@/views/sync')
       },
       {
         name: 'log',

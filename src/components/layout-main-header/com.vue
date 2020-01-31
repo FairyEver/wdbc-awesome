@@ -53,7 +53,7 @@
         <a-icon v-else type="sync"/>
       </div>
     </div>
-    <progress-download-overview/>
+    <download-overview-bar/>
   </div>
 </template>
 
@@ -64,7 +64,7 @@ export default {
     return {
       menus: [
         { label: '画集', value: 'album' },
-        { label: '下载', value: 'download' },
+        { label: '同步', value: 'sync' },
         { label: '日志', value: 'log' },
         { label: '设置', value: 'setting' }
       ]

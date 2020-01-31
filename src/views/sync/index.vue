@@ -1,20 +1,20 @@
 <style lang="scss">
-.page-download {
+.page-sync {
   @extend .full;
   padding: $LAYOUT_MAIN_PADDING;
 }
 </style>
 
 <template>
-  <div class="page-download">
+  <div class="page-sync">
     <container>
-      <list-download/>
+      sync
     </container>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'page-download'
+  name: 'page-sync'
 }
 </script>

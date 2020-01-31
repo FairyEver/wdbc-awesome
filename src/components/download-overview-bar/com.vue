@@ -1,8 +1,8 @@
 <style lang="scss">
-.progress-download-overview {
+.download-overview-bar {
   @extend .radius2;
   padding: $LAYOUT_MAIN_PADDING / 4 $LAYOUT_MAIN_PADDING / 2;
-  .progress-download-overview--title {
+  .download-overview-bar--title {
     text-align: center;
     font-size: 10px;
     line-height: 10px;
@@ -20,8 +20,8 @@
 
 <template>
   <transition name="fade-progress">
-    <div v-if="show" class="progress-download-overview">
-      <div class="progress-download-overview--title">
+    <div v-if="show" class="download-overview-bar">
+      <div class="download-overview-bar--title">
         {{ title }}
       </div>
       <a-progress
@@ -34,7 +34,7 @@
 
 <script>
 export default {
-  name: 'progress-download-overview',
+  name: 'download-overview-bar',
   data () {
     return {
       show: false,

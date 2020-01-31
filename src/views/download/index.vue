@@ -7,7 +7,9 @@
 
 <template>
   <div class="page-download">
-    <list-download/>
+    <container>
+      <list-download/>
+    </container>
   </div>
 </template>
 

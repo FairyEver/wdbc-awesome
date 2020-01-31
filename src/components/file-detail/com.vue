@@ -1,8 +1,6 @@
 <style lang="scss">
 .file-detail {
   @extend .unselect;
-  width: 360px;
-  margin: auto;
   margin-top: $LAYOUT_MAIN_PADDING;
   .preview {
     @extend .radius2;
@@ -54,19 +52,21 @@
 
 <template>
   <div class="file-detail">
-    <div class="preview" flex="main:center cross:center">
-      <v-lazy-image
-        ref="img"
-        :src="imageUrl"
-        :src-placeholder="imageUrlPlaceholder"
-        @load="onImageLoad"/>
-    </div>
-    <div class="image-title">{{ file.name }}</div>
-    <div class="image-info">
-      {{ file.width }} x {{ file.height }} {{ size }}
-      <library-element-badge type="hdd"/>
-    </div>
-    <image-guide-use/>
+    <container>
+      <div class="preview" flex="main:center cross:center">
+        <v-lazy-image
+          ref="img"
+          :src="imageUrl"
+          :src-placeholder="imageUrlPlaceholder"
+          @load="onImageLoad"/>
+      </div>
+      <div class="image-title">{{ file.name }}</div>
+      <div class="image-info">
+        {{ file.width }} x {{ file.height }} {{ size }}
+        <library-element-badge type="hdd"/>
+      </div>
+      <image-guide-use/>
+    </container>
   </div>
 </template>
 

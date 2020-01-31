@@ -3,6 +3,7 @@
   @extend .unselect;
   .list-download-item {
     @extend .nowrap;
+    margin-bottom: $LAYOUT_MAIN_PADDING / 2;
     font-size: 12px;
   }
 }

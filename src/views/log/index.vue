@@ -7,7 +7,9 @@
 
 <template>
   <div class="page-log">
-    <list-log/>
+    <container>
+      <list-log/>
+    </container>
   </div>
 </template>
 

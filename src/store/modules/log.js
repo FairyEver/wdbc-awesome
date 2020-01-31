@@ -43,7 +43,7 @@ export default ({ api }) => ({
     /**
      * @description 日志 清空
      * @param {Object} state state
-     * @param {Object} payload payload
+     * @param {Any} payload payload
      * @example $store.commit('log/clean')
      * @example this.$store.commit('log/clean')
      */

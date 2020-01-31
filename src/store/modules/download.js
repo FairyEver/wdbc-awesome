@@ -125,7 +125,7 @@ export default ({ api }) => ({
     /**
      * @description 清空下载任务
      * @param {Object} state state
-     * @param {Object} payload payload
+     * @param {Any} payload payload
      * @example $store.commit('download/clean')
      * @example this.$store.commit('download/clean')
      */
@@ -135,7 +135,7 @@ export default ({ api }) => ({
     /**
      * @description 增加新的下载任务
      * @param {Object} state state
-     * @param {Object} payload payload
+     * @param {Any} payload payload
      * @example $store.commit('download/push')
      * @example this.$store.commit('download/push')
      */
@@ -145,7 +145,7 @@ export default ({ api }) => ({
     /**
      * @description 设置下载速度
      * @param {Object} state state
-     * @param {Object} payload payload
+     * @param {Any} payload payload
      * @example $store.commit('download/setSpeed')
      * @example this.$store.commit('download/setSpeed')
      */
@@ -157,7 +157,7 @@ export default ({ api }) => ({
     /**
      * @description 开始下载队列 | 进行下一个
      * @param {Object} context context
-     * @param {Object} payload payload
+     * @param {Any} payload payload
      * @example $store.dispatch('download/start')
      * @example this.$store.dispatch('download/start')
      */
@@ -171,7 +171,7 @@ export default ({ api }) => ({
     /**
      * @description 增加新的下载任务
      * @param {Object} context context
-     * @param {Object} payload payload
+     * @param {Any} payload payload
      * @example $store.dispatch('download/push')
      * @example this.$store.dispatch('download/push')
      */

@@ -21,7 +21,7 @@ export default ({ api }) => ({
     /**
      * @description 开始一个项目
      * @param {Object} context context
-     * @param {Object} payload payload
+     * @param {Any} payload payload
      * @example $store.dispatch('loading/start')
      * @example this.$store.dispatch('loading/start')
      */
@@ -39,7 +39,7 @@ export default ({ api }) => ({
     /**
      * @description 开始一个新的 loading
      * @param {Object} state state
-     * @param {Object} payload payload
+     * @param {Any} payload payload
      * @example $store.commit('name/start')
      * @example this.$store.commit('name/start')
      */
@@ -51,7 +51,7 @@ export default ({ api }) => ({
     /**
      * @description 结束一个 loading
      * @param {Object} state state
-     * @param {Object} payload payload
+     * @param {Any} payload payload
      * @example $store.commit('name/stop')
      * @example this.$store.commit('name/stop')
      */

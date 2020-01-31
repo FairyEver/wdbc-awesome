@@ -11,7 +11,7 @@ export default ({ api }) => ({
     /**
      * @description 写入文件
      * @param {Object} context context
-     * @param {Object} payload payload
+     * @param {Any} payload payload
      * @example $store.dispatch('local/write')
      * @example this.$store.dispatch('local/write')
      */
@@ -24,7 +24,7 @@ export default ({ api }) => ({
     /**
      * @description 读取文件
      * @param {Object} context context
-     * @param {Object} payload payload
+     * @param {Any} payload payload
      * @example $store.dispatch('local/read')
      * @example this.$store.dispatch('local/read')
      */

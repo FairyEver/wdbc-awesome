@@ -41,7 +41,7 @@ export default ({ api }) => ({
     /**
      * @description 物料库访问路径 文件路径 追加
      * @param {Object} state state
-     * @param {Object} payload payload
+     * @param {Any} payload payload
      * @example $store.commit('view/push')
      * @example this.$store.commit('view/push')
      */
@@ -55,7 +55,7 @@ export default ({ api }) => ({
     /**
      * @description 清空访问信息
      * @param {Object} state state
-     * @param {Object} payload payload
+     * @param {Any} payload payload
      * @example $store.commit('view/clean')
      * @example this.$store.commit('view/clean')
      */
@@ -66,7 +66,7 @@ export default ({ api }) => ({
     /**
      * @description 物料库访问路径 文件路径 设置到某一个
      * @param {Object} state state
-     * @param {Object} payload payload
+     * @param {Any} payload payload
      * @example $store.commit('view/goPathIndex')
      * @example this.$store.commit('view/goPathIndex')
      */
@@ -77,7 +77,7 @@ export default ({ api }) => ({
     /**
      * @description 设置文件 id
      * @param {Object} state state
-     * @param {Object} payload payload
+     * @param {Any} payload payload
      * @example $store.commit('view/setFileId')
      * @example this.$store.commit('view/setFileId')
      */

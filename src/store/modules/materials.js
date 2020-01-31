@@ -103,7 +103,7 @@ export default ({ api }) => ({
     /**
      * @description 设置物料库
      * @param {Object} state state
-     * @param {Object} payload payload
+     * @param {Any} payload payload
      * @example $store.commit('materials/set')
      * @example this.$store.commit('materials/set')
      */
@@ -113,7 +113,7 @@ export default ({ api }) => ({
     /**
      * @description 设置某个文件的本地路径 单指图片文件 不包括封面
      * @param {Object} state state
-     * @param {Object} payload payload
+     * @param {Any} payload payload
      * @example $store.commit('materials/setImageFilePath')
      * @example this.$store.commit('materials/setImageFilePath')
      */
@@ -135,7 +135,7 @@ export default ({ api }) => ({
     /**
      * @description 请求远程物料库
      * @param {Object} context context
-     * @param {Object} payload payload
+     * @param {Any} payload payload
      * @example $store.dispatch('materials/fetch')
      * @example this.$store.dispatch('materials/fetch')
      */
@@ -153,7 +153,7 @@ export default ({ api }) => ({
     /**
      * @description 下载物料
      * @param {Object} context context
-     * @param {Object} payload payload
+     * @param {Any} payload payload
      * @example $store.dispatch('materials/download')
      * @example this.$store.dispatch('materials/download')
      */
@@ -173,7 +173,7 @@ export default ({ api }) => ({
     /**
      * @description 加载本地缓存的物料库
      * @param {Object} context context
-     * @param {Object} payload payload
+     * @param {Any} payload payload
      * @example $store.dispatch('materials/load')
      * @example this.$store.dispatch('materials/load')
      */
@@ -190,7 +190,7 @@ export default ({ api }) => ({
     /**
      * @description 保存远程资料库数据
      * @param {Object} context context
-     * @param {Object} payload payload
+     * @param {Any} payload payload
      * @example $store.dispatch('materials/save')
      * @example this.$store.dispatch('materials/save')
      */

@@ -3,7 +3,7 @@
   @extend .unselect;
   margin: 0 -16px;
   height: 400px;
-  width: 250px;
+  width: 300px;
   overflow: scroll;
   .list-download-item {
     @extend .nowrap;

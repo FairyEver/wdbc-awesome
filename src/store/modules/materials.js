@@ -71,6 +71,32 @@ export default ({ api }) => ({
      */
     libraryFilesCount (state, getters, rootState, rootGetters) {
       return getters.libraryFiles.length
+    },
+    /**
+     * @description 资源数据 本地文件列表
+     * @example $store.getters['materials/libraryLocalFiles']
+     * @example this.$store.getters['materials/libraryLocalFiles']
+     */
+    libraryLocalFiles (state, getters, rootState, rootGetters) {
+      let result = []
+      function scan (source) {
+        source.forEach(element => {
+          if (element.elements) scan(element.elements)
+          else if (element.filePath) {
+            result.push(element)
+          }
+        })
+      }
+      scan(getters.library)
+      return result
+    },
+    /**
+     * @description 资源数据 本地文件数量
+     * @example $store.getters['materials/libraryLocalFilesCount']
+     * @example this.$store.getters['materials/libraryLocalFilesCount']
+     */
+    libraryLocalFilesCount (state, getters, rootState, rootGetters) {
+      return getters.libraryLocalFiles.length
     }
   },
   mutations: {

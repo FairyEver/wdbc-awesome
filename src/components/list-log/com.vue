@@ -1,7 +1,7 @@
 <style lang="scss">
 .list-log {
   @extend .unselect;
-  .list-log-item {
+  .list-log--item {
     @extend .nowrap;
     @extend .radius2;
     font-size: 12px;
@@ -28,7 +28,7 @@
 <template>
   <div class="list-log">
     <div
-      class="list-log-item"
+      class="list-log--item"
       v-for="(item, index) of $store.getters['log/list']"
       :key="item.id"
       :class="`index-${index + 1}`">

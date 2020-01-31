@@ -81,14 +81,6 @@ export default ({ api }) => ({
   },
   getters: {
     /**
-     * @description 下载列表 优化排序 仅用于显示
-     * @example $store.getters['download/list']
-     * @example this.$store.getters['download/list']
-     */
-    list (state, getters, rootState, rootGetters) {
-      return cloneDeep(state.value).sort((a, b) => b.downloader.state === 'FINISHED' ? -1 : 1)
-    },
-    /**
      * @description 格式化后的速度
      * @example $store.getters['download/speed']
      * @example this.$store.getters['download/speed']

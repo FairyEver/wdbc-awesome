@@ -8,7 +8,7 @@
 <template>
   <div class="page-sync">
     <container>
-      sync
+      <overview-hdd/>
     </container>
   </div>
 </template>

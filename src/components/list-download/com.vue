@@ -4,7 +4,6 @@
   .list-download-item {
     @extend .nowrap;
     font-size: 12px;
-    padding: 5px 16px;
   }
 }
 </style>

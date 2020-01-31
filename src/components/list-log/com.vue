@@ -3,8 +3,9 @@
   @extend .unselect;
   .list-log-item {
     @extend .nowrap;
+    @extend .radius2;
     font-size: 12px;
-    padding: 5px 16px;
+    padding: 5px 10px;
     opacity: 0.4;
     &.index-1 {
       opacity: 1.0;

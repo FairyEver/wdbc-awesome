@@ -17,6 +17,7 @@
     &.index-5 { opacity: 0.6; }
     &.index-6 { opacity: 0.5; }
     &:hover {
+      opacity: 1.0;
       background-color: $COLOR_TEXT_LABEL_ACTIVE;
       color: #FFF;
     }

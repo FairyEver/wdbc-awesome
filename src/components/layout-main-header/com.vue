@@ -7,7 +7,7 @@
     @extend .radius2;
     @extend .unselect;
     padding: $LAYOUT_MAIN_PADDING / 4 $LAYOUT_MAIN_PADDING / 2;
-    &:hover {
+    &:not(.disabled):hover {
       background-color: $COLOR_BACKGROUND;
     }
     &.disabled {

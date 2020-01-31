@@ -1,9 +1,9 @@
 <style lang="scss">
 .library-element-badge {
-  $height: 16px;
-  height: $height;
+  display: inline-block;
+  box-sizing: border-box;
   border-radius: 2px;
-  padding: 0 $height / 4;
+  padding: 3px 4px;
   color: #FFF;
   font-size: 10px;
   i {
@@ -17,7 +17,8 @@
 </style>
 
 <template>
-  <div class="library-element-badge" :style="style" flex="main:center cross:center">
+  <div class="library-element-badge" :style="style">
+    <!-- 父元素需要设置 line-height: 0; -->
     <a-icon :type="icon"/>
     <span>{{ label }}</span>
   </div>

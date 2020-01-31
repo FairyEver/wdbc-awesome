@@ -8,7 +8,8 @@
   padding: $PADDING;
   .library-element--box {
     position: relative;
-    .library-element--box-badge-group {
+    .library-element--box--badge-group {
+      line-height: 0;
       position: absolute;
       top: 2px;
       right: 2px;
@@ -103,7 +104,7 @@
             src-placeholder="/icon/file-placeholder.png"/>
         </div>
       </div>
-      <div class="library-element--box-badge-group">
+      <div class="library-element--box--badge-group">
         <library-element-badge v-if="isHdd(value)" type="hdd"/>
       </div>
     </square>
@@ -114,7 +115,7 @@
         :src="url(value.url, '', 200)"
         src-placeholder="/icon/file-placeholder.png"
         @load="onImageLoad"/>
-      <div class="library-element--box-badge-group">
+      <div class="library-element--box--badge-group">
         <library-element-badge v-if="isHdd(value)" type="hdd"/>
       </div>
     </square>

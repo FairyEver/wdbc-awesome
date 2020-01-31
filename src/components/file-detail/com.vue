@@ -16,6 +16,7 @@
     background-color: #eee;
     background-size: 20px 20px;
     background-position: 0 0, 10px 10px;
+    position: relative;
     img {
       display: block;
       width: 100%;
@@ -42,6 +43,7 @@
     margin-top: 20px;
   }
   .image-info {
+    line-height: 0;
     font-size: 12px;
     text-align: center;
     color: rgba(#000, .45);
@@ -75,7 +77,10 @@
         @load="onImageLoad"/>
     </div>
     <div class="image-title">{{ file.name }}</div>
-    <div class="image-info">{{ file.width }} x {{ file.height }} {{ size }}</div>
+    <div class="image-info">
+      {{ file.width }} x {{ file.height }} {{ size }}
+      <library-element-badge type="hdd"/>
+    </div>
     <div class="image-guide" flex="dir:top main:center cross:center">
       <img src="/image/image-use-guide.png" draggable="false">
       <div class="image-guide-label">请将图片拖拽至其它应用程序窗口使用</div>

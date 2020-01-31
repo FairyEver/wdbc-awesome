@@ -7,8 +7,8 @@
   padding: 10px;
   .overview-hdd--item {
     @extend .radius1;
-    height: 10px;
-    width: 10px;
+    height: 8px;
+    width: 8px;
     float: left;
     background-color: $COLOR_BACKGROUND;
     margin: 1px;

@@ -29,12 +29,16 @@
   overflow: hidden;
 }
 
+.shadow {
+  box-shadow:
+    0 2px 5px 0 rgba(0, 0, 0, 0.04),
+    0 4px 10px 0 rgba(0, 0, 0, 0.02);
+}
+
 .card {
   @extend .radius2;
+  @extend .shadow;
   background-color: #FFF;
-  box-shadow:
-    0 2px 5px 0 rgba(0, 0, 0, 0.05),
-    0 4px 10px 0 rgba(0, 0, 0, 0.05);
 }
 
 // 边距相关

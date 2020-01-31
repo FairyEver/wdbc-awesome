@@ -10,7 +10,7 @@
     height: 10px;
     width: 10px;
     float: left;
-    background-color: rgba(#000, .1);
+    background-color: $COLOR_BACKGROUND;
     margin: 1px;
     &.is-hdd {
       background-color: $colorHdd;

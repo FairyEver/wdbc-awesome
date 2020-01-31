@@ -12,13 +12,18 @@ const mkdir = require('@/utils/mkdir')
 
 /**
  * @description 下载任务的一项
+ * @param {Object} setting {String} url 下载地址
+ * @param {Object} setting {String} destinationFolder 目标文件夹
+ * @param {Object} setting {String} fileName 下载到本地的文件名
+ * @param {Object} setting {Function} onProgress 下载进度回调
+ * @param {Object} setting {Function} onEnd 下载完成回调
  */
 class Task {
   constructor ({
     url,
     destinationFolder,
     fileName,
-    onSpeed = function (speed) { console.log(speed) },
+    onProgress = function (stats) { console.log(stats) },
     onEnd = function (downloadInfo) { console.log(downloadInfo) }
   }) {
     this.id = shortid.generate()
@@ -59,7 +64,7 @@ class Task {
       this.progress = Math.round(stats.progress)
       this.downloaded = byteTo(stats.downloaded)
       this.total = byteTo(stats.total)
-      onSpeed(stats.speed)
+      onProgress(stats)
     })
   }
   start () {
@@ -191,9 +196,9 @@ export default ({ api }) => ({
         url,
         destinationFolder,
         fileName: remoteFilename,
-        onSpeed: function (speed) {
-          if (speed) {
-            commit('setSpeed', speed)
+        onProgress: function (stats) {
+          if (stats.speed) {
+            commit('setSpeed', stats.speed)
           }
         },
         onEnd: async function (downloadInfo) {

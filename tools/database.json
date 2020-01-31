@@ -2575,6 +2575,41 @@
       "hash": "355694fd9d6410d9d218a11559e5b6f2",
       "height": 300,
       "width": 400
+    },
+    {
+      "url": "1580438782168.png",
+      "path": "/Users/liyang/Documents/code/wdbc-awesome/library/Folder 1/测试 - 4比3.png",
+      "hash": "c84f2b67a09cd0bd96b32c0cdfb2e679",
+      "height": 600,
+      "width": 800
+    },
+    {
+      "url": "1580438782583.png",
+      "path": "/Users/liyang/Documents/code/wdbc-awesome/library/Folder 1/测试 - 小图.png",
+      "hash": "28a9645300a2e8bbbf4eb6eb32393d0c",
+      "height": 440,
+      "width": 440
+    },
+    {
+      "url": "1580438782748.png",
+      "path": "/Users/liyang/Documents/code/wdbc-awesome/library/Folder 1/测试 - 特殊比例 - 宽.png",
+      "hash": "5f80db378d026e32978201b2b3931a09",
+      "height": 440,
+      "width": 1200
+    },
+    {
+      "url": "1580438782951.png",
+      "path": "/Users/liyang/Documents/code/wdbc-awesome/library/Folder 1/测试 - 特殊比例 - 高.png",
+      "hash": "692cc4b4fe148e1a5121a80054ec2cdb",
+      "height": 2048,
+      "width": 440
+    },
+    {
+      "url": "1580438783255.png",
+      "path": "/Users/liyang/Documents/code/wdbc-awesome/library/Folder 1/测试 - 透明图片.png",
+      "hash": "ec2ee6aadf9efc01d00a62121cc8d38f",
+      "height": 1200,
+      "width": 1200
     }
   ]
 }

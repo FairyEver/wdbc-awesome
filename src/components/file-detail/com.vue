@@ -51,11 +51,8 @@
   <div class="file-detail">
     <container>
       <div class="preview" flex="main:center cross:center">
-        <v-lazy-image
-          ref="img"
-          :src="imageUrl"
-          :src-placeholder="imageUrlPlaceholder"
-          @load="onImageLoad"/>
+        <img ref="img" v-if="imageUrlLocal" :src="imageUrlLocal">
+        <v-lazy-image v-else :src="imageUrl" :src-placeholder="imageUrlPlaceholder"/>
       </div>
       <div class="image-title">{{ file.name }}</div>
       <div class="image-info">
@@ -98,12 +95,26 @@ export default {
       return byte(this.file.size)
     }
   },
+  mounted () {
+    this.bindDragEvent()
+  },
+  watch: {
+    imageUrlLocal (value) {
+      if (value) {
+        this.$nextTick(() => {
+          this.bindDragEvent()
+        })
+      }
+    }
+  },
   methods: {
-    onImageLoad () {
-      this.$refs.img.$el.ondragstart = event => {
-        if (this.file.filePath) {
-          ipcRenderer.send('ondragstart', this.file.filePath)
-          event.preventDefault()
+    bindDragEvent () {
+      if (this.$refs.img) {
+        this.$refs.img.ondragstart = event => {
+          if (this.file.filePath) {
+            ipcRenderer.send('ondragstart', this.file.filePath)
+            event.preventDefault()
+          }
         }
       }
     }

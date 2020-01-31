@@ -25,10 +25,10 @@ class Task {
     this.id = shortid.generate()
     this.fileName = fileName
 
-    this.downloaded = 0
+    this.downloaded = ''
     this.progress = 0
-    this.speed = 0
-    this.total = 0
+    this.speed = ''
+    this.total = ''
 
     // [ downloader.state ]
     // -> IDLE 等待

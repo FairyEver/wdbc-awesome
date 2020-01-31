@@ -10,7 +10,7 @@
       v-for="item of $store.getters['download/list']"
       :key="item.id"
       :name="item.fileName"
-      :downloaded="item.downloaded"
+      :complete="item.downloaded"
       :total="item.total"
       :percent="item.progress"/>
   </div>

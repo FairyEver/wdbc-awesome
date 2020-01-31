@@ -1,6 +1,10 @@
 <style lang="scss">
 .overview-hdd {
+  @extend .unselect;
+  @extend .card;
+  $colorHdd: #57C22D;
   overflow: hidden;
+  padding: 10px;
   .overview-hdd--item {
     @extend .radius1;
     height: 10px;
@@ -9,7 +13,16 @@
     background-color: rgba(#000, .1);
     margin: 1px;
     &.is-hdd {
-      background-color: #57C22D;
+      background-color: $colorHdd;
+    }
+  }
+  .overview-hdd--title {
+    text-align: center;
+    font-size: 12px;
+    line-height: 12px;
+    margin-bottom: 10px - 2px;
+    .overview-hdd--title-is-hdd {
+      color: $colorHdd;
     }
   }
 }
@@ -17,12 +30,15 @@
 
 <template>
   <div class="overview-hdd">
+    <div class="overview-hdd--title">
+      <span class="overview-hdd--title-is-hdd">本地 {{ libraryLocalFilesCount }}</span> / 远端 {{ libraryFilesCount }}
+    </div>
     <div
-      v-for="n in $store.getters['materials/libraryFilesCount']"
+      v-for="n in libraryFilesCount"
       :key="n"
       class="overview-hdd--item"
       :class="{
-        'is-hdd': n <= $store.getters['materials/libraryLocalFilesCount']
+        'is-hdd': n <= libraryLocalFilesCount
       }">
     </div>
   </div>
@@ -30,6 +46,14 @@
 
 <script>
 export default {
-  name: 'overview-hdd'
+  name: 'overview-hdd',
+  computed: {
+    libraryFilesCount () {
+      return this.$store.getters['materials/libraryFilesCount']
+    },
+    libraryLocalFilesCount () {
+      return this.$store.getters['materials/libraryLocalFilesCount']
+    }
+  }
 }
 </script>

@@ -3,15 +3,11 @@
   @extend .unselect;
   margin-top: $LAYOUT_MAIN_PADDING;
   .preview {
-    @extend .radius2;
+    @extend .card;
     border: 4px solid #FFF;
     transition: all .3s;
-    box-shadow:
-      0 2px 10px 0 rgba(0, 0, 0, 0.05),
-      0 4px 15px 0 rgba(0, 0, 0, 0.05);
     background-image: linear-gradient(45deg,rgba(0,0,0,.25) 25%,transparent 0,transparent 75%,rgba(0,0,0,.25) 0),
                       linear-gradient(45deg,rgba(0,0,0,.25) 25%,transparent 0,transparent 75%,rgba(0,0,0,.25) 0);
-    background-color: #eee;
     background-size: 20px 20px;
     background-position: 0 0, 10px 10px;
     position: relative;

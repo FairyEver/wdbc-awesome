@@ -4,7 +4,6 @@
 
 import byteTo from '@/utils/byte.js'
 
-const { cloneDeep } = require('lodash')
 const shortid = require('shortid')
 const path = require('path')
 const { app } = require('electron').remote

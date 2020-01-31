@@ -29,6 +29,14 @@
   overflow: hidden;
 }
 
+.card {
+  @extend .radius2;
+  background-color: #FFF;
+  box-shadow:
+    0 2px 5px 0 rgba(0, 0, 0, 0.05),
+    0 4px 10px 0 rgba(0, 0, 0, 0.05);
+}
+
 // 边距相关
 $sizes: (0, 5px, 10px, 15px, 20px);
 $sizes-name: (0, 5, 10, 15, 20);

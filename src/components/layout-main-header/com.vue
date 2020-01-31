@@ -17,6 +17,9 @@
     &.active {
       background-color: $COLOR_TEXT_LABEL_ACTIVE;
       color: #FFF;
+      &:hover {
+        background-color: darken($COLOR_TEXT_LABEL_ACTIVE, 5%);
+      }
     }
   }
   .layout-main-header--menu {

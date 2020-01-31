@@ -65,7 +65,8 @@ export default {
       menus: [
         { label: '画集', value: 'album' },
         { label: '下载', value: 'download' },
-        { label: '日志', value: 'log' }
+        { label: '日志', value: 'log' },
+        { label: '设置', value: 'setting' }
       ]
     }
   },

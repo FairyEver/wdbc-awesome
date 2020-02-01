@@ -3,83 +3,16 @@
 // https://www.npmjs.com/package/node-downloader-helper
 
 import byteTo from '@/utils/byte.js'
+import Task from '@/class/Task.js'
 
-const shortid = require('shortid')
 const path = require('path')
 const { app } = require('electron').remote
-const { DownloaderHelper } = require('node-downloader-helper')
-const mkdir = require('@/utils/mkdir')
-
-/**
- * @description 下载任务的一项
- * @param {Object} setting {String} url 下载地址
- * @param {Object} setting {String} destinationFolder 目标文件夹
- * @param {Object} setting {String} fileName 下载到本地的文件名
- * @param {Object} setting {Function} onProgress 下载进度回调
- * @param {Object} setting {Function} onEnd 下载完成回调
- */
-class Task {
-  constructor ({
-    url,
-    destinationFolder,
-    fileName,
-    onProgress = function (stats) { console.log(stats) },
-    onEnd = function (downloadInfo) { console.log(downloadInfo) }
-  }) {
-    this.id = shortid.generate()
-    this.fileName = fileName
-
-    this.downloaded = ''
-    this.progress = 0
-    this.speed = ''
-    this.total = ''
-
-    // [ downloader.state ]
-    // -> IDLE 等待
-    // -> STARTED 已经开始
-    // -> DOWNLOADING 正在下载
-    // -> PAUSED 暂停
-    // -> RESUMED 已经重新开始
-    // -> STOPPED 已经停止
-    // -> FINISHED 已经完成
-    // -> FAILED 已经失败
-    // -> RETRY 重试
-
-    this.downloader = new DownloaderHelper(url, destinationFolder, {
-      fileName,
-      retry: { maxRetries: 3, delay: 1000 },
-      override: true
-    })
-
-    // 下载完成
-    this.downloader.on('end', downloadInfo => {
-      onEnd(downloadInfo)
-    })
-    // 下载失败
-    this.downloader.on('error', error => {
-      console.log(error)
-    })
-    // 下载中
-    this.downloader.on('progress', stats => {
-      this.progress = Math.round(stats.progress)
-      this.downloaded = byteTo(stats.downloaded)
-      this.total = byteTo(stats.total)
-      onProgress(stats)
-    })
-  }
-  start () {
-    this.downloader.start()
-  }
-  stop () {
-    this.downloader.stop()
-  }
-}
 
 export default ({ api }) => ({
   namespaced: true,
   state: {
     // 下载列表
-    value: [],
+    list: [],
     // 整体下载速度
     speed: 0
   },
@@ -107,15 +40,15 @@ export default ({ api }) => ({
      * @example this.$store.getters['download/countAll']
      */
     countAll (state, getters, rootState, rootGetters) {
-      return state.value.length
+      return state.list.length
     },
     /**
-     * @description [ 任务数量 ] 等待中
+     * @description [ 任务数量 ] 未开始
      * @example $store.getters['download/countIdle']
      * @example this.$store.getters['download/countIdle']
      */
     countIdle (state, getters, rootState, rootGetters) {
-      return state.value.filter(e => e.downloader.state === 'IDLE').length
+      return state.list.filter(e => e.downloader.state === 'IDLE').length
     },
     /**
      * @description [ 任务数量 ] 已完成
@@ -123,38 +56,38 @@ export default ({ api }) => ({
      * @example this.$store.getters['download/countFinished']
      */
     countFinished (state, getters, rootState, rootGetters) {
-      return state.value.filter(e => e.downloader.state === 'FINISHED').length
+      return state.list.filter(e => e.downloader.state === 'FINISHED').length
     }
   },
   mutations: {
     /**
-     * @description 清空下载任务
+     * @description 设置下载任务
      * @param {Object} state state
-     * @param {Any} payload payload
-     * @example $store.commit('download/clean')
-     * @example this.$store.commit('download/clean')
+     * @param {Array} list 下载任务列表
+     * @example $store.commit('download/listSet')
+     * @example this.$store.commit('download/listSet')
      */
-    clean (state, payload) {
-      state.value = []
+    listSet (state, list) {
+      state.list = list
     },
     /**
      * @description 增加新的下载任务
      * @param {Object} state state
-     * @param {Any} payload payload
+     * @param {Task} task 下载任务
      * @example $store.commit('download/push')
      * @example this.$store.commit('download/push')
      */
-    push (state, payload) {
-      state.value.push(payload)
+    push (state, task) {
+      state.list.push(task)
     },
     /**
      * @description 设置下载速度
      * @param {Object} state state
      * @param {Any} payload payload
-     * @example $store.commit('download/setSpeed')
-     * @example this.$store.commit('download/setSpeed')
+     * @example $store.commit('download/speedSet')
+     * @example this.$store.commit('download/speedSet')
      */
-    setSpeed (state, payload) {
+    speedSet (state, payload) {
       state.speed = payload
     }
   },
@@ -168,17 +101,17 @@ export default ({ api }) => ({
      */
     async start ({ state, rootState, commit, dispatch, getters, rootGetters }) {
       // 找到没有下载完成的任务 index
-      const index = state.value.findIndex(e => e.downloader.state !== 'FINISHED')
+      const index = state.list.findIndex(e => e.downloader.state !== 'FINISHED')
       if (index >= 0) {
-        state.value[index].start()
+        state.list[index].start()
       }
     },
     /**
      * @description 增加新的下载任务
      * @param {Object} context context
      * @param {Any} payload payload
-     * @example $store.dispatch('download/push')
-     * @example this.$store.dispatch('download/push')
+     * @example $store.dispatch('download/pushImageTask')
+     * @example this.$store.dispatch('download/pushImageTask')
      */
     async pushImageTask (
       { state, rootState, commit, dispatch, getters, rootGetters },
@@ -190,23 +123,22 @@ export default ({ api }) => ({
       const url = libraryBase + libraryPrefix + remoteFilename
       // 计算下载目录
       const destinationFolder = path.join(app.getPath('userData'), ...[ 'library' ])
-      await mkdir(destinationFolder)
+      await dispatch('local/mkdir', destinationFolder, { root: true })
       // 建立下载队列
       commit('push', new Task({
         url,
         destinationFolder,
         fileName: remoteFilename,
         onProgress: function (stats) {
-          if (stats.speed) {
-            commit('setSpeed', stats.speed)
-          }
+          // 将这个任务的速度提交到全局
+          if (stats.speed) commit('speedSet', stats.speed)
         },
         onEnd: async function (downloadInfo) {
+          // 将图片的本地地址设置到资源库
           commit('materials/setImageFilePath', downloadInfo, { root: true })
+          // 保存资源库
           await dispatch('materials/save', undefined, { root: true })
-          if (getters.countIdle === 0) {
-            commit('setSpeed', 0)
-          }
+          // 开始下一个
           await dispatch('start')
         }
       }))

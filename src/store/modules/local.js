@@ -3,6 +3,7 @@
 const fs = require('fs')
 const path = require('path')
 const write = require('@/utils/write')
+const mkdir = require('@/utils/mkdir')
 const { app } = require('electron').remote
 
 export default ({ api }) => ({
@@ -38,6 +39,26 @@ export default ({ api }) => ({
           resolve(data)
         })
       })
+    },
+    /**
+     * @description 确保文件夹存在
+     * @param {Object} context context
+     * @param {String} filePath 文件夹路径
+     * @example $store.dispatch('local/mkdir')
+     * @example this.$store.dispatch('local/mkdir')
+     */
+    async mkdir ({ state, rootState, commit, dispatch, getters, rootGetters }, filePath) {
+      await mkdir(filePath)
+    },
+    /**
+     * @description 确保 userData 中文件夹存在
+     * @param {Object} context context
+     * @param {Array} folderArray 文件夹路径数组
+     * @example $store.dispatch('local/mkdirUserData')
+     * @example this.$store.dispatch('local/mkdirUserData')
+     */
+    async mkdirUserData ({ state, rootState, commit, dispatch, getters, rootGetters }, folderArray) {
+      await mkdir(path.join(app.getPath('userData'), ...folderArray))
     }
   }
 })

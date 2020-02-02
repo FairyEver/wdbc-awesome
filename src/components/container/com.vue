@@ -1,6 +1,7 @@
 <style lang="scss">
 .container {
-  width: 360px;
+  max-width: 360px;
+  min-width: 300px;
   margin: 0 auto;
 }
 </style>

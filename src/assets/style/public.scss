@@ -76,13 +76,11 @@ $sizes-name: (0, 5, 10, 15, 20);
 // 过渡动画
 .fade-router-leave-active,
 .fade-router-enter-active {
-  transition: all 0.3s;
+  transition: all .2s;
 }
 .fade-router-enter {
   opacity: 0;
-  transform: translateX(10px);
 }
 .fade-router-leave-to {
   opacity: 0;
-  transform: translateX(-10px);
 }

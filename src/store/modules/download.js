@@ -136,7 +136,7 @@ export default ({ api }) => ({
           // 保存资源库
           await dispatch('materials/save', undefined, { root: true })
           // 开始下一个
-          await dispatch('start')
+          await dispatch('startNextTask')
         }
       }))
     }

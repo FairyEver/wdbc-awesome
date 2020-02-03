@@ -90,13 +90,13 @@ export default ({ api }) => ({
   },
   actions: {
     /**
-     * @description 开始下载队列 | 进行下一个
+     * @description [ 下载队列 ] 开始下一个下载任务
      * @param {Object} context context
      * @param {Any} payload payload
-     * @example $store.dispatch('download/start')
-     * @example this.$store.dispatch('download/start')
+     * @example $store.dispatch('download/startNextTask')
+     * @example this.$store.dispatch('download/startNextTask')
      */
-    async start ({ state, rootState, commit, dispatch, getters, rootGetters }) {
+    async startNextTask ({ state, rootState, commit, dispatch, getters, rootGetters }) {
       // 找到没有下载完成的任务 index
       const index = state.list.findIndex(e => e.downloader.state !== 'FINISHED')
       if (index >= 0) {

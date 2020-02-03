@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "vue-cli-service electron:build",
+    "build": "NODE_OPTIONS=--max_old_space_size=4096 vue-cli-service electron:build",
     "dev": "vue-cli-service electron:serve",
     "lint": "vue-cli-service lint --fix",
     "postinstall": "electron-builder install-app-deps",

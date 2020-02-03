@@ -1,8 +1,5 @@
 // https://vuex.vuejs.org/zh/api/
 
-// https://www.npmjs.com/package/node-downloader-helper
-
-import byteTo from '@/utils/byte.js'
 import Task from '@/class/Task.js'
 
 const path = require('path')
@@ -18,12 +15,12 @@ export default ({ api }) => ({
   },
   getters: {
     /**
-     * @description 格式化后的速度
+     * @description 整体速度 已经格式化
      * @example $store.getters['download/speed']
      * @example this.$store.getters['download/speed']
      */
     speed (state, getters, rootState, rootGetters) {
-      return `${byteTo(state.speed)}/s`
+      return state.speed
     },
     /**
      * @description 整体进度
@@ -61,7 +58,7 @@ export default ({ api }) => ({
   },
   mutations: {
     /**
-     * @description 设置下载任务
+     * @description [ 下载列表 ] 设置下载列表 覆盖之前的
      * @param {Object} state state
      * @param {Array} list 下载任务列表
      * @example $store.commit('download/listSet')
@@ -71,17 +68,17 @@ export default ({ api }) => ({
       state.list = list
     },
     /**
-     * @description 增加新的下载任务
+     * @description [ 下载列表 ] 追加新的下载任务
      * @param {Object} state state
      * @param {Task} task 下载任务
-     * @example $store.commit('download/push')
-     * @example this.$store.commit('download/push')
+     * @example $store.commit('download/listPush')
+     * @example this.$store.commit('download/listPush')
      */
-    push (state, task) {
+    listPush (state, task) {
       state.list.push(task)
     },
     /**
-     * @description 设置下载速度
+     * @description [ 下载速度 ] 设置下载速度
      * @param {Object} state state
      * @param {Any} payload payload
      * @example $store.commit('download/speedSet')
@@ -110,10 +107,10 @@ export default ({ api }) => ({
      * @description 增加新的下载任务
      * @param {Object} context context
      * @param {Any} payload payload
-     * @example $store.dispatch('download/pushImageTask')
-     * @example this.$store.dispatch('download/pushImageTask')
+     * @example $store.dispatch('download/listPushImageTask')
+     * @example this.$store.dispatch('download/listPushImageTask')
      */
-    async pushImageTask (
+    async listPushImageTask (
       { state, rootState, commit, dispatch, getters, rootGetters },
       { remoteFilename = '' } = {}
     ) {
@@ -125,7 +122,7 @@ export default ({ api }) => ({
       const destinationFolder = path.join(app.getPath('userData'), ...[ 'library' ])
       await dispatch('local/mkdir', destinationFolder, { root: true })
       // 建立下载队列
-      commit('push', new Task({
+      commit('listPush', new Task({
         url,
         destinationFolder,
         fileName: remoteFilename,

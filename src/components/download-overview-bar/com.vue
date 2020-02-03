@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import byteTo from '@/utils/byte.js'
 export default {
   name: 'download-overview-bar',
   data () {
@@ -52,7 +53,7 @@ export default {
       const countAll = this.$store.getters['download/countAll']
       const countFinished = this.$store.getters['download/countFinished']
       const done = countFinished === countAll
-      return done ? '完成' : `正在同步 ${countFinished}/${countAll} ${speed}`
+      return done ? '完成' : `正在同步 ${countFinished}/${countAll} ${byteTo(speed)}/s`
     }
   },
   watch: {

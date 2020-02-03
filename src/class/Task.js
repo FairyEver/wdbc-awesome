@@ -1,4 +1,4 @@
-import byteTo from '@/utils/byte.js'
+// https://www.npmjs.com/package/node-downloader-helper
 
 const shortid = require('shortid')
 const { DownloaderHelper } = require('node-downloader-helper')
@@ -54,15 +54,30 @@ export default class Task {
     // 下载中
     this.downloader.on('progress', stats => {
       this.progress = Math.round(stats.progress)
-      this.downloaded = byteTo(stats.downloaded)
-      this.total = byteTo(stats.total)
+      this.downloaded = stats.downloaded
+      this.total = stats.total
       onProgress(stats)
     })
   }
-  async start () {
-    this.downloader.start()
+  /**
+   * @description 开始
+   */
+  start () { this.downloader.start() }
+  /**
+   * @description 暂停
+   */
+  pause () { this.downloader.pause() }
+  /**
+   * @description 恢复
+   */
+  resume () {
+    // 如果可以恢复下载
+    if (this.downloader.isResumable()) {
+      this.downloader.resume()
+    }
   }
-  stop () {
-    this.downloader.stop()
-  }
+  /**
+   * @description 停止
+   */
+  stop () { this.downloader.stop() }
 }

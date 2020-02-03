@@ -164,7 +164,7 @@ export default ({ api }) => ({
       // 遍历文件
       const files = getters.libraryFiles
       for (const file of files) {
-        await dispatch('download/pushImageTask', { remoteFilename: file.url }, { root: true })
+        await dispatch('download/listPushImageTask', { remoteFilename: file.url }, { root: true })
       }
       // 开始下载
       dispatch('download/start', undefined, { root: true })

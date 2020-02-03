@@ -26,10 +26,10 @@
     &:hover {
       transform: translateY(-2px);
       box-shadow:
-        0 2px 10px 0 rgba(0, 0, 0, 0.1),
-        0 4px 15px 0 rgba(0, 0, 0, 0.1),
-        0 10px 20px 0 rgba(0, 0, 0, 0.1),
-        0 10px 40px 0 rgba(0, 0, 0, 0.05);
+        0 2px 5px 0 rgba(0, 0, 0, 0.05),
+        0 4px 10px 0 rgba(0, 0, 0, 0.04),
+        0 10px 20px 0 rgba(0, 0, 0, 0.03),
+        0 10px 40px 0 rgba(0, 0, 0, 0.02);
     }
   }
   .image-title {

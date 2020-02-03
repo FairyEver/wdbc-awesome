@@ -4,10 +4,10 @@
   margin-top: $LAYOUT_MAIN_PADDING;
   .preview {
     @extend .card;
-    border: 4px solid #FFF;
+    border: 4px solid #FFFFFF;
     transition: all .3s;
-    background-image: linear-gradient(45deg,rgba(0,0,0,.25) 25%,transparent 0,transparent 75%,rgba(0,0,0,.25) 0),
-                      linear-gradient(45deg,rgba(0,0,0,.25) 25%,transparent 0,transparent 75%,rgba(0,0,0,.25) 0);
+    background-image: linear-gradient(45deg, #CBCBCB 25%,transparent 0,transparent 75%, #CBCBCB 0),
+                      linear-gradient(45deg, #CBCBCB 25%,transparent 0,transparent 75%, #CBCBCB 0);
     background-size: 20px 20px;
     background-position: 0 0, 10px 10px;
     position: relative;
